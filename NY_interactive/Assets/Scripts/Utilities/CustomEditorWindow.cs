@@ -19,10 +19,16 @@ public class CustomEditorWindow : EditorWindow
         if (GUILayout.Button("Reload Items"))
         {
             GameObject.Find("Databases").GetComponent<LoadExcel>().LoadRiservaByType("Foresta Demaniale");
-        }if (GUILayout.Button("Foresta Demaniale"))
+        }
+        if (GUILayout.Button("Foresta Demaniale"))
         {
             GameObject.Find("Databases").GetComponent<LoadExcel>().LoadRiservaByType("Foresta Demaniale");
         }
+        if (GUILayout.Button("Riserva Naturale Biogenetica"))
+        {
+            GameObject.Find("Databases").GetComponent<LoadExcel>().LoadRiservaByType("RISERVA NATURALE BIOGENETICA");
+        }
+        
     }
 
     // Update is called once per frame
