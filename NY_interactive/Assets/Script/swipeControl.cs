@@ -10,11 +10,13 @@ public class swipeControl : MonoBehaviour
     [SerializeField]
     GameObject scrollbar;
     LoadExcel database;
+    [SerializeField] GameObject thirdFilter;
     private int countTypes;
     [SerializeField] GameObject gameobjectToClone;
-    int index = 0;
+    int index = -1;
+    Transform nome;
     //private bool stopped = true;
-
+     
     float scrollPos = 0;
     float[] pos;
     int posisi = 0;
@@ -46,17 +48,17 @@ public class swipeControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("START");
+        
         database = GameObject.FindAnyObjectByType<LoadExcel>();
         countTypes = database.type.Count;
-        Debug.Log(countTypes);
-        TypesToText(gameobjectToClone);
+        
+        TypesToText(2);
     }
 
     //instanziamo i figli in base ai diversi tipi
-    public void TypesToText(GameObject gameObjectToClone)
+    public void TypesToText(int numfilter)
     {
-        if (gameobjectToClone != null)
+        if (gameobjectToClone != null && numfilter == 2)
         {
 
             if (this.name == "SecondFilter")
@@ -67,14 +69,25 @@ public class swipeControl : MonoBehaviour
                     instanciated.GetComponent<TextMeshProUGUI>().text = t;
                 }
             }
-            //if (this.name == "ThirdFilter")
-            //{
-            //    Debug.Log("terzo filtro");
-            //    
-            //}
+            
+        }
+        if (gameobjectToClone != null && numfilter == 3)
+        {
+           if(thirdFilter!= null)
+            {
+                foreach (Transform child in thirdFilter.transform) Destroy(child.gameObject);
+                foreach (Riserva r in database.riservaDatabaseType)
+                {
+                    var instanciated= Instantiate(thirdFilter.GetComponent<SwipeControlBase>().gameObjectToClone, thirdFilter.transform);
+                    instanciated.transform.Find("Nome").GetComponent<TextMeshProUGUI>().text= r.name;
+                    instanciated.transform.Find("Descr").GetComponent<TextMeshProUGUI>().text = r.descr;
+
+
+                }
+            }
+         
         }
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -102,9 +115,8 @@ public class swipeControl : MonoBehaviour
                     if (index != index_temp)
                     {
                         ChangeIndex(index_temp);
+                        
                     }
-
-
 
                 }
 
@@ -113,6 +125,7 @@ public class swipeControl : MonoBehaviour
 
 
     }
+
     void ChangeIndex(int i)
     {
         if (i == 0)
@@ -121,13 +134,19 @@ public class swipeControl : MonoBehaviour
         }
         else
         {
-            //Debug.Log(database.type[i - 1]);
+
+            Debug.Log("cAMBIA");
             database.LoadRiservaByType(database.type[i - 1]);
+            TypesToText(3);
+            //thirdFilter.GetComponent<SwipeControlBase>().reset = true;
+            thirdFilter.GetComponent<SwipeControlBase>().ResetScroll();
+           
+
             //Debug.Log(this.name);
             //TypesToText(gameobjectToClone);
 
         }
-       
-        
+
+        index = i;
     }
 }
