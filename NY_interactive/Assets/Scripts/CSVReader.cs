@@ -47,10 +47,10 @@ public class CSVReader
                     finalvalue = f;
                 }
                 header[j].TrimStart(TRIM_CHARS).TrimEnd(TRIM_CHARS);
-                Debug.Log(header[j].ToString());
+               //Debug.Log(header[j].ToString());
 
                 entry[header[j]] = finalvalue;
-                Debug.Log(finalvalue);
+                //Debug.Log(finalvalue);
             }
             list.Add(entry);
         }

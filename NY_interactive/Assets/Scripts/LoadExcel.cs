@@ -10,6 +10,7 @@ public class LoadExcel : MonoBehaviour
     public List<Riserva> riservaDatabaseType = new List<Riserva>();
     public List<string> type = new List<string>();
     public bool loadedItems = false;
+    private string actualType;
 
 
     public void Start()
@@ -31,7 +32,7 @@ public class LoadExcel : MonoBehaviour
         List<Dictionary<string, object>> data = CSVReader.Read("Riserve");
         for (var i = 0; i < data.Count; i++)
         {
-            Debug.Log("i: riga " + i);
+            //Debug.Log("i: riga " + i);
             string type = data[i]["Type"].ToString();
             string name = data[i]["Name"].ToString();
             string coord = data[i]["Coord"].ToString();
@@ -74,21 +75,26 @@ public class LoadExcel : MonoBehaviour
             }
         }
 
-        Debug.Log(type);
+        //Debug.Log(type);
     }
 
     public  List<Riserva> LoadRiservaByType(string type)
     {
-        riservaDatabaseType.Clear();
-        if (loadedItems == false) LoadItemData();
-        foreach (Riserva r in riservaDatabase)
+        if (actualType != type)
         {
-            if (r.type.ToUpper() == type.ToUpper())
+            actualType = type;
+            riservaDatabaseType.Clear();
+            if (loadedItems == false) LoadItemData();
+            foreach (Riserva r in riservaDatabase)
             {
-                riservaDatabaseType.Add(r);
+                if (r.type.ToUpper() == type.ToUpper())
+                {
+                    riservaDatabaseType.Add(r);
+                }
             }
         }
         return riservaDatabaseType;
+
     }
 
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.Mathematics;
 
 public class swipeControl : MonoBehaviour
 {
@@ -11,22 +12,15 @@ public class swipeControl : MonoBehaviour
     LoadExcel database;
     private int countTypes;
     [SerializeField] GameObject gameobjectToClone;
-    private bool stopped = true;
+    int index = 0;
+    //private bool stopped = true;
 
     float scrollPos = 0;
     float[] pos;
     int posisi = 0;
 
 
-    private bool m_stop = false;
-    public bool stop = false;
-    public delegate void OnVariableChangeDelegate(bool newVal);
-    public event OnVariableChangeDelegate OnVariableChange;
-
-    private void VariableChangeHandler(bool newVal)
-    {
-        Debug.Log("Cambiato");
-    }
+  
     public void next()
     {
         if(posisi<pos.Length - 1)
@@ -57,14 +51,15 @@ public class swipeControl : MonoBehaviour
         countTypes = database.type.Count;
         Debug.Log(countTypes);
         TypesToText(gameobjectToClone);
-        this.OnVariableChange += VariableChangeHandler;
     }
 
     //instanziamo i figli in base ai diversi tipi
     public void TypesToText(GameObject gameObjectToClone)
     {
         if (gameobjectToClone != null)
-             if( this.name == "SecondFilter")
+        {
+
+            if (this.name == "SecondFilter")
             {
                 foreach (string t in database.type)
                 {
@@ -72,9 +67,13 @@ public class swipeControl : MonoBehaviour
                     instanciated.GetComponent<TextMeshProUGUI>().text = t;
                 }
             }
-       
+            //if (this.name == "ThirdFilter")
+            //{
+            //    Debug.Log("terzo filtro");
+            //    
+            //}
+        }
     }
-
 
     // Update is called once per frame
     void Update()
@@ -99,17 +98,36 @@ public class swipeControl : MonoBehaviour
             {
                 if (scrollPos < pos[i] + (distance/2) && scrollPos > pos[i] - (distance / 2)){
                     scrollbar.GetComponent<Scrollbar>().value = Mathf.Lerp (scrollbar.GetComponent<Scrollbar>().value, pos[i], 0.01f);//0.01 f corrisponde all'easing
-                    
+                    var index_temp = i;
+                    if (index != index_temp)
+                    {
+                        ChangeIndex(index_temp);
+                    }
+
+
+
                 }
-                if(scrollPos == pos[i] && m_stop!=stop && OnVariableChange!=null)
-                {
-                    m_stop = stop;
-                    OnVariableChange(stop);
-                }
-               
+
             }
         }
 
 
+    }
+    void ChangeIndex(int i)
+    {
+        if (i == 0)
+        {
+            Debug.Log("TUTTE");
+        }
+        else
+        {
+            //Debug.Log(database.type[i - 1]);
+            database.LoadRiservaByType(database.type[i - 1]);
+            //Debug.Log(this.name);
+            //TypesToText(gameobjectToClone);
+
+        }
+       
+        
     }
 }
