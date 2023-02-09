@@ -268,8 +268,8 @@ MonoBehaviour:
     y: 0
     width: 1538
     height: 790
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -356,22 +356,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Utente\Documents\NY_interactive\NY_interactive
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: c4560000
-    m_LastClickedID: 22212
+    m_SelectedIDs: b6560000
+    m_LastClickedID: 22198
     m_ExpandedIDs: 00000000b656000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -538,9 +538,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 54590000
-      m_LastClickedID: 22868
-      m_ExpandedIDs: d4f2ffff24f3ffff1ef9ffff16fbffff2c59000054590000665900007a5900000a5a0000
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 14f7ffff58f7ffffc8f7ffff0cf8ffff48f8ffff7af9ffff16fbffff185700004057000052570000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
