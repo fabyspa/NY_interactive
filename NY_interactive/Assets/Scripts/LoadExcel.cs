@@ -15,7 +15,6 @@ public class LoadExcel : MonoBehaviour
 
     public void Start()
     {
-       
         LoadItemData();
     }
 
@@ -57,6 +56,7 @@ public class LoadExcel : MonoBehaviour
 
         tempItem.type = type;
         tempItem.coord = coord;
+        //tempItem.coord = Convert_coordinates.remapLatLng(coord, 180f, 1900f, 360f, 1700f).ToString(); 
         tempItem.name = name;
         tempItem.descr = descr;
 

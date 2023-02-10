@@ -1,21 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Text.RegularExpressions;
 
 
 
 
 
-public class Convert_coordinates : MonoBehaviour
+
+public static class Convert_coordinates
 {
-    public string coordinates;
-    public double from1, to1;
-    public int from2, to2;
+    public static string coordinates;
+    public static double from1, to1;
+    public static int from2, to2;
 
     
-        public int[] remapLatLng(string coord, double from1, double to1, float from2, float to2)
+        public static int[] remapLatLng(string coord, double from1, double to1, float from2, float to2)
         {
             string[] subs = coord.Split(',');
+            foreach (string i in subs) Debug.Log(i);
+
             int[] xy = new int[2];
             for (int i = 0; i < subs.Length; i++)
             {
@@ -31,18 +35,18 @@ public class Convert_coordinates : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
-    {
-        int[] coord = remapLatLng(coordinates,from1,to1,from2,to2);
-        Debug.Log(coord[0]);
-        Debug.Log(coord[1]);
-    }
+    //void Start()
+    //{
+    //    int[] coord = remapLatLng(coordinates,from1,to1,from2,to2);
+    //    Debug.Log(coord[0]);
+    //    Debug.Log(coord[1]);
+    //}
 
-    // Update is called once per frame
-    void Update()
-    {
+    //// Update is called once per frame
+    //void Update()
+    //{
         
-    }
+    //}
 }
 
 
