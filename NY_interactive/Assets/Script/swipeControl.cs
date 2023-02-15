@@ -16,13 +16,14 @@ public class swipeControl : MonoBehaviour
     int index = -1;
     Transform nome;
     //private bool stopped = true;
-     
-    float scrollPos = 0;
+    
+    //attenzione, l'ho messo public
+    public float scrollPos = 0;
     float[] pos;
     int posisi = 0;
 
 
-  
+    //scorri avanti di una posizione
     public void next()
     {
         if(posisi<pos.Length - 1)
@@ -32,6 +33,7 @@ public class swipeControl : MonoBehaviour
         }
     }
 
+    //torna indietro di una posizione
     public void prev()
     {
         if (posisi>0)
@@ -48,7 +50,7 @@ public class swipeControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
         database = GameObject.FindAnyObjectByType<LoadExcel>();
         countTypes = database.type.Count;
         
@@ -93,12 +95,11 @@ public class swipeControl : MonoBehaviour
     {
         //creo un array lungo tanto quanto il numero di oggetti dentro al content
         pos = new float[transform.childCount];
-        //easing
+        //distanza scrolling
         float distance = 1f / (pos.Length - 1f);
         for( int i= 0; i< pos.Length; i++)
         {
             pos[i] = distance * i;
-            //Debug.Log()
         }
 
        if (Input.GetMouseButton(0))
@@ -107,6 +108,7 @@ public class swipeControl : MonoBehaviour
         }
         else
         {
+            // quando il mouse è premuto se la posizione supera metà della distanza indicata passa alla posizione successiva o precedente
             for(int i =0; i< pos.Length;i++)
             {
                 if (scrollPos < pos[i] + (distance/2) && scrollPos > pos[i] - (distance / 2)){

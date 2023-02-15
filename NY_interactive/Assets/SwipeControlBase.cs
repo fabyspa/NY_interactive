@@ -13,23 +13,23 @@ public class SwipeControlBase : MonoBehaviour
     float[] pos;
     int posisi = 0;
     public bool reset = true;
-    //public void next()
-    //{
-    //    if (posisi < pos.Length - 1)
-    //    {
-    //        posisi += 1;
-    //        scrollPos = pos[posisi];
-    //    }
-    //}
+    public void next()
+    {
+        if (posisi < pos.Length - 1)
+        {
+            posisi += 1;
+            scrollPos = pos[posisi];
+        }
+    }
 
-    //public void prev()
-    //{
-    //    if (posisi > 0)
-    //    {
-    //        posisi -= 1;
-    //        scrollPos = pos[posisi];
-    //    }
-    //}
+    public void prev()
+    {
+        if (posisi > 0)
+        {
+            posisi -= 1;
+            scrollPos = pos[posisi];
+        }
+    }
 
 
 
