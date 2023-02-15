@@ -135,7 +135,7 @@ public class swipeControl : MonoBehaviour
         else
         {
 
-            Debug.Log("cAMBIA");
+            
             database.LoadRiservaByType(database.type[i - 1]);
             TypesToText(3);
             //thirdFilter.GetComponent<SwipeControlBase>().reset = true;
