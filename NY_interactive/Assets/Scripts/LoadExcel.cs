@@ -48,13 +48,14 @@ public class LoadExcel : MonoBehaviour
         GetRiservaTypes();
     }
 
+
     //se viene modificato il file excel da esterno facciamo in modo che si aggiorni direttamente la build
     public void ReLoadItemData()
     {
         loadedItems = false;
         LoadItemData();
     }
-        void AddRiserva(string type, string name, string coord,  string descr)
+    void AddRiserva(string type, string name, string coord,  string descr)
     {
         Riserva tempItem = new Riserva(blankRiserva);
 
@@ -65,6 +66,17 @@ public class LoadExcel : MonoBehaviour
         tempItem.descr = descr;
 
         riservaDatabase.Add(tempItem);
+    }
+
+    //una funzione che ho creato io (sam)
+    public string[] GetArrayTypeFromList()
+    {
+        string[] arrayTemp = new string[riservaDatabase.Count];
+        for(int i =0; i<arrayTemp.Length; i++)
+        {
+            arrayTemp[i] = riservaDatabase[i].type;
+        }
+        return arrayTemp;
     }
 
     //torna tutti i tipi di riserve diverse

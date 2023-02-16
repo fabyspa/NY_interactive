@@ -7367,6 +7367,7 @@ GameObject:
   - component: {fileID: 1784184319}
   - component: {fileID: 1784184321}
   - component: {fileID: 1784184320}
+  - component: {fileID: 1784184322}
   m_Layer: 0
   m_Name: CircularScrollingList
   m_TagString: Untagged
@@ -7539,12 +7540,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 1784184318}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9451625e3ef760d43b4080aa3f2577e0, type: 3}
+  m_Script: {fileID: 11500000, guid: 737d846dcc5738d4b96dbdd8179d3dea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _contents:
-  - 1
-  - 2
+  _contents: []
+--- !u!114 &1784184322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784184318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0469ce6718109064e978d231b5d59a44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numfilter: 2
+  array: []
 --- !u!114 &1810054206 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8415990495607897632, guid: 0ea52ba83ba93fe428f847e2d94ea62c, type: 3}

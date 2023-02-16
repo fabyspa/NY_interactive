@@ -9,14 +9,12 @@ using AirFishLab.ScrollingList;
 // Must be inherit from the class BaseListBank
 public class IntListBank1 : BaseListBank
 {
-    LoadExcel database;
-    private int countTypes;
-
+    Script_Prova a;
     //array contenente i nomi 
     [SerializeField]
     private string[] _contents;
 
-   
+
 
 
     // This function will be invoked by the `CircularScrollingList`
@@ -25,28 +23,14 @@ public class IntListBank1 : BaseListBank
     // which will be converted back to its own type in `IntListBox.UpdateDisplayContent()`
     public override object GetListContent(int index)
     {
-
-        _contents = Populate();
+        _contents = a.Filter_prova();
         return _contents[index];
     }
     public override int GetListLength()
     {
+        _contents = a.Filter_prova();
         return _contents.Length;
     }
-
-    private string[] Populate()
-    {
-        database = GameObject.FindAnyObjectByType<LoadExcel>();
-        countTypes = database.type.Count;
-        string[] array = new string[countTypes];
-
-        for (int i = 0; i < database.type.Count; i++)
-        {
-
-            array[i] = database.type[i];
-        }
-
-        return array;
-    }
-
 }
+
+
