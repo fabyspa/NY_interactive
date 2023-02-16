@@ -11,11 +11,13 @@ using System.Text.RegularExpressions;
 public static class Convert_coordinates
 {
     public static string coordinates;
-    public static double from1, to1;
-    public static int from2, to2;
+    public static double from1= 36.697198;
+    public static double to1= 47.084416;
+    public static int from2=10;
+    public static int to2=-10;
 
-    
-        public static int[] remapLatLng(string coord, double from1, double to1, float from2, float to2)
+
+    public static int[] remapLatLng(string coord, double from1, double to1, float from2, float to2)
         {
             string[] subs = coord.Split(',');
             foreach (string i in subs) Debug.Log(i);
