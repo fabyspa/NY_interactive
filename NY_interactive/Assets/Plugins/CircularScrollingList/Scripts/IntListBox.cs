@@ -13,6 +13,7 @@ public class IntListBox : ListBox
     // The original type of the content is `int`.
     protected override void UpdateDisplayContent(object content)
     {
+        Debug.Log(content);
         _contentText.text = ((string)content).ToString();
     }
 }

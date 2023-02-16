@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using AirFishLab.ScrollingList.Demo;
+
 
 public class LoadExcel : MonoBehaviour
 {
@@ -9,6 +11,7 @@ public class LoadExcel : MonoBehaviour
     public List<Riserva> riservaDatabase = new List<Riserva>();
     public List<Riserva> riservaDatabaseType = new List<Riserva>();
     public List<string> type = new List<string>();
+    [SerializeField] GameObject scrolling;
     public bool loadedItems = false;
     private string actualType;
 
@@ -16,6 +19,7 @@ public class LoadExcel : MonoBehaviour
     public void Start()
     {
         LoadItemData();
+        scrolling.GetComponent<VariableStringListBankRiserva>().ChangeContents();
     }
 
 

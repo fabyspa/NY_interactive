@@ -2,7 +2,7 @@
 {
     public class IntListBank : BaseListBank
     {
-        private readonly int[] _contents = {
+        public readonly int[] _contents = {
             1, 2222, 3, 4, 5, 6, 7, 8, 9, 10
         };
 

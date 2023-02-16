@@ -224,25 +224,29 @@ namespace AirFishLab.ScrollingList
         /// </param>
         public void Refresh(int centeredContentID = -1)
         {
-            var centeredBox = _listPositionCtrl.GetCenteredBox();
-            var numOfContents = _listBank.GetListLength();
+            if (_listPositionCtrl != null)
+            {
+                var centeredBox = _listPositionCtrl.GetCenteredBox();
+                var numOfContents = _listBank.GetListLength();
+                Debug.Log(centeredContentID);
+                if (centeredContentID < 0)
+                    centeredContentID =
+                        centeredBox.contentID == int.MinValue
+                            ? 0
+                            : Mathf.Min(centeredBox.contentID, numOfContents - 1);
+                else if (centeredContentID >= numOfContents)
+                    throw new IndexOutOfRangeException(
+                        $"{nameof(centeredContentID)} is larger than the number of contents");
 
-            if (centeredContentID < 0)
-                centeredContentID =
-                    centeredBox.contentID == int.MinValue
-                        ? 0
-                        : Mathf.Min(centeredBox.contentID, numOfContents - 1);
-            else if (centeredContentID >= numOfContents)
-                throw new IndexOutOfRangeException(
-                    $"{nameof(centeredContentID)} is larger than the number of contents");
+                _listPositionCtrl.numOfLowerDisabledBoxes = 0;
+                _listPositionCtrl.numOfUpperDisabledBoxes = 0;
 
-            _listPositionCtrl.numOfLowerDisabledBoxes = 0;
-            _listPositionCtrl.numOfUpperDisabledBoxes = 0;
+                foreach (var listBox in _listBoxes)
+                    listBox.Refresh(centeredBox.listBoxID, centeredContentID);
 
-            foreach (var listBox in _listBoxes)
-                listBox.Refresh(centeredBox.listBoxID, centeredContentID);
-
-            _hasNoContent = numOfContents == 0;
+                _hasNoContent = numOfContents == 0;
+            }
+           
         }
 
         /// <summary>
