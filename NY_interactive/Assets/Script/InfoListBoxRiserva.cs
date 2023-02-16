@@ -3,14 +3,14 @@ using UnityEngine.UI;
 
 namespace AirFishLab.ScrollingList.Demo
 {
-    public class StringListBox : ListBox
+    public class InfoListBoxRiserva : ListBox
     {
         [SerializeField]
         private Text _text;
 
         protected override void UpdateDisplayContent(object content)
         {
-            var dataWrapper = (VariableStringListBank.DataWrapper) content;
+            var dataWrapper = (VariableInfoListBankRiserva.DataWrapper) content;
             _text.text = dataWrapper.data;
         }
     }

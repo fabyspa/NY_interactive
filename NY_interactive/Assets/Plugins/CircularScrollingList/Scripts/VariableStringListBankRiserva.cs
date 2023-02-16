@@ -26,9 +26,13 @@ namespace AirFishLab.ScrollingList.Demo
         /// </summary>
         public void ChangeContents()
         {
+           
+           // Debug.Log(_circularList.GetCenteredBox().name);
             loadexcel = GameObject.FindObjectOfType<LoadExcel>();
+            _contentsList.Add("Tutte");
             foreach ( string t in loadexcel.type)
             {
+
                 _contentsList.Add(t);
                //_contentInputField.text.Split(
                //    new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
@@ -40,7 +44,9 @@ namespace AirFishLab.ScrollingList.Demo
 
         public override object GetListContent(int index)
         {
+            
             _dataWrapper.data = _contents[index];
+            //Debug.Log(_dataWrapper.data);
             return _dataWrapper;
         }
 

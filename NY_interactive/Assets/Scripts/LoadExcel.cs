@@ -10,6 +10,8 @@ public class LoadExcel : MonoBehaviour
     public Riserva blankRiserva;
     public List<Riserva> riservaDatabase = new List<Riserva>();
     public List<Riserva> riservaDatabaseType = new List<Riserva>();
+   public List<Riserva> ordenList = new List<Riserva>();
+
     public List<string> type = new List<string>();
     [SerializeField] GameObject scrolling;
     public bool loadedItems = false;
@@ -20,6 +22,7 @@ public class LoadExcel : MonoBehaviour
     {
         LoadItemData();
         scrolling.GetComponent<VariableStringListBankRiserva>().ChangeContents();
+        SortListByType();
     }
 
 
@@ -110,6 +113,16 @@ public class LoadExcel : MonoBehaviour
             }
         }
         return riservaDatabaseType;
+
+    }
+
+    public List<Riserva> SortListByType()
+    {
+        foreach (string t in type)
+        {
+            ordenList.AddRange(LoadRiservaByType(t));
+        }
+        return ordenList;
 
     }
 
