@@ -15,6 +15,7 @@ public class LoadExcel : MonoBehaviour
     public bool loadedItems = false;
     private string actualType;
     [SerializeField] GameObject point;
+    public Transform parent;
 
     public void Start()
     {
@@ -84,12 +85,11 @@ public class LoadExcel : MonoBehaviour
     {
         if (r.coord != "")
         {
-            int[] coord = Convert_coordinates.remapLatLng(r.coord, Convert_coordinates.from1, Convert_coordinates.to1, Convert_coordinates.from2, Convert_coordinates.to2);
-            //Vector2 vec2 = new Vector2(coord[0], coord[1]);
-            Vector2 vec2 = new Vector2(0, 0);
-            GameObject  PointC = Instantiate(point, vec2, Quaternion.identity);
-            PointC.transform.parent = point.transform;
-            Debug.Log("done");
+            int[] coord = Convert_coordinates.remapLatLng(r.coord);
+            Debug.Log(coord[0]+","+ coord[1]);
+            Vector3 v = new Vector3(coord[0], coord[1], 0);
+            Vector3 vec3 = parent.transform.InverseTransformPoint(v);
+            Instantiate(point, vec3, Quaternion.identity,parent);
         }
 
     }
