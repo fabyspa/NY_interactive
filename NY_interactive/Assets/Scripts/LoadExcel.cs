@@ -16,8 +16,7 @@ public class LoadExcel : MonoBehaviour
     [SerializeField] GameObject scrolling;
     public bool loadedItems = false;
     private string actualType;
-    [SerializeField] GameObject point;
-    public Transform parent;
+
 
     public void Start()
     {
@@ -70,7 +69,6 @@ public class LoadExcel : MonoBehaviour
         tempItem.descr = descr;
 
         riservaDatabase.Add(tempItem);
-        InstantiatePoints(tempItem);
     }
 
     //una funzione che ho creato io (sam)
@@ -82,19 +80,6 @@ public class LoadExcel : MonoBehaviour
             arrayTemp[i] = riservaDatabase[i].type;
         }
         return arrayTemp;
-    }
-    //altra funzione di sam che potrebbe compromettere tutto il codice
-    public void InstantiatePoints(Riserva r)
-    {
-        if (r.coord != "")
-        {
-            int[] coord = Convert_coordinates.remapLatLng(r.coord);
-            Debug.Log(coord[0]+","+ coord[1]);
-            Vector3 v = new Vector3(coord[0], coord[1], 0);
-            Vector3 vec3 = parent.transform.InverseTransformPoint(v);
-            Instantiate(point, vec3, Quaternion.identity,parent);
-        }
-
     }
 
     //torna tutti i tipi di riserve diverse
