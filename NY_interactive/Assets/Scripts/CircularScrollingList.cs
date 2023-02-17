@@ -10,11 +10,13 @@ namespace AirFishLab.ScrollingList
     /// <summary>
     /// Manage and control the circular scrolling list
     /// </summary>
-    public class CircularScrollingListRiserva : MonoBehaviour,
+    public class CircularScrollingList : MonoBehaviour,
         IBeginDragHandler, IDragHandler, IEndDragHandler, IScrollHandler
     {
-        #region Enum Definitions
 
+
+        #region Enum Definitions
+      
         /// <summary>
         /// The type of the list
         /// </summary>
@@ -68,8 +70,8 @@ namespace AirFishLab.ScrollingList
         [Tooltip("The setting of this list")]
         private CircularScrollingListSetting _setting;
 
-        //[SerializeField]
-        //CircularScrollingListRiserva _info;
+        [SerializeField]
+        CircularScrollingList _info;
         #endregion
 
         #region Exposed Properties
@@ -80,7 +82,7 @@ namespace AirFishLab.ScrollingList
         #endregion
 
         #region Private Members
-        
+
         /// <summary>
         /// The rect transform that this list belongs to
         /// </summary>
@@ -228,29 +230,30 @@ namespace AirFishLab.ScrollingList
         /// </param>
         public void Refresh(int centeredContentID = -1)
         {
-            if (_listPositionCtrl != null)
-            {
-                var centeredBox = _listPositionCtrl.GetCenteredBox();
-                var numOfContents = _listBank.GetListLength();
-                //Debug.Log(centeredContentID);
-                if (centeredContentID < 0)
-                    centeredContentID =
-                        centeredBox.contentID == int.MinValue
-                            ? 0
-                            : Mathf.Min(centeredBox.contentID, numOfContents - 1);
-                else if (centeredContentID >= numOfContents)
-                    throw new IndexOutOfRangeException(
-                        $"{nameof(centeredContentID)} is larger than the number of contents");
+            Initialize();
 
-                _listPositionCtrl.numOfLowerDisabledBoxes = 0;
-                _listPositionCtrl.numOfUpperDisabledBoxes = 0;
+            var centeredBox = _listPositionCtrl.GetCenteredBox();
+            var numOfContents = _listBank.GetListLength();
+           // Debug.Log(centeredContentID);
+            if (centeredContentID < 0)
+                centeredContentID =
+                    centeredBox.contentID == int.MinValue
+                        ? 0
+                        : Mathf.Min(centeredBox.contentID, numOfContents - 1);
+            else if (centeredContentID >= numOfContents)
+                throw new IndexOutOfRangeException(
+                    $"{nameof(centeredContentID)} is larger than the number of contents");
 
-                foreach (var listBox in _listBoxes)
-                    listBox.Refresh(centeredBox.listBoxID, centeredContentID);
+            _listPositionCtrl.numOfLowerDisabledBoxes = 0;
+            _listPositionCtrl.numOfUpperDisabledBoxes = 0;
 
-                _hasNoContent = numOfContents == 0;
-            }
-           
+            foreach (var listBox in _listBoxes)
+                listBox.Refresh(centeredBox.listBoxID, centeredContentID);
+
+            _hasNoContent = numOfContents == 0;
+
+            Debug.Log(centeredBox.GetComponentInChildren<Text>().text);
+
         }
 
         /// <summary>
@@ -297,21 +300,19 @@ namespace AirFishLab.ScrollingList
             if (_hasNoContent)
                 return;
             //Debug.Log(GetCenteredBox().GetComponentInChildren<Text>().text );
-            //if (this.gameObject.transform.parent.name != "Info")
-            //{
-            //    var centeredBox = GetCenteredBox().GetComponentInChildren<Text>().text;
-            //   // Debug.Log(centeredBox);
+           // _info.gameObject.GetComponent<VariableStringListBankRiserva>().ChangeInfoContents(GetCenteredBox().GetComponentInChildren<Text>().text);
 
-            //    _info.gameObject.GetComponent<VariableStringListBankRiserva>().ChangeInfoContents(centeredBox);
-            //}
 
             _listPositionCtrl.InputPositionHandler(eventData, TouchPhase.Ended);
+
+
         }
 
         public void OnScroll(PointerEventData eventData)
         {
             if (_hasNoContent)
                 return;
+          
 
             _listPositionCtrl.ScrollHandler(eventData);
         }
@@ -324,6 +325,7 @@ namespace AirFishLab.ScrollingList
                 return;
 
             _listPositionCtrl.Update();
+           // Debug.Log(GetCenteredBox().GetComponentInChildren<Text>().text);
         }
 
         private void LateUpdate()
@@ -332,8 +334,6 @@ namespace AirFishLab.ScrollingList
                 return;
 
             _listPositionCtrl.LateUpdate();
-
-           
         }
 
 #if UNITY_EDITOR

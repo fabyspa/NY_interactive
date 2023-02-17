@@ -1084,35 +1084,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 492592227}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cabda73a056f575479ab196aa3f4edd1, type: 3}
+  m_Script: {fileID: 11500000, guid: 74b28da717247e847909960b478ff563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _contents:
-  - Riserva Naturale
-  - Parchi naturali
-  _circularList: {fileID: 0}
---- !u!114 &492592230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 492592227}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 831ecc00ba8a38f448ccce2a87cd76db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _listBank: {fileID: 492592229}
+  _listBank: {fileID: 492592230}
   _listBoxes:
-  - {fileID: 1885486833}
+  - {fileID: 1885486837}
   - {fileID: 1347930410}
   - {fileID: 222776328}
   _setting:
     _listType: 0
     _controlMode: 0
     _alignMiddle: 1
-    _reverseDirection: 0
+    _reverseDirection: 1
     _direction: 1
     _centeredContentID: 0
     _centerSelectedBox: 0
@@ -1173,20 +1157,20 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 1
-        inSlope: -2.665783
-        outSlope: -2.665783
+        inSlope: 0
+        outSlope: -2.5
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0.048507463
+        outWeight: 0
       - serializedVersion: 3
         time: 1
         value: 0
-        inSlope: -0.028004175
-        outSlope: -0.028004175
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.10261196
+        inWeight: 0
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -1224,7 +1208,22 @@ MonoBehaviour:
     _onMovementEnd:
       m_PersistentCalls:
         m_Calls: []
-  _info: {fileID: 0}
+--- !u!114 &492592230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492592227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cabda73a056f575479ab196aa3f4edd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _contents:
+  - Riserve Naturali
+  - Parchi Naturali
+  _circularList: {fileID: 492592229}
 --- !u!1 &522043960
 GameObject:
   m_ObjectHideFlags: 0
@@ -2333,8 +2332,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 986936555}
-  m_RootOrder: -1
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4310,10 +4309,9 @@ GameObject:
   - component: {fileID: 1371252900}
   - component: {fileID: 1371252904}
   - component: {fileID: 1371252903}
-  - component: {fileID: 1371252905}
   m_Layer: 0
   m_Name: CircularScrollingList
-  m_TagString: Untagged
+  m_TagString: Info
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4333,6 +4331,7 @@ RectTransform:
   - {fileID: 596011812}
   - {fileID: 1179867709}
   - {fileID: 1083148659}
+  - {fileID: 2050047244}
   m_Father: {fileID: 7801748841300061946}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4366,7 +4365,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1371252899}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 74b28da717247e847909960b478ff563, type: 3}
   m_Name: 
@@ -4492,138 +4491,6 @@ MonoBehaviour:
     _onMovementEnd:
       m_PersistentCalls:
         m_Calls: []
-  _info: {fileID: 0}
---- !u!114 &1371252905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1371252899}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 831ecc00ba8a38f448ccce2a87cd76db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _listBank: {fileID: 1371252903}
-  _listBoxes: []
-  _setting:
-    _listType: 0
-    _controlMode: 0
-    _alignMiddle: 1
-    _reverseDirection: 0
-    _direction: 1
-    _centeredContentID: 0
-    _centerSelectedBox: 0
-    _reverseOrder: 1
-    _initializeOnStart: 1
-    _boxDensity: 1
-    _boxPositionCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: -1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    _boxScaleCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: -1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    _boxVelocityCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: -2.5
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    _boxMovementCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 8
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 0.25
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    _onBoxClick:
-      m_PersistentCalls:
-        m_Calls: []
-    _onCenteredContentChanged:
-      m_PersistentCalls:
-        m_Calls: []
-    _onMovementEnd:
-      m_PersistentCalls:
-        m_Calls: []
-  _info: {fileID: 0}
 --- !u!1 &1391242036
 GameObject:
   m_ObjectHideFlags: 0
@@ -5102,7 +4969,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 492592230}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AirFishLab.ScrollingList.CircularScrollingList,
           Assembly-CSharp-firstpass
         m_MethodName: MoveOneUnitUp
@@ -5740,7 +5607,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8415990495607897638, guid: 0ea52ba83ba93fe428f847e2d94ea62c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1885486833}
+      addedObject: {fileID: 1885486837}
   m_SourcePrefab: {fileID: 100100000, guid: 0ea52ba83ba93fe428f847e2d94ea62c, type: 3}
 --- !u!1 &1610975997
 GameObject:
@@ -6415,7 +6282,7 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8415990495607897633, guid: 0ea52ba83ba93fe428f847e2d94ea62c, type: 3}
   m_PrefabInstance: {fileID: 1602628264}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1885486833
+--- !u!114 &1885486837
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6424,7 +6291,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1885486827}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: beb107afc877ad244957eac96366bc57, type: 3}
+  m_Script: {fileID: 11500000, guid: ca523a0be3354794fb13d0d382e08791, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 1259200916}
@@ -6511,7 +6378,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 492592230}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AirFishLab.ScrollingList.CircularScrollingList,
           Assembly-CSharp-firstpass
         m_MethodName: MoveOneUnitDown
@@ -6939,7 +6806,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a4502a4a6ec58b4181fffaf1a93ad1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _text: {fileID: 524364172}
 --- !u!1 &2077999468
 GameObject:
   m_ObjectHideFlags: 0
@@ -9008,7 +8874,6 @@ MonoBehaviour:
     _onMovementEnd:
       m_PersistentCalls:
         m_Calls: []
-  _info: {fileID: 1371252904}
 --- !u!224 &7801748841792539592
 RectTransform:
   m_ObjectHideFlags: 0
