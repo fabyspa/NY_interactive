@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using AirFishLab.ScrollingList.MovementCtrl;
+using UnityEngine.Events;
 
 namespace AirFishLab.ScrollingList
 {
@@ -12,8 +14,10 @@ namespace AirFishLab.ScrollingList
     /// </summary>
     public class ListPositionCtrl
     {
+        public string centeredBoxAfterScroll;
         #region Enums
-
+        
+       
         /// <summary>
         /// The state of the position of the list
         /// </summary>
@@ -36,6 +40,7 @@ namespace AirFishLab.ScrollingList
         #endregion
 
         #region Referenced Components
+        UnityEvent m_MyEvent = new UnityEvent();
 
         /// <summary>
         /// The setting of the list
@@ -219,6 +224,7 @@ namespace AirFishLab.ScrollingList
         {
             float GetAligningDistance() => _deltaDistanceToCenter;
             PositionState GetPositionState() => _positionState;
+            m_MyEvent.AddListener(() => CenteredBoxisChanged());
 
             var overGoingThreshold = unitPos * 0.3f;
 
@@ -431,6 +437,7 @@ namespace AirFishLab.ScrollingList
         /// Update the position state and find the distance for aligning a box
         /// to the center
         /// </summary>
+       
         public void LateUpdate()
         {
             if (!_toRunLateUpdate)
@@ -443,17 +450,37 @@ namespace AirFishLab.ScrollingList
 
             if (!_movementCtrl.IsMovementEnded())
                 return;
+           
 
             // Not to update the state of box after the last frame of movement
             _toRunLateUpdate = false;
 
             if (!_isEndingMovement)
                 return;
+            else
+            {
+
+                //Debug.Log("isEndingMovement");
+                var newCenteredBoxAfterScroll = GetCenteredBox().GetComponentInChildren<Text>().text;
+                if(m_MyEvent!=null && centeredBoxAfterScroll != newCenteredBoxAfterScroll)
+                {
+
+                    centeredBoxAfterScroll = newCenteredBoxAfterScroll;
+
+                    Debug.Log(centeredBoxAfterScroll);
+
+                    m_MyEvent.Invoke();
+                }
+            }
 
             _isEndingMovement = false;
             _listSetting.onMovementEnd?.Invoke();
         }
 
+        void CenteredBoxisChanged()
+        {
+            
+        }
         #endregion
 
         #region Movement Control

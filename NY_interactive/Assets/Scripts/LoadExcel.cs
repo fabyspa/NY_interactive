@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using AirFishLab.ScrollingList.Demo;
+using AirFishLab.ScrollingList;
 
 
 public class LoadExcel : MonoBehaviour

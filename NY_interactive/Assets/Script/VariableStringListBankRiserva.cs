@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace AirFishLab.ScrollingList.Demo
+namespace AirFishLab.ScrollingList
 {
     public class VariableStringListBankRiserva : BaseListBank
     {
@@ -15,9 +15,11 @@ namespace AirFishLab.ScrollingList.Demo
         private List<string> _contentsList = new List<string>();
         public string[] _contents;
         [SerializeField]
-        private CircularScrollingList _circularList;
-       // [SerializeField]
-       // private CircularScrollingList _linearList;
+        private CircularScrollingListRiserva _circularList;
+        //[SerializeField]
+        //private CircularScrollingList _thirdCircular;
+        // [SerializeField]
+        // private CircularScrollingList _linearList;
 
         private readonly DataWrapper _dataWrapper = new DataWrapper();
 
@@ -26,13 +28,21 @@ namespace AirFishLab.ScrollingList.Demo
         /// </summary>
         public void ChangeContents()
         {
+            //Debug.Log("CHANGE");
+            //if(_thirdCircular!=null)
+            //_thirdCircular.GetComponent<VariableStringListBankRiserva>().ChangeContents();
+            _contentsList.Add("Tutte");
+
             loadexcel = GameObject.FindObjectOfType<LoadExcel>();
-            foreach ( string t in loadexcel.type)
-            {
-                _contentsList.Add(t);
-               //_contentInputField.text.Split(
-               //    new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            }
+           
+                foreach (string t in loadexcel.type)
+                {
+                    _contentsList.Add(t);
+                    //_contentInputField.text.Split(
+                    //    new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                }
+            
+            
             _contents = _contentsList.ToArray();
             _circularList.Refresh();
             //_linearList.Refresh();
@@ -55,6 +65,27 @@ namespace AirFishLab.ScrollingList.Demo
         public class DataWrapper
         {
             public string data;
+        }
+
+        public void ChangeInfoContents(string type)
+        {
+            loadexcel = GameObject.FindObjectOfType<LoadExcel>();
+
+            //Debug.Log(type);
+            if (loadexcel.type.Contains(type) )
+            {
+                loadexcel.LoadRiservaByType(type);
+                _contentsList.Clear();
+                foreach (Riserva r in loadexcel.riservaDatabaseType)
+                {
+                    _contentsList.Add(r.name);
+                    //_contentInputField.text.Split(
+                    //    new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                }
+                _contents = _contentsList.ToArray();
+                _circularList.Refresh();
+            }
+           
         }
     }
 }
