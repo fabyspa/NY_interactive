@@ -142,8 +142,7 @@ public class swipeControl : MonoBehaviour
             TypesToText(3);
             //thirdFilter.GetComponent<SwipeControlBase>().reset = true;
             thirdFilter.GetComponent<SwipeControlBase>().ResetScroll();
-           
-
+            
             //Debug.Log(this.name);
             //TypesToText(gameobjectToClone);
 

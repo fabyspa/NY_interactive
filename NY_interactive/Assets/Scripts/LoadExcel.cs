@@ -10,14 +10,16 @@ public class LoadExcel : MonoBehaviour
     public Riserva blankRiserva;
     public List<Riserva> riservaDatabase = new List<Riserva>();
     public List<Riserva> riservaDatabaseType = new List<Riserva>();
-   public List<Riserva> ordenList = new List<Riserva>();
+    public List<Riserva> ordenList = new List<Riserva>();
 
     public List<string> type = new List<string>();
     [SerializeField] GameObject scrolling;
     public bool loadedItems = false;
     private string actualType;
+    
     [SerializeField] GameObject point;
     public Transform parent;
+    public List<GameObject> pointList = new List<GameObject>();
 
     public void Start()
     {
@@ -50,6 +52,7 @@ public class LoadExcel : MonoBehaviour
         }
         loadedItems = true;
         GetRiservaTypes();
+       /* InstantiatePoints(riservaDatabase,tipo);*/
     }
 
 
@@ -70,31 +73,30 @@ public class LoadExcel : MonoBehaviour
         tempItem.descr = descr;
 
         riservaDatabase.Add(tempItem);
-        InstantiatePoints(tempItem);
+          
     }
 
-    //una funzione che ho creato io (sam)
-    public string[] GetArrayTypeFromList()
+    //Instanzio i punti passandogli la lista 
+    public void InstantiatePoints(List<Riserva> r)
     {
-        string[] arrayTemp = new string[riservaDatabase.Count];
-        for(int i =0; i<arrayTemp.Length; i++)
-        {
-            arrayTemp[i] = riservaDatabase[i].type;
-        }
-        return arrayTemp;
-    }
-    //altra funzione di sam che potrebbe compromettere tutto il codice
-    public void InstantiatePoints(Riserva r)
-    {
-        if (r.coord != "")
-        {
-            int[] coord = Convert_coordinates.remapLatLng(r.coord);
-            Debug.Log(coord[0]+","+ coord[1]);
-            Vector3 v = new Vector3(coord[0], coord[1], 0);
-            Vector3 vec3 = parent.transform.InverseTransformPoint(v);
-            Instantiate(point, vec3, Quaternion.identity,parent);
-        }
+        ClearPoints();
 
+        foreach (Riserva c in r) { 
+            float[] coord = Convert_coordinates.remapLatLng(c.coord);
+            Vector3 worldSpacePosition = new Vector3(coord[1], coord[0], 0);
+            Vector3 localSpacePosition = transform.InverseTransformPoint(worldSpacePosition);
+            pointList.Add(Instantiate(point, localSpacePosition, Quaternion.identity,parent));
+
+            Debug.Log(c.coord);
+            }
+    }
+
+    public void ClearPoints()
+    {
+        foreach (GameObject c in pointList)
+        {
+            GameObject.Destroy(c);
+        }
     }
 
     //torna tutti i tipi di riserve diverse
