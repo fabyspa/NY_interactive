@@ -84,7 +84,7 @@ public class LoadExcel : MonoBehaviour
             Vector3 worldSpacePosition = new Vector3(coord[1], coord[0], 0);
             Vector3 localSpacePosition = transform.InverseTransformPoint(worldSpacePosition);
             pointList.Add(Instantiate(point, localSpacePosition, Quaternion.identity,parent));
-
+            
             Debug.Log(c.coord);
             }
     }

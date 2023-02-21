@@ -14,6 +14,7 @@ namespace AirFishLab.ScrollingList
     /// </summary>
     public class ListPositionCtrl
     {
+        private CircularScrollingListRiserva circularScrollingList;
         public string centeredBoxAfterScroll;
         #region Enums
 
@@ -228,6 +229,7 @@ namespace AirFishLab.ScrollingList
             PositionState GetPositionState() => _positionState;
             m_MyEvent.AddListener(() => CenteredBoxisChanged());
             //info = GameObject.FindGameObjectWithTag("Info");
+            circularScrollingList = GameObject.FindObjectOfType<CircularScrollingListRiserva>();
             var overGoingThreshold = unitPos * 0.3f;
 
             switch (_listSetting.controlMode) {
@@ -462,34 +464,42 @@ namespace AirFishLab.ScrollingList
             else
             {
 
-                //Debug.Log("isEndingMovement");
-                var newCenteredBoxAfterScroll = GetCenteredBox().GetComponentInChildren<Text>().text;
-                if(m_MyEvent!=null && centeredBoxAfterScroll != newCenteredBoxAfterScroll)
+                if (circularScrollingList.tagScroll == "Type")
                 {
+                    Debug.Log("Typescrollinglist");
+                    var newCenteredBoxAfterScroll = GetCenteredBox().GetComponentInChildren<Text>().text;
+                    if (m_MyEvent != null && centeredBoxAfterScroll != newCenteredBoxAfterScroll)
+                    {
 
-                    centeredBoxAfterScroll = newCenteredBoxAfterScroll;
+                        centeredBoxAfterScroll = newCenteredBoxAfterScroll;
 
 
-                    m_MyEvent.Invoke();
+                        m_MyEvent.Invoke();
+                    }
+                   
                 }
+                //Debug.Log("isEndingMovement");
+                _isEndingMovement = false;
+                _listSetting.onMovementEnd?.Invoke();
             }
+          
 
-            _isEndingMovement = false;
-            _listSetting.onMovementEnd?.Invoke();
         }
+
 
         void CenteredBoxisChanged()
         {
-            Debug.Log("1");
+            
             var info= GameObject.FindGameObjectWithTag("Info");
-            Debug.Log("2");
+           // var firstFilter = GameObject.FindGameObjectsWithTag("FirstFilter");
+
             #nullable enable
-            VariableStringListBankRiserva? list = (VariableStringListBankRiserva?) info.GetComponent<CircularScrollingListRiserva>().listBank;
-            Debug.Log(list);
+            VariableGameObjectListBankRiserva? list = (VariableGameObjectListBankRiserva?) info.GetComponent<CircularScrollingListRiserva>().listBank;
             if(list!=null)
             {
                 list.ChangeInfoContents(centeredBoxAfterScroll);
             }
+
             #nullable disable
             // list.ChangeInfoContents(centeredBoxAfterScroll);
             //foreach (VariableStringListBankRiserva v in _variable)

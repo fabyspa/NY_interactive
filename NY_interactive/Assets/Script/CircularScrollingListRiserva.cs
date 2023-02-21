@@ -13,6 +13,7 @@ namespace AirFishLab.ScrollingList
     public class CircularScrollingListRiserva : MonoBehaviour,
         IBeginDragHandler, IDragHandler, IEndDragHandler, IScrollHandler
     {
+        public string tagScroll;
         #region Enum Definitions
 
         /// <summary>
@@ -296,6 +297,9 @@ namespace AirFishLab.ScrollingList
         {
             if (_hasNoContent)
                 return;
+
+            tagScroll = this.gameObject.tag.ToString();
+            Debug.Log(tagScroll);
             //Debug.Log(GetCenteredBox().GetComponentInChildren<Text>().text );
             //if (this.gameObject.transform.parent.name != "Info")
             //{
