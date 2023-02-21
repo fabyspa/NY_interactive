@@ -25,6 +25,8 @@ public class LoadExcel : MonoBehaviour
         LoadItemData();
         scrolling.GetComponent<VariableStringListBankRiserva>().ChangeContents();
         SortListByType();
+        GameObject.FindGameObjectWithTag("Info").GetComponent<VariableGameObjectListBankRiserva>().ChangeInfoContents("Tutte");
+
     }
 
 
@@ -85,7 +87,7 @@ public class LoadExcel : MonoBehaviour
             Vector3 localSpacePosition = transform.InverseTransformPoint(worldSpacePosition);
             pointList.Add(Instantiate(point, localSpacePosition, Quaternion.identity,parent));
             
-            Debug.Log(c.coord);
+           // Debug.Log(c.coord);
             }
     }
 

@@ -41,8 +41,7 @@ namespace AirFishLab.ScrollingList
                     //_contentInputField.text.Split(
                     //    new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 }
-            
-            
+
             _contents = _contentsList.ToArray();
             _circularList.Refresh();
             //_linearList.Refresh();

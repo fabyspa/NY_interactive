@@ -299,7 +299,7 @@ namespace AirFishLab.ScrollingList
                 return;
 
             tagScroll = this.gameObject.tag.ToString();
-            Debug.Log(tagScroll);
+            _listPositionCtrl.tagscroll = tagScroll;
             //Debug.Log(GetCenteredBox().GetComponentInChildren<Text>().text );
             //if (this.gameObject.transform.parent.name != "Info")
             //{

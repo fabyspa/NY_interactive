@@ -14,7 +14,7 @@ namespace AirFishLab.ScrollingList
     /// </summary>
     public class ListPositionCtrl
     {
-        private CircularScrollingListRiserva circularScrollingList;
+        public string tagscroll;
         public string centeredBoxAfterScroll;
         #region Enums
 
@@ -229,7 +229,6 @@ namespace AirFishLab.ScrollingList
             PositionState GetPositionState() => _positionState;
             m_MyEvent.AddListener(() => CenteredBoxisChanged());
             //info = GameObject.FindGameObjectWithTag("Info");
-            circularScrollingList = GameObject.FindObjectOfType<CircularScrollingListRiserva>();
             var overGoingThreshold = unitPos * 0.3f;
 
             switch (_listSetting.controlMode) {
@@ -464,9 +463,8 @@ namespace AirFishLab.ScrollingList
             else
             {
 
-                if (circularScrollingList.tagScroll == "Type")
+                if (tagscroll == "Type")
                 {
-                    Debug.Log("Typescrollinglist");
                     var newCenteredBoxAfterScroll = GetCenteredBox().GetComponentInChildren<Text>().text;
                     if (m_MyEvent != null && centeredBoxAfterScroll != newCenteredBoxAfterScroll)
                     {
@@ -478,6 +476,7 @@ namespace AirFishLab.ScrollingList
                     }
                    
                 }
+
                 //Debug.Log("isEndingMovement");
                 _isEndingMovement = false;
                 _listSetting.onMovementEnd?.Invoke();

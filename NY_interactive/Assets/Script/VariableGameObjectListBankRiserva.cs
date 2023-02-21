@@ -13,8 +13,8 @@ namespace AirFishLab.ScrollingList
         LoadExcel loadexcel;
         //[SerializeField]
         //private InputField _contentInputField;
-        private List<GameObject> _contentsList = new List<GameObject>();
-        public GameObject[] _contents;
+        private List<Riserva> _contentsList = new List<Riserva>();
+        public Riserva[] _contents;
         [SerializeField]
         private CircularScrollingListRiserva _circularList;
         [SerializeField]
@@ -45,28 +45,42 @@ namespace AirFishLab.ScrollingList
         public void ChangeInfoContents(string type)
         {
             loadexcel = GameObject.FindObjectOfType<LoadExcel>();
-
-            //Debug.Log(type);
-            if (loadexcel.type.Contains(type))
+            if (type == "Tutte")
             {
+                _contentsList.Clear();
+                foreach (Riserva r in loadexcel.ordenList)
+                {
+                    _contentsList.Add(r);
+                }
+                loadexcel.InstantiatePoints(loadexcel.ordenList);
+            }
+            //Debug.Log(type);
+            else if (loadexcel.type.Contains(type))
+            {
+                //Debug.Log(_dataWrapper.data.transform.childCount);
                 loadexcel.LoadRiservaByType(type);
                 _contentsList.Clear();
                 foreach (Riserva r in loadexcel.riservaDatabaseType)
                 {
-                    gameobjectToClone.transform.Find("Nome").GetComponent<TextMeshPro>().text = r.name;
-                    gameobjectToClone.transform.Find("Descr").GetComponent<TextMeshPro>().text = r.descr;
+                    //_dataWrapper.data.transform.GetChild(0).GetComponent<Text>().text = r.name;
+                    //_dataWrapper.data.transform.GetChild(1).GetComponent<Text>().text = r.descr;
 
-                    _contentsList.Add(gameobjectToClone);
+
+                    _contentsList.Add(r);
+                    //foreach (Transform child in _dataWrapper.data.transform)
+                    //{
+                    //    Debug.Log(child.GetComponent<Text>().text);
+                    //}
                     //_contentInputField.text.Split(
                     //    new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 }
                 loadexcel.InstantiatePoints(loadexcel.riservaDatabaseType);
 
-                _contents = _contentsList.ToArray();
-                _circularList.Refresh();
-
             }
+           
 
+            _contents = _contentsList.ToArray();
+            _circularList.Refresh();
 
         }
 
@@ -80,7 +94,7 @@ namespace AirFishLab.ScrollingList
         /// </summary>
         public class DataWrapper
         {
-            public GameObject data;
+            public Riserva data;
         }
 
         
