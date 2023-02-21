@@ -2,51 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Text.RegularExpressions;
-
-
-
-
-
+using System;
 
 public static class Convert_coordinates
 {
     public static string coordinates;
-    public static double from1, to1;
-    public static int from2, to2;
 
-    
-        public static int[] remapLatLng(string coord, double from1, double to1, float from2, float to2)
+    public static double xfrom1 = 6.362218;
+    public static double xto1 = 18.785160;
+    public static double xfrom2 = -2.37;
+    public static double xto2 = 2.31;
+
+    public static double yfrom1 = 37.027325;
+    public static double yto1 = 46.574408;
+    public static double yfrom2 = -0.65;
+    public static double yto2 = 4.46;
+
+    public static int decimalp = 5;
+
+    public static float[] remapLatLng(string coord)
+    {
+        string[] subs = coord.Split(',');
+        float[] xy = new float[2];
+        for (int i = 0; i < subs.Length; i++)
         {
-            string[] subs = coord.Split(',');
-            foreach (string i in subs) Debug.Log(i);
-
-            int[] xy = new int[2];
-            for (int i = 0; i < subs.Length; i++)
+            double v = double.Parse(subs[i], System.Globalization.CultureInfo.InvariantCulture);
+            if (i == 0)
             {
-                double v = double.Parse(subs[i], System.Globalization.CultureInfo.InvariantCulture);
-                xy[i]= ExtensionMethods.Remap(v, from1, to1, from2, to2);
+                xy[i] = ExtensionMethods.Remap(v, yfrom1, yto1, yfrom2, yto2, decimalp);
             }
-            return xy;
+            else
+            {
+                xy[i] = ExtensionMethods.Remap(v, xfrom1, xto1, xfrom2, xto2, decimalp);
+            }
+
         }
-
-     
-
-
-
-
-    // Start is called before the first frame update
-    //void Start()
-    //{
-    //    int[] coord = remapLatLng(coordinates,from1,to1,from2,to2);
-    //    Debug.Log(coord[0]);
-    //    Debug.Log(coord[1]);
-    //}
-
-    //// Update is called once per frame
-    //void Update()
-    //{
-        
-    //}
+        return xy;
+    }
 }
 
 
@@ -54,11 +46,16 @@ public static class Convert_coordinates
 public static class ExtensionMethods
 {
 
-    public static int Remap(this double value, double from1, double to1, float from2, float to2)
+    public static float Remap(double sourceNumber, double fromA, double fromB, double toA, double toB, int decimalPrecision)
     {
-        int n = System.Convert.ToInt32((value - from1) / (to1 - from1) * (to2 - from2) + from2);
-        return n;
+        double deltaA = fromB - fromA;
+        double deltaB = toB - toA;
+        double scale = deltaB / deltaA;
+        double negA = -1 * fromA;
+        double offset = (negA * scale) + toA;
+        double finalNumber = (sourceNumber * scale) + offset;
+        int calcScale = (int)Math.Pow(10, decimalPrecision);
+        return (float)Math.Round(finalNumber * calcScale) / calcScale;
     }
-
 }
 

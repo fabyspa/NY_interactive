@@ -10,13 +10,20 @@ public class LoadExcel : MonoBehaviour
     public Riserva blankRiserva;
     public List<Riserva> riservaDatabase = new List<Riserva>();
     public List<Riserva> riservaDatabaseType = new List<Riserva>();
-   public List<Riserva> ordenList = new List<Riserva>();
+    public List<Riserva> ordenList = new List<Riserva>();
 
     public List<string> type = new List<string>();
     [SerializeField] GameObject scrolling;
     public bool loadedItems = false;
     private string actualType;
+<<<<<<< HEAD
 
+=======
+    
+    [SerializeField] GameObject point;
+    public Transform parent;
+    public List<GameObject> pointList = new List<GameObject>();
+>>>>>>> Samu
 
     public void Start()
     {
@@ -49,6 +56,7 @@ public class LoadExcel : MonoBehaviour
         }
         loadedItems = true;
         GetRiservaTypes();
+       /* InstantiatePoints(riservaDatabase,tipo);*/
     }
 
 
@@ -69,18 +77,37 @@ public class LoadExcel : MonoBehaviour
         tempItem.descr = descr;
 
         riservaDatabase.Add(tempItem);
+<<<<<<< HEAD
+=======
+          
+>>>>>>> Samu
     }
 
-    //una funzione che ho creato io (sam)
-    public string[] GetArrayTypeFromList()
+    //Instanzio i punti passandogli la lista 
+    public void InstantiatePoints(List<Riserva> r)
     {
-        string[] arrayTemp = new string[riservaDatabase.Count];
-        for(int i =0; i<arrayTemp.Length; i++)
-        {
-            arrayTemp[i] = riservaDatabase[i].type;
-        }
-        return arrayTemp;
+        ClearPoints();
+
+        foreach (Riserva c in r) { 
+            float[] coord = Convert_coordinates.remapLatLng(c.coord);
+            Vector3 worldSpacePosition = new Vector3(coord[1], coord[0], 0);
+            Vector3 localSpacePosition = transform.InverseTransformPoint(worldSpacePosition);
+            pointList.Add(Instantiate(point, localSpacePosition, Quaternion.identity,parent));
+
+            Debug.Log(c.coord);
+            }
     }
+<<<<<<< HEAD
+=======
+
+    public void ClearPoints()
+    {
+        foreach (GameObject c in pointList)
+        {
+            GameObject.Destroy(c);
+        }
+    }
+>>>>>>> Samu
 
     //torna tutti i tipi di riserve diverse
     public void GetRiservaTypes()
