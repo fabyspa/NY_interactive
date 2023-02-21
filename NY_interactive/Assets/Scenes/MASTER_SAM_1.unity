@@ -4126,7 +4126,7 @@ PrefabInstance:
     - target: {fileID: 4333776204369620916, guid: a8eaf8e2c8352da44befdb4403ac224c, type: 3}
       propertyPath: point
       value: 
-      objectReference: {fileID: 8184889516069221117, guid: 7686b4f320e2bbb4ca92a0847d4d0ffc, type: 3}
+      objectReference: {fileID: 2027124706745483616, guid: 0de64a7c5011c6b41877dab8496f5e0e, type: 3}
     - target: {fileID: 4333776204369620916, guid: a8eaf8e2c8352da44befdb4403ac224c, type: 3}
       propertyPath: parent
       value: 
