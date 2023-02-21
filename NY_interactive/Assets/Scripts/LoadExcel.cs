@@ -16,14 +16,9 @@ public class LoadExcel : MonoBehaviour
     [SerializeField] GameObject scrolling;
     public bool loadedItems = false;
     private string actualType;
-<<<<<<< HEAD
-
-=======
-    
     [SerializeField] GameObject point;
     public Transform parent;
     public List<GameObject> pointList = new List<GameObject>();
->>>>>>> Samu
 
     public void Start()
     {
@@ -77,10 +72,6 @@ public class LoadExcel : MonoBehaviour
         tempItem.descr = descr;
 
         riservaDatabase.Add(tempItem);
-<<<<<<< HEAD
-=======
-          
->>>>>>> Samu
     }
 
     //Instanzio i punti passandogli la lista 
@@ -97,8 +88,6 @@ public class LoadExcel : MonoBehaviour
             Debug.Log(c.coord);
             }
     }
-<<<<<<< HEAD
-=======
 
     public void ClearPoints()
     {
@@ -107,7 +96,7 @@ public class LoadExcel : MonoBehaviour
             GameObject.Destroy(c);
         }
     }
->>>>>>> Samu
+
 
     //torna tutti i tipi di riserve diverse
     public void GetRiservaTypes()
