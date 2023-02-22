@@ -1,21 +1,24 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace AirFishLab.ScrollingList
 {
-    public class VariableStringListBankRiserva : BaseListBank
+    public class VariableGameObjectListBankRiserva : BaseListBank
     {
 
         LoadExcel loadexcel;
         //[SerializeField]
         //private InputField _contentInputField;
-        private List<string> _contentsList = new List<string>();
-        public string[] _contents;
+        private List<Riserva> _contentsList = new List<Riserva>();
+        public Riserva[] _contents;
         [SerializeField]
         private CircularScrollingListRiserva _circularList;
+        [SerializeField]
+        private GameObject gameobjectToClone;
         //[SerializeField]
         //private CircularScrollingList _thirdCircular;
         // [SerializeField]
@@ -26,26 +29,7 @@ namespace AirFishLab.ScrollingList
         /// <summary>
         /// Extract the contents from the input field and refresh the list
         /// </summary>
-        public void ChangeContents()
-        {
-            //Debug.Log("CHANGE");
-            //if(_thirdCircular!=null)
-            //_thirdCircular.GetComponent<VariableStringListBankRiserva>().ChangeContents();
-            _contentsList.Add("Tutte");
-
-            loadexcel = GameObject.FindObjectOfType<LoadExcel>();
-           
-                foreach (string t in loadexcel.type)
-                {
-                    _contentsList.Add(t);
-                    //_contentInputField.text.Split(
-                    //    new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                }
-
-            _contents = _contentsList.ToArray();
-            _circularList.Refresh();
-            //_linearList.Refresh();
-        }
+       
 
         public override object GetListContent(int index)
         {
@@ -58,44 +42,61 @@ namespace AirFishLab.ScrollingList
             return _contents.Length;
         }
 
-        /// <summary>
-        /// Used for carry the data of value type to avoid boxing/unboxing
-        /// </summary>
-        public class DataWrapper
-        {
-            public string data;
-        }
-
         public void ChangeInfoContents(string type)
         {
             loadexcel = GameObject.FindObjectOfType<LoadExcel>();
-
-            //Debug.Log(type);
-            if (loadexcel.type.Contains(type) )
+            if (type == "Tutte")
             {
+                _contentsList.Clear();
+                foreach (Riserva r in loadexcel.ordenList)
+                {
+                    _contentsList.Add(r);
+                }
+                loadexcel.InstantiatePoints(loadexcel.ordenList);
+            }
+            //Debug.Log(type);
+            else if (loadexcel.type.Contains(type))
+            {
+                //Debug.Log(_dataWrapper.data.transform.childCount);
                 loadexcel.LoadRiservaByType(type);
                 _contentsList.Clear();
                 foreach (Riserva r in loadexcel.riservaDatabaseType)
                 {
-                    _contentsList.Add(r.name);
+                    //_dataWrapper.data.transform.GetChild(0).GetComponent<Text>().text = r.name;
+                    //_dataWrapper.data.transform.GetChild(1).GetComponent<Text>().text = r.descr;
+
+
+                    _contentsList.Add(r);
+                    //foreach (Transform child in _dataWrapper.data.transform)
+                    //{
+                    //    Debug.Log(child.GetComponent<Text>().text);
+                    //}
                     //_contentInputField.text.Split(
                     //    new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 }
                 loadexcel.InstantiatePoints(loadexcel.riservaDatabaseType);
 
-                _contents = _contentsList.ToArray();
-                _circularList.Refresh();
-
             }
-            loadexcel.AddState();
-            loadexcel.InstantiatePoints(loadexcel.riservaDatabase);
+           
+
+            _contents = _contentsList.ToArray();
+            _circularList.Refresh();
 
         }
 
         //disattiva il filtro per tipo se il primo filtro è parchi
         public void DeactivateTypeFilter()
         {
-            
+
         }
+        /// <summary>
+        /// Used for carry the data of value type to avoid boxing/unboxing
+        /// </summary>
+        public class DataWrapper
+        {
+            public Riserva data;
+        }
+
+        
     }
 }

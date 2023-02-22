@@ -29,6 +29,8 @@ public class LoadExcel : MonoBehaviour
         LoadItemData();
         scrolling.GetComponent<VariableStringListBankRiserva>().ChangeContents();
         SortListByType();
+        GameObject.FindGameObjectWithTag("Info").GetComponent<VariableGameObjectListBankRiserva>().ChangeInfoContents("Tutte");
+
     }
 
 

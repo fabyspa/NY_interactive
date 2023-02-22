@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
@@ -14,6 +14,7 @@ namespace AirFishLab.ScrollingList
     /// </summary>
     public class ListPositionCtrl
     {
+        public string tagscroll;
         public string centeredBoxAfterScroll;
         #region Enums
 
@@ -462,34 +463,42 @@ namespace AirFishLab.ScrollingList
             else
             {
 
-                //Debug.Log("isEndingMovement");
-                var newCenteredBoxAfterScroll = GetCenteredBox().GetComponentInChildren<Text>().text;
-                if(m_MyEvent!=null && centeredBoxAfterScroll != newCenteredBoxAfterScroll)
+                if (tagscroll == "Type")
                 {
+                    var newCenteredBoxAfterScroll = GetCenteredBox().GetComponentInChildren<Text>().text;
+                    if (m_MyEvent != null && centeredBoxAfterScroll != newCenteredBoxAfterScroll)
+                    {
 
-                    centeredBoxAfterScroll = newCenteredBoxAfterScroll;
+                        centeredBoxAfterScroll = newCenteredBoxAfterScroll;
 
 
-                    m_MyEvent.Invoke();
+                        m_MyEvent.Invoke();
+                    }
+                   
                 }
-            }
 
-            _isEndingMovement = false;
-            _listSetting.onMovementEnd?.Invoke();
+                //Debug.Log("isEndingMovement");
+                _isEndingMovement = false;
+                _listSetting.onMovementEnd?.Invoke();
+            }
+          
+
         }
+
 
         void CenteredBoxisChanged()
         {
-            /*Debug.Log("1");*/
+            
             var info= GameObject.FindGameObjectWithTag("Info");
-            /*Debug.Log("2");*/
+           // var firstFilter = GameObject.FindGameObjectsWithTag("FirstFilter");
+
             #nullable enable
-            VariableStringListBankRiserva? list = (VariableStringListBankRiserva?) info.GetComponent<CircularScrollingListRiserva>().listBank;
-            /*Debug.Log(list);*/
+            VariableGameObjectListBankRiserva? list = (VariableGameObjectListBankRiserva?) info.GetComponent<CircularScrollingListRiserva>().listBank;
             if(list!=null)
             {
                 list.ChangeInfoContents(centeredBoxAfterScroll);
             }
+
             #nullable disable
             // list.ChangeInfoContents(centeredBoxAfterScroll);
             //foreach (VariableStringListBankRiserva v in _variable)
