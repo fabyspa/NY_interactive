@@ -75,7 +75,7 @@ namespace AirFishLab.ScrollingList
                     //    new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 }
                 loadexcel.InstantiatePoints(loadexcel.riservaDatabaseType);
-
+               //Debug.Log(loadexcel.pointList.Count);
             }
            
 

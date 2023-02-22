@@ -516,6 +516,7 @@ namespace AirFishLab.ScrollingList
 
         #region Movement Control
 
+
         /// <summary>
         /// Find the listBox which is the closest to the center position,
         /// and calculate the delta x or y position between it and the center position.

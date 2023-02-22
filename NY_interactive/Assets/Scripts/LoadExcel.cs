@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using AirFishLab.ScrollingList;
+using System.Linq;
 
 
 public class LoadExcel : MonoBehaviour
@@ -16,13 +17,17 @@ public class LoadExcel : MonoBehaviour
     [SerializeField] GameObject scrolling;
     public bool loadedItems = false;
     private string actualType;
+    public Dictionary<Vector3, float[]> coord2position = new Dictionary<Vector3, float[]>();
 
     public Transform parent;
     public List<GameObject> pointList = new List<GameObject>();
 
+    
     //Ogetto contenente l'item attivo in questo momento
     public Riserva aItem;
     [SerializeField] GameObject point;
+
+
 
     public void Start()
     {
@@ -43,7 +48,7 @@ public class LoadExcel : MonoBehaviour
         riservaDatabaseType.Clear();
         type.Clear();
         //READ CSV FILE
-        List<Dictionary<string, object>> data = CSVReader.Read("Riserve");
+        List<Dictionary<string, object>> data = CSVReader.Read("RiserveNEW");
         for (var i = 0; i < data.Count; i++)
         {
             //Debug.Log("i: riga " + i);
@@ -84,16 +89,26 @@ public class LoadExcel : MonoBehaviour
     public void InstantiatePoints(List<Riserva> r)
     {
         ClearPoints();
+        coord2position.Clear();
 
         foreach (Riserva c in r) {
             GameObject Tpoint = TransformPoint(c.state);
             float[] coord = Convert_coordinates.remapLatLng(c.coord);
             Vector3 worldSpacePosition = new Vector3(coord[1], coord[0], 0);
             Vector3 localSpacePosition = transform.InverseTransformPoint(worldSpacePosition);
-            pointList.Add(Instantiate(Tpoint, localSpacePosition, Quaternion.identity,parent));
-
+            var instanciated = Instantiate(Tpoint, localSpacePosition, Quaternion.identity, parent);
+            pointList.Add(instanciated);
+            //Debug.Log(instanciated.transform.localPosition);
            // Debug.Log(c.coord);
-            }
+            if(!coord2position.ContainsKey(instanciated.transform.localPosition)) coord2position.Add(instanciated.transform.localPosition,coord);
+           // Debug.Log(string.Join(",", coord2position));
+        }
+       
+    }
+
+    public void CoordToPositionMap()
+    {
+
     }
 
     public void ClearPoints()
@@ -112,7 +127,7 @@ public class LoadExcel : MonoBehaviour
         {
             i++;
             t.state = assignItem(t);
-            Debug.Log(t.name);
+            //Debug.Log(t.name);
         }
         
     }
@@ -193,6 +208,27 @@ public class LoadExcel : MonoBehaviour
         }
         return riservaDatabaseType;
 
+    }
+
+    public Riserva GetRiservaByCoord(Vector3 position)
+    {
+        
+        foreach(Riserva r in riservaDatabase)
+        {
+            float[] coord = Convert_coordinates.remapLatLng(r.coord);
+            var value = new float[2];
+            coord2position.TryGetValue(position, out value);
+            //Debug.Log("val "+ string.Join(" ,", value));
+            //Debug.Log("coord " + string.Join(" ,", coord));
+
+            if (Enumerable.SequenceEqual(coord,value))
+            {
+                Debug.Log(r.name);
+                return r;
+            }
+           
+        }
+        return null;
     }
 
     public List<Riserva> SortListByType()

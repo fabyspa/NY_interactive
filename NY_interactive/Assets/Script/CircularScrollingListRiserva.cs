@@ -64,7 +64,7 @@ namespace AirFishLab.ScrollingList
         [SerializeField]
         [Tooltip("The game objects that used for displaying the content. " +
                  "They should be derived from the class ListBox")]
-        private List<ListBox> _listBoxes;
+        public List<ListBox> _listBoxes;
         [SerializeField]
         [Tooltip("The setting of this list")]
         private CircularScrollingListSetting _setting;
@@ -93,7 +93,7 @@ namespace AirFishLab.ScrollingList
         /// <summary>
         /// The component that controlling the position of each box
         /// </summary>
-        private ListPositionCtrl _listPositionCtrl;
+        public ListPositionCtrl _listPositionCtrl;
         /// <summary>
         /// The component that controlling the content for each box
         /// </summary>
@@ -300,6 +300,7 @@ namespace AirFishLab.ScrollingList
 
             tagScroll = this.gameObject.tag.ToString();
             _listPositionCtrl.tagscroll = tagScroll;
+
             //Debug.Log(GetCenteredBox().GetComponentInChildren<Text>().text );
             //if (this.gameObject.transform.parent.name != "Info")
             //{
@@ -310,6 +311,7 @@ namespace AirFishLab.ScrollingList
             //}
 
             _listPositionCtrl.InputPositionHandler(eventData, TouchPhase.Ended);
+            Debug.Log(string.Join("," ,eventData));
         }
 
         public void OnScroll(PointerEventData eventData)
