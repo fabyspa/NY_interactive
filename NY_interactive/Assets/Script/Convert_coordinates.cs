@@ -48,8 +48,8 @@ public static class ExtensionMethods
 
     public static float Remap(double sourceNumber, double fromA, double fromB, double toA, double toB, int decimalPrecision)
     {
-        double deltaA = fromB - fromA;
-        double deltaB = toB - toA;
+        double deltaA = (fromB - fromA);
+        double deltaB = (toB - toA);
         double scale = deltaB / deltaA;
         double negA = -1 * fromA;
         double offset = (negA * scale) + toA;

@@ -480,12 +480,12 @@ namespace AirFishLab.ScrollingList
 
         void CenteredBoxisChanged()
         {
-            Debug.Log("1");
+            /*Debug.Log("1");*/
             var info= GameObject.FindGameObjectWithTag("Info");
-            Debug.Log("2");
+            /*Debug.Log("2");*/
             #nullable enable
             VariableStringListBankRiserva? list = (VariableStringListBankRiserva?) info.GetComponent<CircularScrollingListRiserva>().listBank;
-            Debug.Log(list);
+            /*Debug.Log(list);*/
             if(list!=null)
             {
                 list.ChangeInfoContents(centeredBoxAfterScroll);

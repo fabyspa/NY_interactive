@@ -85,8 +85,9 @@ namespace AirFishLab.ScrollingList
                 _contents = _contentsList.ToArray();
                 _circularList.Refresh();
             }
+            loadexcel.AddState();
+            loadexcel.InstantiatePoints(loadexcel.riservaDatabase);
 
-            loadexcel.InstantiatePoints(loadexcel.riservaDatabaseType);
         }
     }
 }

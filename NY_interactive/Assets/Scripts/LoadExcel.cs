@@ -16,9 +16,13 @@ public class LoadExcel : MonoBehaviour
     [SerializeField] GameObject scrolling;
     public bool loadedItems = false;
     private string actualType;
-    [SerializeField] GameObject point;
+
     public Transform parent;
     public List<GameObject> pointList = new List<GameObject>();
+
+    //Ogetto contenente l'item attivo in questo momento
+    public Riserva aItem;
+    [SerializeField] GameObject point;
 
     public void Start()
     {
@@ -51,7 +55,8 @@ public class LoadExcel : MonoBehaviour
         }
         loadedItems = true;
         GetRiservaTypes();
-       /* InstantiatePoints(riservaDatabase,tipo);*/
+        AddState();
+        /* InstantiatePoints(riservaDatabase,tipo);*/
     }
 
 
@@ -67,10 +72,9 @@ public class LoadExcel : MonoBehaviour
 
         tempItem.type = type;
         tempItem.coord = coord;
-        //tempItem.coord = Convert_coordinates.remapLatLng(coord, 180f, 1900f, 360f, 1700f).ToString(); 
         tempItem.name = name;
         tempItem.descr = descr;
-
+       
         riservaDatabase.Add(tempItem);
     }
 
@@ -79,13 +83,14 @@ public class LoadExcel : MonoBehaviour
     {
         ClearPoints();
 
-        foreach (Riserva c in r) { 
+        foreach (Riserva c in r) {
+            GameObject Tpoint = TransformPoint(c.state);
             float[] coord = Convert_coordinates.remapLatLng(c.coord);
             Vector3 worldSpacePosition = new Vector3(coord[1], coord[0], 0);
             Vector3 localSpacePosition = transform.InverseTransformPoint(worldSpacePosition);
-            pointList.Add(Instantiate(point, localSpacePosition, Quaternion.identity,parent));
+            pointList.Add(Instantiate(Tpoint, localSpacePosition, Quaternion.identity,parent));
 
-            Debug.Log(c.coord);
+           // Debug.Log(c.coord);
             }
     }
 
@@ -97,6 +102,62 @@ public class LoadExcel : MonoBehaviour
         }
     }
 
+    //aggiunge lo stato alla variabile state
+    public void AddState()
+    {
+        int i = 0;
+        foreach(Riserva t in riservaDatabase)
+        {
+            i++;
+            t.state = assignItem(t);
+            Debug.Log(t.name);
+        }
+        
+    }
+
+    //assegna lo stato all'oggetto
+    public string assignItem(Riserva t)
+    {
+        string state = "unselected";
+
+            foreach(Riserva r in riservaDatabaseType)
+            {
+                if (t.name == r.name || t.type=="Tutte" )
+                {
+                    if (t.name == aItem.name)
+                    {
+                        state = "active";
+                    }
+                   
+                        state = "selected";
+                }
+            }
+
+        return state;
+    }
+
+    //gestisco scala punti
+    public GameObject TransformPoint(string state)
+    {
+        GameObject t = point;
+        Vector3 piccolo = new Vector3((float)0.6, (float)0.6, 0);
+        Vector3 grande = new Vector3((float)0.8, (float)0.8, 0);
+        Vector3 highlights = new Vector3((float)1.5, (float)1.5, 0);
+        switch (state)
+        {
+            case "active":
+                t.transform.localScale = grande;
+                break;
+            case "selected":
+                t.transform.localScale = highlights;
+                break;
+            default:
+                t.transform.localScale = piccolo;
+                break;
+        }
+         
+            return t;
+    }
 
     //torna tutti i tipi di riserve diverse
     public void GetRiservaTypes()
