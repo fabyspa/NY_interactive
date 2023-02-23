@@ -122,13 +122,21 @@ public class LoadExcel : MonoBehaviour
     //aggiunge lo stato alla variabile state
     public void AddState()
     {
-        int i = 0;
-        foreach(Riserva t in riservaDatabase)
+        //int i = 0;
+        //foreach(Riserva t in riservaDatabase)
+        //{
+        //    i++;
+        //    t.state = assignItem(t);
+        //    //Debug.Log(t.name);
+        //}
+        foreach(Riserva r in riservaDatabase)
         {
-            i++;
-            t.state = assignItem(t);
-            //Debug.Log(t.name);
+            if (riservaDatabaseType.Contains(r))
+                r.state = "active";
+            else
+                r.state = "unselected";
         }
+
         
     }
 

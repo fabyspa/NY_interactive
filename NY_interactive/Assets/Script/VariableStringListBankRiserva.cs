@@ -87,7 +87,6 @@ namespace AirFishLab.ScrollingList
                 _circularList.Refresh();
 
             }
-            loadexcel.AddState();
             loadexcel.InstantiatePoints(loadexcel.riservaDatabase);
 
         }
