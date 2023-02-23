@@ -414,7 +414,7 @@ namespace AirFishLab.ScrollingList
         /// <summary>
         /// Scroll the list in horizontal direction
         /// </summary>
-        private void ScrollHorizontally(float scrollDelta)
+        public void ScrollHorizontally(float scrollDelta)
         {
             SetUnitMove(scrollDelta < 0 ? _scrollFactor : -_scrollFactor);
         }

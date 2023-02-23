@@ -70,8 +70,38 @@ public class ButtonPoint : Button
 
         if (loadexcel != null)
         {
+            var val = 0;
             Vector3 localPosition = this.transform.localPosition;
             Riserva riserva = loadexcel.GetRiservaByCoord(this.transform.localPosition);
+            for(int i=0; i< info.GetComponent<VariableGameObjectListBankRiserva>()._contents.Length;i++)
+            {
+                if(info.GetComponent<VariableGameObjectListBankRiserva>()._contents[i].name == info.GetComponent<VariableGameObjectListBankRiserva>().GetCenterItem().name)
+                {
+                    Debug.Log("indice da cui partire per contare:" + i);
+                    for (int j = i; j < info.GetComponent<VariableGameObjectListBankRiserva>()._contents.Length; j++)
+                    {
+                        if (info.GetComponent<VariableGameObjectListBankRiserva>()._contents[j].name != riserva.name)
+                            val++;
+                        else break;
+
+                    }
+
+                }
+
+            }
+            //foreach(Riserva r in info.GetComponent<VariableGameObjectListBankRiserva>()._contents)
+            //{
+            //    Debug.Log(r.name);
+            //    if (r.name != info.GetComponent<VariableGameObjectListBankRiserva>().GetCenterItem().name)
+            //    {
+            //        i++;
+            //    }
+            //    else break;
+            //}
+            //Debug.Log(i);
+
+            Debug.Log("salto "+ val);
+            info.GetComponent<CircularScrollingListRiserva>()._listPositionCtrl.SetUnitMove(-3*val);
             //ListBox listbox = info.GetComponent<CircularScrollingListRiserva>()._listBoxes[2];
             //info.GetComponent<CircularScrollingListRiserva>()._listPositionCtrl.MoveTo(listbox);
         }

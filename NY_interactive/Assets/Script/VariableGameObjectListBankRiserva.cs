@@ -80,7 +80,7 @@ namespace AirFishLab.ScrollingList
             {
                 if(r.name== obj.GetComponentInChildren<Text>().text)
                 {
-                    Debug.Log(r.name);
+                    //Debug.Log(r.name);
                     return r;
                 }
             }
