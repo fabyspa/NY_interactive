@@ -81,13 +81,13 @@ namespace AirFishLab.ScrollingList
                     //_contentInputField.text.Split(
                     //    new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 }
-                loadexcel.InstantiatePoints(loadexcel.riservaDatabaseType);
-
+                //loadexcel.InstantiatePoints(loadexcel.riservaDatabaseType);
+                loadexcel.InstantiatePoints(loadexcel.riservaDatabase);
                 _contents = _contentsList.ToArray();
                 _circularList.Refresh();
-
+                
             }
-            loadexcel.InstantiatePoints(loadexcel.riservaDatabase);
+            
 
         }
 

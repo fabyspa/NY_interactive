@@ -122,13 +122,6 @@ public class LoadExcel : MonoBehaviour
     //aggiunge lo stato alla variabile state
     public void AddState()
     {
-        //int i = 0;
-        //foreach(Riserva t in riservaDatabase)
-        //{
-        //    i++;
-        //    t.state = assignItem(t);
-        //    //Debug.Log(t.name);
-        //}
         foreach(Riserva r in riservaDatabase)
         {
             if (riservaDatabaseType.Contains(r))
@@ -140,26 +133,6 @@ public class LoadExcel : MonoBehaviour
         
     }
 
-    //assegna lo stato all'oggetto
-    public string assignItem(Riserva t)
-    {
-        string state = "unselected";
-
-            foreach(Riserva r in riservaDatabaseType)
-            {
-                if (t.name == r.name || t.type=="Tutte" )
-                {
-                    if (t.name == aItem.name)
-                    {
-                        state = "active";
-                    }
-                   
-                        state = "selected";
-                }
-            }
-
-        return state;
-    }
 
     //gestisco scala punti
     public GameObject TransformPoint(string state)

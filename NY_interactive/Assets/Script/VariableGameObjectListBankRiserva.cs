@@ -74,7 +74,7 @@ namespace AirFishLab.ScrollingList
                     //_contentInputField.text.Split(
                     //    new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 }
-                loadexcel.InstantiatePoints(loadexcel.riservaDatabaseType);
+                loadexcel.InstantiatePoints(loadexcel.riservaDatabase);
                 loadexcel.AddState();
 
                 //Debug.Log(loadexcel.pointList.Count);
@@ -83,7 +83,7 @@ namespace AirFishLab.ScrollingList
 
             _contents = _contentsList.ToArray();
             _circularList.Refresh();
-
+            
         }
 
         //disattiva il filtro per tipo se il primo filtro è parchi
