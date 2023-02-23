@@ -311,7 +311,7 @@ namespace AirFishLab.ScrollingList
             //}
 
             _listPositionCtrl.InputPositionHandler(eventData, TouchPhase.Ended);
-            Debug.Log(string.Join("," ,eventData));
+           // Debug.Log(string.Join("," ,eventData));
         }
 
         public void OnScroll(PointerEventData eventData)

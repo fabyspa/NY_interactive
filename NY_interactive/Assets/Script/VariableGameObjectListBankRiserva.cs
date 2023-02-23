@@ -19,6 +19,7 @@ namespace AirFishLab.ScrollingList
         private CircularScrollingListRiserva _circularList;
         [SerializeField]
         private GameObject gameobjectToClone;
+        
         //[SerializeField]
         //private CircularScrollingList _thirdCircular;
         // [SerializeField]
@@ -54,42 +55,36 @@ namespace AirFishLab.ScrollingList
                 }
                 loadexcel.InstantiatePoints(loadexcel.ordenList);
             }
-            //Debug.Log(type);
             else if (loadexcel.type.Contains(type))
             {
-                //Debug.Log(_dataWrapper.data.transform.childCount);
                 loadexcel.LoadRiservaByType(type);
                 _contentsList.Clear();
                 foreach (Riserva r in loadexcel.riservaDatabaseType)
-                {
-                    //_dataWrapper.data.transform.GetChild(0).GetComponent<Text>().text = r.name;
-                    //_dataWrapper.data.transform.GetChild(1).GetComponent<Text>().text = r.descr;
-
-
+                { 
                     _contentsList.Add(r);
-                    //foreach (Transform child in _dataWrapper.data.transform)
-                    //{
-                    //    Debug.Log(child.GetComponent<Text>().text);
-                    //}
-                    //_contentInputField.text.Split(
-                    //    new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 }
                 loadexcel.InstantiatePoints(loadexcel.riservaDatabaseType);
                 loadexcel.AddState();
-
-                //Debug.Log(loadexcel.pointList.Count);
             }
-
-
             _contents = _contentsList.ToArray();
             _circularList.Refresh();
-
+            GetCenterItem();
         }
 
-        //disattiva il filtro per tipo se il primo filtro è parchi
-        public void DeactivateTypeFilter()
+        public Riserva GetCenterItem()
         {
-
+            int size = this.transform.childCount;
+            GameObject obj = this.transform.GetChild(size - 1).gameObject;
+            //Debug.Log(obj.GetComponentInChildren<Text>().text);
+            foreach (Riserva r in loadexcel.riservaDatabase)
+            {
+                if(r.name== obj.GetComponentInChildren<Text>().text)
+                {
+                    Debug.Log(r.name);
+                    return r;
+                }
+            }
+            return null;
         }
         /// <summary>
         /// Used for carry the data of value type to avoid boxing/unboxing
