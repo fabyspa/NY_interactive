@@ -17,8 +17,8 @@ public class LoadExcel : MonoBehaviour
     [SerializeField] GameObject scrolling;
     public bool loadedItems = false;
     private string actualType;
-    public Dictionary<Vector3, float[]> coord2position = new Dictionary<Vector3, float[]>();
-
+    public Dictionary<GameObject, float[]> coord2position = new Dictionary<GameObject, float[]>();
+    public GameObject _oldGameObjecct;
     public Transform parent;
     public List<GameObject> pointList = new List<GameObject>();
 
@@ -35,7 +35,9 @@ public class LoadExcel : MonoBehaviour
         scrolling.GetComponent<VariableStringListBankRiserva>().ChangeContents();
         SortListByType();
         GameObject.FindGameObjectWithTag("Info").GetComponent<VariableGameObjectListBankRiserva>().ChangeInfoContents("Tutte");
-        
+       // Debug.Log("ITEM "+aItem.coord);
+       
+
     }
 
 
@@ -90,7 +92,7 @@ public class LoadExcel : MonoBehaviour
     {
         ClearPoints();
         coord2position.Clear();
-
+        AddState();
         foreach (Riserva c in r) {
             GameObject Tpoint = TransformPoint(c.state);
             float[] coord = Convert_coordinates.remapLatLng(c.coord);
@@ -100,7 +102,7 @@ public class LoadExcel : MonoBehaviour
             pointList.Add(instanciated);
             //Debug.Log(instanciated.transform.localPosition);
            // Debug.Log(c.coord);
-            if(!coord2position.ContainsKey(instanciated.transform.localPosition)) coord2position.Add(instanciated.transform.localPosition,coord);
+            if(!coord2position.ContainsKey(instanciated)) coord2position.Add(instanciated,coord);
            // Debug.Log(string.Join(",", coord2position));
         }
        
@@ -122,10 +124,20 @@ public class LoadExcel : MonoBehaviour
     //aggiunge lo stato alla variabile state
     public void AddState()
     {
-        foreach(Riserva r in riservaDatabase)
+        Debug.Log("addstate");
+
+        foreach (Riserva r in riservaDatabase)
         {
             if (riservaDatabaseType.Contains(r))
-                r.state = "active";
+            {
+
+                if (r.name == aItem.name)
+                {
+                    r.state = "selected";
+                }
+                else r.state = "active";
+            }
+
             else
                 r.state = "unselected";
         }
@@ -133,13 +145,29 @@ public class LoadExcel : MonoBehaviour
         
     }
 
+    public void ChangeStateTo(GameObject g, string newstate)
+    {
+        Vector3 highlights = new Vector3((float)1.5, (float)1.5, 0);
+        Vector3 grande = new Vector3((float)0.8, (float)0.8, 0);
 
+
+        Riserva r = GetRiservaByCoord(g);
+        if (_oldGameObjecct != null)
+        {
+            Riserva oldR = GetRiservaByCoord(_oldGameObjecct);
+            oldR.state = "active";
+            _oldGameObjecct.transform.localScale = grande;
+        }
+        r.state = newstate;
+        g.transform.localScale = highlights;
+        _oldGameObjecct = g;
+
+    }
     //gestisco scala punti
     public GameObject TransformPoint(string state)
     {
-        Debug.Log("TRANSFORM POINT");
         GameObject t = point;
-        Vector3 piccolo = new Vector3((float)0.6, (float)0.6, 0);
+        Vector3 piccolo = new Vector3((float)0.4, (float)0.4, 0);
         Vector3 grande = new Vector3((float)0.8, (float)0.8, 0);
         Vector3 highlights = new Vector3((float)1.5, (float)1.5, 0);
         switch (state)
@@ -191,15 +219,26 @@ public class LoadExcel : MonoBehaviour
         return riservaDatabaseType;
 
     }
+    public Riserva LoadRiservaByName(string name)
+    {
 
-    public Riserva GetRiservaByCoord(Vector3 position)
+        foreach (Riserva r in riservaDatabase)
+        {
+            if (r.name == name) return r;
+        }
+
+        return null;
+
+    }
+
+    public Riserva GetRiservaByCoord(GameObject p)
     {
         
         foreach(Riserva r in riservaDatabase)
         {
             float[] coord = Convert_coordinates.remapLatLng(r.coord);
             var value = new float[2];
-            coord2position.TryGetValue(position, out value);
+            coord2position.TryGetValue(p, out value);
             //Debug.Log("val "+ string.Join(" ,", value));
             //Debug.Log("coord " + string.Join(" ,", coord));
 

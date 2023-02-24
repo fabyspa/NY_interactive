@@ -10,7 +10,7 @@ public class ButtonPoint : Button
 {
     LoadExcel loadexcel;
     GameObject info;
-
+    public int val=0;
 
 
     public override bool Equals(object other)
@@ -65,30 +65,85 @@ public class ButtonPoint : Button
 
     public override void OnPointerClick(PointerEventData eventData)
     {
+        int indice_i=0;
+        int indice_j=0;
+
         //Debug.Log("POINTERCLICK");
         base.OnPointerClick(eventData);
 
         if (loadexcel != null)
         {
-            var val = 0;
             Vector3 localPosition = this.transform.localPosition;
-            Riserva riserva = loadexcel.GetRiservaByCoord(this.transform.localPosition);
-            for(int i=0; i< info.GetComponent<VariableGameObjectListBankRiserva>()._contents.Length;i++)
+            Riserva riserva = loadexcel.GetRiservaByCoord(this.gameObject);
+            if (riserva.state == "active")
             {
-                if(info.GetComponent<VariableGameObjectListBankRiserva>()._contents[i].name == info.GetComponent<VariableGameObjectListBankRiserva>().GetCenterItem().name)
+                loadexcel.ChangeStateTo(this.gameObject, "selected");
+                //loadexcel.InstantiatePoints(loadexcel.riservaDatabase);
+                for (int  i = 0; i < info.GetComponent<VariableGameObjectListBankRiserva>()._contents.Length; i++)
                 {
-                    Debug.Log("indice da cui partire per contare:" + i);
-                    for (int j = i; j < info.GetComponent<VariableGameObjectListBankRiserva>()._contents.Length; j++)
+                    if (info.GetComponent<VariableGameObjectListBankRiserva>()._contents[i].name == info.GetComponent<VariableGameObjectListBankRiserva>().GetCenterItem().name)
                     {
-                        if (info.GetComponent<VariableGameObjectListBankRiserva>()._contents[j].name != riserva.name)
-                            val++;
-                        else break;
-
+                        indice_i = i;
                     }
+                        ////Debug.Log("indice da cui partire per contare:" + i);
+                        //for (int j = i; j < info.GetComponent<VariableGameObjectListBankRiserva>()._contents.Length; j++)
+                        //{
+                        //    if (info.GetComponent<VariableGameObjectListBankRiserva>()._contents[j].name != riserva.name)
+                        //        val++;
+                        //    else
+                        //    {
+                        //        //val = 0;
+                        //        break;
+                        //    }
+                                
 
+                        //}
+
+           
+                }
+                for (int j = 0; j < info.GetComponent<VariableGameObjectListBankRiserva>()._contents.Length; j++)
+                {
+                    if (info.GetComponent<VariableGameObjectListBankRiserva>()._contents[j].name == riserva.name)
+                    {
+                        indice_j = j;
+                    }
                 }
 
+                int diff= indice_i - indice_j;
+                if(diff>0)
+                {
+                    val = info.GetComponent<VariableGameObjectListBankRiserva>()._contents.Length - val;
+                   // Debug.Log("NUMERO DI PASSI sinistra" + diff);
+                    info.GetComponent<CircularScrollingListRiserva>()._listPositionCtrl.SetUnitMove(3 * Mathf.Abs(diff));
+                }
+                else
+                {
+                   // Debug.Log("NUMERO DI PASSI destra" + diff);
+                    info.GetComponent<CircularScrollingListRiserva>()._listPositionCtrl.SetUnitMove(-3 * Mathf.Abs(diff));
+                }
+                    //if(riserva.name!= info.GetComponent<VariableGameObjectListBankRiserva>().GetCenterItem().name)
+                    //{
+                    //    i = 0;
+                    //    OnPointerClick(eventData);
+                    //}
+
+                //    if (val> info.GetComponent<VariableGameObjectListBankRiserva>()._contents.Length / 2)
+                //{
+                //    val = info.GetComponent<VariableGameObjectListBankRiserva>()._contents.Length - val;
+                //    Debug.Log("NUMERO DI PASSI sinistra" + val);
+                //    info.GetComponent<CircularScrollingListRiserva>()._listPositionCtrl.SetUnitMove(3 * val);
+                //    val = 0;
+                //}
+                //else
+                //{
+                //    Debug.Log("NUMERO DI PASSI destra" + val);
+                //    info.GetComponent<CircularScrollingListRiserva>()._listPositionCtrl.SetUnitMove(-3 * val);
+                //    val = 0;
+
+
+                //}
             }
+
             //foreach(Riserva r in info.GetComponent<VariableGameObjectListBankRiserva>()._contents)
             //{
             //    Debug.Log(r.name);
@@ -99,9 +154,6 @@ public class ButtonPoint : Button
             //    else break;
             //}
             //Debug.Log(i);
-
-            Debug.Log("salto "+ val);
-            info.GetComponent<CircularScrollingListRiserva>()._listPositionCtrl.SetUnitMove(-3*val);
             //ListBox listbox = info.GetComponent<CircularScrollingListRiserva>()._listBoxes[2];
             //info.GetComponent<CircularScrollingListRiserva>()._listPositionCtrl.MoveTo(listbox);
         }

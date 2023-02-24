@@ -6,6 +6,8 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using AirFishLab.ScrollingList.MovementCtrl;
 using UnityEngine.Events;
+using System.Linq;
+
 
 namespace AirFishLab.ScrollingList
 {
@@ -16,6 +18,7 @@ namespace AirFishLab.ScrollingList
     {
         public string tagscroll;
         public string centeredBoxAfterScroll;
+        LoadExcel loadexcel;
         #region Enums
 
         
@@ -227,6 +230,7 @@ namespace AirFishLab.ScrollingList
         {
             float GetAligningDistance() => _deltaDistanceToCenter;
             PositionState GetPositionState() => _positionState;
+            loadexcel = GameObject.FindObjectOfType<LoadExcel>();
             m_MyEvent.AddListener(() => CenteredBoxisChanged());
             //info = GameObject.FindGameObjectWithTag("Info");
             var overGoingThreshold = unitPos * 0.3f;
@@ -475,7 +479,15 @@ namespace AirFishLab.ScrollingList
                     }
                    
                 }
-            
+                if(tagscroll == "Info")
+                {
+                    var newInfoCenteredBoxAfterScroll = GetCenteredBox().GetComponentInChildren<Text>().text;
+                    Riserva _centerRiserva = loadexcel.LoadRiservaByName(newInfoCenteredBoxAfterScroll);
+                    loadexcel.aItem=_centerRiserva;
+                    loadexcel.ChangeStateTo(loadexcel.coord2position.FirstOrDefault(x => Enumerable.SequenceEqual(x.Value, Convert_coordinates.remapLatLng(loadexcel.aItem.coord))).Key, "selected");
+
+                }
+
                 //Debug.Log("isEndingMovement");
                 _isEndingMovement = false;
                 _listSetting.onMovementEnd?.Invoke();

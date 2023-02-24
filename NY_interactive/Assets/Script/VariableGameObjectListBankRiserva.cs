@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
+
 
 namespace AirFishLab.ScrollingList
 {
@@ -46,17 +48,19 @@ namespace AirFishLab.ScrollingList
         public void ChangeInfoContents(string type)
         {
             loadexcel = GameObject.FindObjectOfType<LoadExcel>();
+            _contentsList.Clear();
+            
             if (type == "Tutte")
             {
-                _contentsList.Clear();
                 foreach (Riserva r in loadexcel.ordenList)
                 {
                     _contentsList.Add(r);
                 }
                 loadexcel.riservaDatabaseType.Clear();
                 loadexcel.riservaDatabaseType.AddRange(loadexcel.ordenList);
-               loadexcel.AddState();
-
+                _contents = _contentsList.ToArray();
+                _circularList.Refresh();
+                GetCenterItem();
                 loadexcel.InstantiatePoints(loadexcel.ordenList);
             }
             else if (loadexcel.type.Contains(type))
@@ -67,28 +71,40 @@ namespace AirFishLab.ScrollingList
                 { 
                     _contentsList.Add(r);
                 }
-                loadexcel.AddState();
+
+                _contents = _contentsList.ToArray();
+                _circularList.Refresh();
+                GetCenterItem();
 
                 loadexcel.InstantiatePoints(loadexcel.riservaDatabase);
 
                 //Debug.Log(loadexcel.pointList.Count);
             }
-            _contents = _contentsList.ToArray();
-            _circularList.Refresh();
-            GetCenterItem();
+
+            //loadexcel.AddState();
+            var myKey = loadexcel.coord2position.FirstOrDefault(x => Enumerable.SequenceEqual(x.Value, Convert_coordinates.remapLatLng(loadexcel.aItem.coord))).Key;
+            loadexcel._oldGameObjecct = myKey;
         }
 
         public Riserva GetCenterItem()
         {
+           // Debug.Log("getCenterItem");
             int size = this.transform.childCount;
+            Debug.Log("size " + size);
             GameObject obj = this.transform.GetChild(size - 1).gameObject;
             //Debug.Log(obj.GetComponentInChildren<Text>().text);
             foreach (Riserva r in loadexcel.riservaDatabase)
             {
+                Debug.Log("obj " + obj.GetComponentInChildren<Text>().text);
                 if(r.name== obj.GetComponentInChildren<Text>().text)
                 {
+                    loadexcel.aItem = r;
                     //Debug.Log(r.name);
                     return r;
+                }
+                else
+                {
+                    Debug.Log("Center not found");
                 }
             }
             return null;
