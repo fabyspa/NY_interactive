@@ -137,6 +137,7 @@ public class LoadExcel : MonoBehaviour
     //gestisco scala punti
     public GameObject TransformPoint(string state)
     {
+        Debug.Log("TRANSFORM POINT");
         GameObject t = point;
         Vector3 piccolo = new Vector3((float)0.6, (float)0.6, 0);
         Vector3 grande = new Vector3((float)0.8, (float)0.8, 0);

@@ -52,6 +52,10 @@ namespace AirFishLab.ScrollingList
                 {
                     _contentsList.Add(r);
                 }
+                loadexcel.riservaDatabaseType.Clear();
+                loadexcel.riservaDatabaseType.AddRange(loadexcel.ordenList);
+               loadexcel.AddState();
+
                 loadexcel.InstantiatePoints(loadexcel.ordenList);
             }
             //Debug.Log(type);
@@ -74,8 +78,9 @@ namespace AirFishLab.ScrollingList
                     //_contentInputField.text.Split(
                     //    new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 }
-                loadexcel.InstantiatePoints(loadexcel.riservaDatabase);
                 loadexcel.AddState();
+
+                loadexcel.InstantiatePoints(loadexcel.riservaDatabase);
 
                 //Debug.Log(loadexcel.pointList.Count);
             }
