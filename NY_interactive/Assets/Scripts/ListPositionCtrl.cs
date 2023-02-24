@@ -414,7 +414,7 @@ namespace AirFishLab.ScrollingList
         /// <summary>
         /// Scroll the list in horizontal direction
         /// </summary>
-        private void ScrollHorizontally(float scrollDelta)
+        public void ScrollHorizontally(float scrollDelta)
         {
             SetUnitMove(scrollDelta < 0 ? _scrollFactor : -_scrollFactor);
         }
@@ -434,6 +434,8 @@ namespace AirFishLab.ScrollingList
             var distance = _movementCtrl.GetDistance(Time.deltaTime);
             foreach (var listBox in _listBoxes)
                 listBox.UpdatePosition(distance);
+
+            //Debug.Log(GetCenteredBox());
         }
 
         /// <summary>
@@ -468,15 +470,12 @@ namespace AirFishLab.ScrollingList
                     var newCenteredBoxAfterScroll = GetCenteredBox().GetComponentInChildren<Text>().text;
                     if (m_MyEvent != null && centeredBoxAfterScroll != newCenteredBoxAfterScroll)
                     {
-
                         centeredBoxAfterScroll = newCenteredBoxAfterScroll;
-
-
                         m_MyEvent.Invoke();
                     }
                    
                 }
-
+            
                 //Debug.Log("isEndingMovement");
                 _isEndingMovement = false;
                 _listSetting.onMovementEnd?.Invoke();

@@ -35,7 +35,7 @@ public class LoadExcel : MonoBehaviour
         scrolling.GetComponent<VariableStringListBankRiserva>().ChangeContents();
         SortListByType();
         GameObject.FindGameObjectWithTag("Info").GetComponent<VariableGameObjectListBankRiserva>().ChangeInfoContents("Tutte");
-
+        
     }
 
 
@@ -205,7 +205,7 @@ public class LoadExcel : MonoBehaviour
 
             if (Enumerable.SequenceEqual(coord,value))
             {
-                Debug.Log(r.name);
+                Debug.Log("SELEZIONATA "+ r.name);
                 return r;
             }
            
