@@ -13,26 +13,15 @@ namespace AirFishLab.ScrollingList
     {
 
         LoadExcel loadexcel;
-        //[SerializeField]
-        //private InputField _contentInputField;
         private List<Riserva> _contentsList = new List<Riserva>();
         public Riserva[] _contents;
         [SerializeField]
         private CircularScrollingListRiserva _circularList;
         [SerializeField]
         private GameObject gameobjectToClone;
-        
-        //[SerializeField]
-        //private CircularScrollingList _thirdCircular;
-        // [SerializeField]
-        // private CircularScrollingList _linearList;
-
         private readonly DataWrapper _dataWrapper = new DataWrapper();
+        private Image _image;
 
-        /// <summary>
-        /// Extract the contents from the input field and refresh the list
-        /// </summary>
-       
 
         public override object GetListContent(int index)
         {
@@ -86,26 +75,25 @@ namespace AirFishLab.ScrollingList
             loadexcel._oldGameObjecct = myKey;
         }
 
+        
+
         public Riserva GetCenterItem()
         {
            // Debug.Log("getCenterItem");
             int size = this.transform.childCount;
-            Debug.Log("size " + size);
+            //Debug.Log("size " + size);
             GameObject obj = this.transform.GetChild(size - 1).gameObject;
             //Debug.Log(obj.GetComponentInChildren<Text>().text);
             foreach (Riserva r in loadexcel.riservaDatabase)
             {
-                Debug.Log("obj " + obj.GetComponentInChildren<Text>().text);
+                //Debug.Log("obj " + obj.GetComponentInChildren<Text>().text);
                 if(r.name== obj.GetComponentInChildren<Text>().text)
                 {
                     loadexcel.aItem = r;
                     //Debug.Log(r.name);
                     return r;
                 }
-                else
-                {
-                    Debug.Log("Center not found");
-                }
+              
             }
             return null;
         }

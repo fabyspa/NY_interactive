@@ -471,6 +471,7 @@ namespace AirFishLab.ScrollingList
 
                 if (tagscroll == "Type")
                 {
+                    Debug.Log("type: " + GetCenteredBox().GetComponentInChildren<Text>().text);
                     var newCenteredBoxAfterScroll = GetCenteredBox().GetComponentInChildren<Text>().text;
                     if (m_MyEvent != null && centeredBoxAfterScroll != newCenteredBoxAfterScroll)
                     {

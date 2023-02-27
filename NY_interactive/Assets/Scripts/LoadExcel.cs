@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using AirFishLab.ScrollingList;
 using System.Linq;
+using UnityEngine.UI;
 
 
 public class LoadExcel : MonoBehaviour
@@ -12,7 +13,7 @@ public class LoadExcel : MonoBehaviour
     public List<Riserva> riservaDatabase = new List<Riserva>();
     public List<Riserva> riservaDatabaseType = new List<Riserva>();
     public List<Riserva> ordenList = new List<Riserva>();
-
+   // public Image _image;
     public List<string> type = new List<string>();
     [SerializeField] GameObject scrolling;
     public bool loadedItems = false;
@@ -58,7 +59,7 @@ public class LoadExcel : MonoBehaviour
             string name = data[i]["Name"].ToString();
             string coord = data[i]["Coord"].ToString();
             string descr = data[i]["Descr"].ToString();
-
+            //Sprite sprite = UpdateImage((data[i]["Name"]).ToString());
             AddRiserva(type, name, coord, descr);
 
         }
@@ -68,7 +69,13 @@ public class LoadExcel : MonoBehaviour
         /* InstantiatePoints(riservaDatabase,tipo);*/
     }
 
-
+    public Sprite UpdateImage(string _name)
+    {
+        Debug.Log("Image updated!");
+        var tex = Resources.Load<Sprite>("Images/" + _name);
+        if (tex == null) return null;
+        return tex;
+    }
     //se viene modificato il file excel da esterno facciamo in modo che si aggiorni direttamente la build
     public void ReLoadItemData()
     {
@@ -83,7 +90,7 @@ public class LoadExcel : MonoBehaviour
         tempItem.coord = coord;
         tempItem.name = name;
         tempItem.descr = descr;
-       
+        //tempItem.sprite = sprite;
         riservaDatabase.Add(tempItem);
     }
 
@@ -124,7 +131,7 @@ public class LoadExcel : MonoBehaviour
     //aggiunge lo stato alla variabile state
     public void AddState()
     {
-        Debug.Log("addstate");
+       // Debug.Log("addstate");
 
         foreach (Riserva r in riservaDatabase)
         {
@@ -216,6 +223,7 @@ public class LoadExcel : MonoBehaviour
                 }
             }
         }
+
         return riservaDatabaseType;
 
     }
@@ -244,7 +252,7 @@ public class LoadExcel : MonoBehaviour
 
             if (Enumerable.SequenceEqual(coord,value))
             {
-                Debug.Log("SELEZIONATA "+ r.name);
+                //Debug.Log("SELEZIONATA "+ r.name);
                 return r;
             }
            
