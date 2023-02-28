@@ -66,35 +66,29 @@ namespace AirFishLab.ScrollingList
             public string data;
         }
 
-        public void ChangeInfoContents(string type)
-        {
-            loadexcel = GameObject.FindObjectOfType<LoadExcel>();
+        //public void ChangeInfoContents(string type)
+        //{
+        //    loadexcel = GameObject.FindObjectOfType<LoadExcel>();
 
-            //Debug.Log(type);
-            if (loadexcel.type.Contains(type) )
-            {
-                loadexcel.LoadRiservaByType(type);
-                _contentsList.Clear();
-                foreach (Riserva r in loadexcel.riservaDatabaseType)
-                {
-                    _contentsList.Add(r.name);
-                    //_contentInputField.text.Split(
-                    //    new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                }
-                //loadexcel.InstantiatePoints(loadexcel.riservaDatabaseType);
-                loadexcel.InstantiatePoints(loadexcel.riservaDatabase);
-                _contents = _contentsList.ToArray();
-                _circularList.Refresh();
+        //    //Debug.Log(type);
+        //    if (loadexcel.type.Contains(type) )
+        //    {
+        //        loadexcel.LoadRiservaByType(type);
+        //        _contentsList.Clear();
+        //        foreach (Riserva r in loadexcel.riservaDatabaseType)
+        //        {
+        //            _contentsList.Add(r.name);
+        //            //_contentInputField.text.Split(
+        //            //    new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+        //        }
+        //        //loadexcel.InstantiatePoints(loadexcel.riservaDatabaseType);
+        //        loadexcel.InstantiatePoints(loadexcel.riservaDatabase);
+        //        _contents = _contentsList.ToArray();
+        //        _circularList.Refresh();
                 
-            }
+        //    }
             
 
-        }
-
-        //disattiva il filtro per tipo se il primo filtro è parchi
-        public void DeactivateTypeFilter()
-        {
-            
-        }
+       // }       
     }
 }

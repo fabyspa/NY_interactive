@@ -47,6 +47,7 @@ namespace AirFishLab.ScrollingList
                 }
                 loadexcel.riservaDatabaseType.Clear();
                 loadexcel.riservaDatabaseType.AddRange(loadexcel.ordenList);
+                loadexcel.actualType = "Tutte";
                 _contents = _contentsList.ToArray();
                 _circularList.Refresh();
                 GetCenterItem();
@@ -54,6 +55,7 @@ namespace AirFishLab.ScrollingList
             }
             else if (loadexcel.type.Contains(type))
             {
+                //Debug.Log("FILTRO PER TIPO");
                 loadexcel.LoadRiservaByType(type);
                 _contentsList.Clear();
                 foreach (Riserva r in loadexcel.riservaDatabaseType)

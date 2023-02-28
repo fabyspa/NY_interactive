@@ -97,16 +97,16 @@ public class ButtonPoint : Button
                 if (diff>0)
                 {
                     /*PROVVISORIO- per quache strano motivo quando si è su tutte non fsa il numero di salti giusti quando si è a metà*/
-                    if (loadexcel.riservaDatabase.Count==loadexcel.riservaDatabaseType.Count && diff == (val-1)/2) diff++;
+                   if (loadexcel.riservaDatabase.Count==loadexcel.riservaDatabaseType.Count && diff == (val-1)/2) diff++;
 
-                    Debug.Log("NUMERO DI PASSI sinistra" + diff +" per raggiungere" + riserva.name +"da "+ info.GetComponent<VariableGameObjectListBankRiserva>().GetCenterItem().name);
+                    Debug.Log("NUMERO DI PASSI sinistra" + diff +" per raggiungere" + riserva.name +" da "+ info.GetComponent<VariableGameObjectListBankRiserva>().GetCenterItem().name);
                     info.GetComponent<CircularScrollingListRiserva>()._listPositionCtrl.SetUnitMove(3 * Mathf.Abs(diff));
                     loadexcel.aItem = riserva;
                 }
                 else
                 {
                     /*PROVVISORIO*/
-                    if (loadexcel.riservaDatabase.Count == loadexcel.riservaDatabaseType.Count  && diff == - (val - 1) / 2) diff--;
+                    if (loadexcel.riservaDatabase.Count == loadexcel.riservaDatabaseType.Count  &&  diff == - (val - 1) / 2) diff--;
 
                     Debug.Log("NUMERO DI PASSI destra" + diff + " per raggiungere" + riserva.name + "da " + info.GetComponent<VariableGameObjectListBankRiserva>().GetCenterItem().name);
                     info.GetComponent<CircularScrollingListRiserva>()._listPositionCtrl.SetUnitMove(-3 * Mathf.Abs(diff));
@@ -217,15 +217,15 @@ public class ButtonPoint : Button
         base.OnTransformParentChanged();
     }
 
-    protected override void OnValidate()
-    {
-        base.OnValidate();
-    }
+    //protected override void OnValidate()
+    //{
+    //    base.OnValidate();
+    //}
 
-    protected override void Reset()
-    {
-        base.Reset();
-    }
+    //protected override void Reset()
+    //{
+    //    base.Reset();
+    //}
 
     protected override void Start()
     {

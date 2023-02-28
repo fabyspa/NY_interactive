@@ -17,7 +17,7 @@ public class LoadExcel : MonoBehaviour
     public List<string> type = new List<string>();
     [SerializeField] GameObject scrolling;
     public bool loadedItems = false;
-    private string actualType;
+    public string actualType;
     public Dictionary<GameObject, float[]> coord2position = new Dictionary<GameObject, float[]>();
     public GameObject _oldGameObjecct;
     public Transform parent;
@@ -59,8 +59,8 @@ public class LoadExcel : MonoBehaviour
             string name = data[i]["Name"].ToString();
             string coord = data[i]["Coord"].ToString();
             string descr = data[i]["Descr"].ToString();
-            //Sprite sprite = UpdateImage((data[i]["Name"]).ToString());
-            AddRiserva(type, name, coord, descr);
+            Sprite sprite = UpdateImage((data[i]["Name"]).ToString());
+            AddRiserva(type, name, coord, descr,sprite);
 
         }
         loadedItems = true;
@@ -82,7 +82,7 @@ public class LoadExcel : MonoBehaviour
         loadedItems = false;
         LoadItemData();
     }
-    void AddRiserva(string type, string name, string coord,  string descr)
+    void AddRiserva(string type, string name, string coord,  string descr, Sprite sprite)
     {
         Riserva tempItem = new Riserva(blankRiserva);
 
@@ -90,7 +90,7 @@ public class LoadExcel : MonoBehaviour
         tempItem.coord = coord;
         tempItem.name = name;
         tempItem.descr = descr;
-        //tempItem.sprite = sprite;
+        tempItem.sprite = sprite;
         riservaDatabase.Add(tempItem);
     }
 
@@ -212,6 +212,7 @@ public class LoadExcel : MonoBehaviour
     {
         if (actualType != type)
         {
+            Debug.Log("CARICO LA LISTA PER TIPO");
             actualType = type;
             riservaDatabaseType.Clear();
             if (loadedItems == false) LoadItemData();

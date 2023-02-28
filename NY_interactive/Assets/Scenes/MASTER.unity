@@ -844,7 +844,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: {fileID: 276572278}
   _descr: {fileID: 1912299102}
-  _image: {fileID: 1538060161}
+  _image: {fileID: 73506488}
 --- !u!1 &334683287
 GameObject:
   m_ObjectHideFlags: 0
@@ -4086,7 +4086,19 @@ MonoBehaviour:
         m_Calls: []
     _onMovementEnd:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 11500000, guid: 68e1efa0528be6042866834711833519, type: 3}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: 
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 1
 --- !u!114 &1371252905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7470,6 +7482,19 @@ MonoBehaviour:
       - m_Target: {fileID: 1371252904}
         m_TargetAssemblyTypeName: AirFishLab.ScrollingList.CircularScrollingListRiserva,
           Assembly-CSharp
+        m_MethodName: UpdateTagScroll
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1371252904}
+        m_TargetAssemblyTypeName: AirFishLab.ScrollingList.CircularScrollingListRiserva,
+          Assembly-CSharp
         m_MethodName: MoveOneUnitDown
         m_Mode: 1
         m_Arguments:
@@ -7627,6 +7652,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1371252904}
+        m_TargetAssemblyTypeName: AirFishLab.ScrollingList.CircularScrollingListRiserva,
+          Assembly-CSharp
+        m_MethodName: UpdateTagScroll
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1371252904}
         m_TargetAssemblyTypeName: AirFishLab.ScrollingList.CircularScrollingListRiserva,
           Assembly-CSharp
@@ -7998,6 +8036,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 7801748841595677596}
+        m_TargetAssemblyTypeName: AirFishLab.ScrollingList.CircularScrollingListRiserva,
+          Assembly-CSharp
+        m_MethodName: UpdateTagScroll
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 7801748841595677596}
         m_TargetAssemblyTypeName: AirFishLab.ScrollingList.CircularScrollingListRiserva,
           Assembly-CSharp
@@ -8634,6 +8685,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 7801748841595677596}
+        m_TargetAssemblyTypeName: AirFishLab.ScrollingList.CircularScrollingListRiserva,
+          Assembly-CSharp
+        m_MethodName: UpdateTagScroll
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 7801748841595677596}
         m_TargetAssemblyTypeName: AirFishLab.ScrollingList.CircularScrollingListRiserva,
           Assembly-CSharp

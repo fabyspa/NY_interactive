@@ -293,13 +293,20 @@ namespace AirFishLab.ScrollingList
             _listPositionCtrl.InputPositionHandler(eventData, TouchPhase.Moved);
         }
 
+        public void UpdateTagScroll()
+        {
+            tagScroll = this.gameObject.tag.ToString();
+            Debug.Log("TAGSCROLL " + tagScroll);
+            _listPositionCtrl.tagscroll = tagScroll;
+        }
+
         public void OnEndDrag(PointerEventData eventData)
         {
             if (_hasNoContent)
                 return;
 
-            tagScroll = this.gameObject.tag.ToString();
-            _listPositionCtrl.tagscroll = tagScroll;
+            UpdateTagScroll();
+      
 
             //Debug.Log(GetCenteredBox().GetComponentInChildren<Text>().text );
             //if (this.gameObject.transform.parent.name != "Info")

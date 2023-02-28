@@ -15,7 +15,7 @@ namespace AirFishLab.ScrollingList.Demo
             var dataWrapper = (VariableGameObjectListBankRiserva.DataWrapper) content;
             _name.text = dataWrapper.data.name;
             _descr.text = dataWrapper.data.descr;
-           // _image.sprite = dataWrapper.data.sprite;
+            _image.sprite = dataWrapper.data.sprite;
             
         }
        

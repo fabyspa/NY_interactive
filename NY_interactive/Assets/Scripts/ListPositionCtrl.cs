@@ -433,8 +433,8 @@ namespace AirFishLab.ScrollingList
         public void Update()
         {
             if (_movementCtrl.IsMovementEnded())
-                return;
-
+            return;
+        
             var distance = _movementCtrl.GetDistance(Time.deltaTime);
             foreach (var listBox in _listBoxes)
                 listBox.UpdatePosition(distance);
@@ -451,7 +451,7 @@ namespace AirFishLab.ScrollingList
         {
             if (!_toRunLateUpdate)
                 return;
-
+            Debug.Log(_movementCtrl.IsMovementEnded());
             // Update the state of the boxes
             FindDeltaDistanceToCenter();
             if (_listSetting.listType == CircularScrollingList.ListType.Linear)
@@ -459,16 +459,8 @@ namespace AirFishLab.ScrollingList
 
             if (!_movementCtrl.IsMovementEnded())
                 return;
-           
-
-            // Not to update the state of box after the last frame of movement
-            _toRunLateUpdate = false;
-
-            if (!_isEndingMovement)
-                return;
             else
             {
-
                 if (tagscroll == "Type")
                 {
                     Debug.Log("type: " + GetCenteredBox().GetComponentInChildren<Text>().text);
@@ -478,25 +470,28 @@ namespace AirFishLab.ScrollingList
                         centeredBoxAfterScroll = newCenteredBoxAfterScroll;
                         m_MyEvent.Invoke();
                     }
-                   
+
                 }
-                if(tagscroll == "Info")
+                if (tagscroll == "Info")
                 {
                     var newInfoCenteredBoxAfterScroll = GetCenteredBox().GetComponentInChildren<Text>().text;
                     Riserva _centerRiserva = loadexcel.LoadRiservaByName(newInfoCenteredBoxAfterScroll);
-                    loadexcel.aItem=_centerRiserva;
+                    loadexcel.aItem = _centerRiserva;
                     loadexcel.ChangeStateTo(loadexcel.coord2position.FirstOrDefault(x => Enumerable.SequenceEqual(x.Value, Convert_coordinates.remapLatLng(loadexcel.aItem.coord))).Key, "selected");
 
                 }
-
-                //Debug.Log("isEndingMovement");
-                _isEndingMovement = false;
-                _listSetting.onMovementEnd?.Invoke();
             }
-          
 
+            // Not to update the state of box after the last frame of movement
+            _toRunLateUpdate = false;
+
+            if (!_isEndingMovement)
+                return;
+           
+            _isEndingMovement = false;
+            _listSetting.onMovementEnd?.Invoke();
+            
         }
-
 
         void CenteredBoxisChanged()
         {
@@ -570,6 +565,7 @@ namespace AirFishLab.ScrollingList
         public void SetUnitMove(int unit)
         {
             _movementCtrl.SetMovement(unit * unitPos, false);
+            
             _toRunLateUpdate = true;
         }
 

@@ -11,7 +11,7 @@ public class Riserva
     public string coord;
     public string descr;
     public string state;
-    //public Sprite sprite;
+    public Sprite sprite;
     // Update is called once per frame
     public Riserva( Riserva r)
     {
@@ -19,7 +19,7 @@ public class Riserva
         name = r.name;
         coord = r.coord;
         descr = r.descr;
-        //sprite= r.sprite;
+        sprite= r.sprite;
         state = r.state;
     }
 }
