@@ -24,16 +24,20 @@ public static class Convert_coordinates
     {
         string[] subs = coord.Split(',');
         float[] xy = new float[2];
+        double v;
         for (int i = 0; i < subs.Length; i++)
         {
-            double v = double.Parse(subs[i], System.Globalization.CultureInfo.InvariantCulture);
-            if (i == 0)
+            if( double.TryParse(subs[i], out v)) 
             {
-                xy[i] = ExtensionMethods.Remap(v, yfrom1, yto1, yfrom2, yto2, decimalp);
-            }
-            else
-            {
-                xy[i] = ExtensionMethods.Remap(v, xfrom1, xto1, xfrom2, xto2, decimalp);
+                if (i == 0)
+                {
+                    xy[i] = ExtensionMethods.Remap(v, yfrom1, yto1, yfrom2, yto2, decimalp);
+                }
+                else
+                {
+                    xy[i] = ExtensionMethods.Remap(v, xfrom1, xto1, xfrom2, xto2, decimalp);
+                }
+
             }
 
         }

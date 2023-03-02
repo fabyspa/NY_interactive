@@ -451,7 +451,6 @@ namespace AirFishLab.ScrollingList
         {
             if (!_toRunLateUpdate)
                 return;
-            Debug.Log(_movementCtrl.IsMovementEnded());
             // Update the state of the boxes
             FindDeltaDistanceToCenter();
             if (_listSetting.listType == CircularScrollingList.ListType.Linear)

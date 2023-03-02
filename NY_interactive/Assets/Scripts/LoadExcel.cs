@@ -55,17 +55,19 @@ public class LoadExcel : MonoBehaviour
         for (var i = 0; i < data.Count; i++)
         {
             string type = data[i]["Type"].ToString();
-
-            //Debug.Log("i: riga " + i);
             string name = data[i]["Name_ITA"].ToString();
             string coord = data[i]["Coord"].ToString();
             string descr = data[i]["Descr_ITA"].ToString();
             string descr_eng = data[i]["Descr_ENG"].ToString();
             string name_eng = data[i]["Name_ENG"].ToString();
+            if (name_eng == "")
+            {
+                name_eng = name;
+            }
             string luogo = data[i]["Luogo"].ToString();
             string anno = data[i]["Anno"].ToString();
             string sup = data[i]["Sup"].ToString();
-            string region = data[i]["Region"].ToString();
+            string region = data[i]["Regione"].ToString();
             Sprite sprite = UpdateImage((data[i]["Name_ITA"]).ToString());
             AddRiserva(type, name, coord, descr,sprite,region,sup,anno,luogo,name_eng,descr_eng);
 
