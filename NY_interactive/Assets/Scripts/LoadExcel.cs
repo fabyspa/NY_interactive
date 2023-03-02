@@ -51,16 +51,23 @@ public class LoadExcel : MonoBehaviour
         riservaDatabaseType.Clear();
         type.Clear();
         //READ CSV FILE
-        List<Dictionary<string, object>> data = CSVReader.Read("RiserveNEW");
+        List<Dictionary<string, object>> data = CSVReader.Read("RiserveFOGLI");
         for (var i = 0; i < data.Count; i++)
         {
-            //Debug.Log("i: riga " + i);
             string type = data[i]["Type"].ToString();
-            string name = data[i]["Name"].ToString();
+
+            //Debug.Log("i: riga " + i);
+            string name = data[i]["Name_ITA"].ToString();
             string coord = data[i]["Coord"].ToString();
-            string descr = data[i]["Descr"].ToString();
-            Sprite sprite = UpdateImage((data[i]["Name"]).ToString());
-            AddRiserva(type, name, coord, descr,sprite);
+            string descr = data[i]["Descr_ITA"].ToString();
+            string descr_eng = data[i]["Descr_ENG"].ToString();
+            string name_eng = data[i]["Name_ENG"].ToString();
+            string luogo = data[i]["Luogo"].ToString();
+            string anno = data[i]["Anno"].ToString();
+            string sup = data[i]["Sup"].ToString();
+            string region = data[i]["Region"].ToString();
+            Sprite sprite = UpdateImage((data[i]["Name_ITA"]).ToString());
+            AddRiserva(type, name, coord, descr,sprite,region,sup,anno,luogo,name_eng,descr_eng);
 
         }
         loadedItems = true;
@@ -82,7 +89,8 @@ public class LoadExcel : MonoBehaviour
         loadedItems = false;
         LoadItemData();
     }
-    void AddRiserva(string type, string name, string coord,  string descr, Sprite sprite)
+
+    void AddRiserva(string type, string name, string coord,  string descr, Sprite sprite, string region, string sup, string anno, string luogo, string name_eng, string descr_eng)
     {
         Riserva tempItem = new Riserva(blankRiserva);
 
@@ -91,6 +99,12 @@ public class LoadExcel : MonoBehaviour
         tempItem.name = name;
         tempItem.descr = descr;
         tempItem.sprite = sprite;
+        tempItem.region = region;
+        tempItem.sup = sup;
+        tempItem.anno = anno;
+        tempItem.luogo = luogo;
+        tempItem.name_eng = name_eng;
+        tempItem.descr_eng = descr_eng;
         riservaDatabase.Add(tempItem);
     }
 
