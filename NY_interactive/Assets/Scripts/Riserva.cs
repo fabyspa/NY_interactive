@@ -11,9 +11,10 @@ public class Riserva
     public string coord;
     public string descr;
     public string state;
-    public Sprite sprite;
+    //public Sprite sprite;
     public string name_eng;
     public string descr_eng;
+    public string type_eng;
     public string sup;
     public string region;
     public string anno;
@@ -25,10 +26,11 @@ public class Riserva
         name = r.name;
         coord = r.coord;
         descr = r.descr;
-        sprite= r.sprite;
+        //sprite= r.sprite;
         state = r.state;
         name_eng = r.name_eng;
         descr_eng = r.descr_eng;
+        type_eng = r.type_eng;
         sup = r.sup;
         anno = r.anno;
         luogo = r.luogo;
