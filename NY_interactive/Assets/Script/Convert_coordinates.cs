@@ -29,19 +29,24 @@ public static class Convert_coordinates
         {
             if (double.TryParse(subs[i], out v))
             {
-                Debug.Log(String.Join(",", subs));
                 if (i == 0)
                 {
                     xy[i] = ExtensionMethods.Remap(v, yfrom1, yto1, yfrom2, yto2, decimalp);
+                   // Debug.Log(v);
+
                 }
                 else
                 {
                     xy[i] = ExtensionMethods.Remap(v, xfrom1, xto1, xfrom2, xto2, decimalp);
-                }
-            }
+                    Debug.Log(v);
 
+                }
+
+            }
             else break;
         }
+        Debug.Log(string.Join(",", xy));
+
         return xy;
     }
 }
