@@ -65,7 +65,7 @@ namespace AirFishLab.ScrollingList
 
                 _contents = _contentsList.ToArray();
                 _circularList.Refresh();
-                GetCenterItem();
+                 GetCenterItem();
 
                 loadexcel.InstantiatePoints(loadexcel.riservaDatabase);
 

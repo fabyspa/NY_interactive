@@ -27,7 +27,7 @@ public static class Convert_coordinates
         double v;
         for (int i = 0; i < subs.Length; i++)
         {
-            if( double.TryParse(subs[i], out v)) 
+            if (double.TryParse(subs[i], out v))
             {
                 if (i == 0)
                 {
@@ -39,7 +39,7 @@ public static class Convert_coordinates
                 }
 
             }
-
+            else Debug.Log(String.Join(",", subs));
         }
         return xy;
     }
