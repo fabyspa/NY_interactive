@@ -22,6 +22,11 @@ namespace AirFishLab.ScrollingList
         private readonly DataWrapper _dataWrapper = new DataWrapper();
         private Image _image;
 
+        public void Start()
+        {
+            //setta il primo come selected
+            loadexcel.ChangeStateTo(loadexcel.coord2position.FirstOrDefault(x => Enumerable.SequenceEqual(x.Value, Convert_coordinates.remapLatLng(GetCenterItem().coord))).Key, "selected");
+        }
 
         public override object GetListContent(int index)
         {

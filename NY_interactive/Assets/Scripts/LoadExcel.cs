@@ -16,7 +16,7 @@ public class LoadExcel : MonoBehaviour
    // public Image _image;
     public List<string> type = new List<string>();
     [SerializeField] GameObject scrolling;
-    //[SerializeField] VariableGameObjectListBankRiserva VariableGameObjectListBankRiserva;
+    [SerializeField] VariableGameObjectListBankRiserva VariableGameObjectListBankRiserva;
     public bool loadedItems = false;
     public string actualType;
     public Dictionary<GameObject, float[]> coord2position = new Dictionary<GameObject, float[]>();
@@ -37,8 +37,6 @@ public class LoadExcel : MonoBehaviour
         SortListByType();
         GameObject.FindGameObjectWithTag("Info").GetComponent<VariableGameObjectListBankRiserva>().ChangeInfoContents("Tutte");
         // Debug.Log("ITEM "+aItem.coord);
-        //aItem = VariableGameObjectListBankRiserva.GetCenterItem();
-
     }
 
     
@@ -76,7 +74,7 @@ public class LoadExcel : MonoBehaviour
         }
         loadedItems = true;
         GetRiservaTypes();
-        AddState();
+       // AddState();
         /* InstantiatePoints(riservaDatabase,tipo);*/
     }
 
@@ -122,15 +120,17 @@ public class LoadExcel : MonoBehaviour
         coord2position.Clear();
         AddState();
         foreach (Riserva c in r) {
-            GameObject Tpoint = TransformPoint(c.state);
             float[] coord = Convert_coordinates.remapLatLng(c.coord);
             Vector3 worldSpacePosition = new Vector3(coord[1], coord[0], 0);
             Vector3 localSpacePosition = transform.InverseTransformPoint(worldSpacePosition);
+            GameObject Tpoint = TransformPoint(c.state);
+
             var instanciated = Instantiate(Tpoint, localSpacePosition, Quaternion.identity, parent);
             pointList.Add(instanciated);
             //Debug.Log(instanciated.transform.localPosition);
            // Debug.Log(c.coord);
             if(!coord2position.ContainsKey(instanciated)) coord2position.Add(instanciated,coord);
+
            // Debug.Log(string.Join(",", coord2position));
         }
        
@@ -152,7 +152,7 @@ public class LoadExcel : MonoBehaviour
     //aggiunge lo stato alla variabile state
     public void AddState()
     {
-       // Debug.Log("addstate");
+         Debug.Log("addstate");
 
         foreach (Riserva r in riservaDatabase)
         {
@@ -194,6 +194,7 @@ public class LoadExcel : MonoBehaviour
     //gestisco scala punti
     public GameObject TransformPoint(string state)
     {
+        Debug.Log("transform");
         GameObject t = point;
         Vector3 piccolo = new Vector3((float)0.4, (float)0.4, 0);
         Vector3 grande = new Vector3((float)0.8, (float)0.8, 0);
@@ -227,7 +228,6 @@ public class LoadExcel : MonoBehaviour
 
             if (r.type_eng != "")
             {
-                Debug.Log("RISERVA TRADOTTA");
                 ita2engType.Add(r.type_eng, r.type);
             }
         }
