@@ -41,7 +41,7 @@ public class LoadExcel : MonoBehaviour
 
     }
 
-
+    
 
     public void LoadItemData()
     {
