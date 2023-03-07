@@ -26,24 +26,25 @@ public static class Convert_coordinates
         float[] xy = new float[2];
         double v;
         for (int i = 0; i < subs.Length; i++)
-        {
             if (double.TryParse(subs[i], out v))
             {
-                if (i == 0)
                 {
-                    xy[i] = ExtensionMethods.Remap(v, yfrom1, yto1, yfrom2, yto2, decimalp);
-                   // Debug.Log(v);
+                    v = double.Parse(subs[i], System.Globalization.CultureInfo.InvariantCulture);
 
+                    if (i == 0)
+                    {
+                        xy[i] = ExtensionMethods.Remap(v, yfrom1, yto1, yfrom2, yto2, decimalp);
+                        // Debug.Log(v);
+
+                    }
+                    else
+                    {
+                        xy[i] = ExtensionMethods.Remap(v, xfrom1, xto1, xfrom2, xto2, decimalp);
+                        Debug.Log(v);
+
+                    }
                 }
-                else
-                {
-                    xy[i] = ExtensionMethods.Remap(v, xfrom1, xto1, xfrom2, xto2, decimalp);
-                    Debug.Log(v);
-
-                }
-
-            }
-            else break;
+     
         }
         Debug.Log(string.Join(",", xy));
 
