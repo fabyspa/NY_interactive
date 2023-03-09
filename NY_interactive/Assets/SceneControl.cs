@@ -5,14 +5,36 @@ using UnityEngine.SceneManagement;
 
 public class SceneControl
 {
-    public static AsyncOperation scene1, scene2;
+    public static AsyncOperation sceneR, sceneP;
+    public static Scene riserve, parchi;
 
     public static void addScene()
     {
-        scene1 = SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
-        scene2 = SceneManager.LoadSceneAsync(2, LoadSceneMode.Additive);
+        sceneR = SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
+        sceneP = SceneManager.LoadSceneAsync(2, LoadSceneMode.Additive);
 
-        scene2.allowSceneActivation = false;
+        //sceneP.allowSceneActivation = false;
+        riserve = SceneManager.GetSceneByBuildIndex(1);
+        parchi = SceneManager.GetSceneByBuildIndex(2);
+    }
+
+    public static void TaskOnClickActive(Scene sceneToActivate)
+    {
+
+    }
+
+
+    public static void TaskOnClickDisabled(Scene sceneToDisabled)
+    {
+        Debug.Log("DISABLED"+ sceneToDisabled.name);
+        if (sceneToDisabled.name == "RISERVE")
+        {
+            //sceneR.allowSceneActivation = false;
+            SceneManager.SetActiveScene(parchi);
+            GameObject.FindGameObjectWithTag("CANVARISERVE").SetActive(false);
+
+        }
+
 
     }
 

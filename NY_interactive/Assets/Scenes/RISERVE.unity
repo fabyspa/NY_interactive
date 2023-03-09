@@ -5039,7 +5039,7 @@ GameObject:
   - component: {fileID: 7801748840615930514}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: RISERVE
+  m_TagString: CANVARISERVE
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

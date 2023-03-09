@@ -11,6 +11,8 @@ TagManager:
   - ITA
   - RISERVE
   - PARCHI
+  - CANVARISERVE
+  - CANVAPARCHI
   layers:
   - Default
   - TransparentFX

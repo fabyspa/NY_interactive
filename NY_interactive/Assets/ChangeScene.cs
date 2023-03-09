@@ -19,25 +19,28 @@ public class ChangeScene : MonoBehaviour
 
         par = false;
         ris = true;
-        
+
+
+        btn.onClick.AddListener(Loader.SwitchScene);
+        //btn.onClick.AddListener(()=>SceneControl.TaskOnClickActive(this.gameObject.scene));
 
         //ColorBlock cb = btn.colors;
 
         //se il bottone ti manda alla stessa scena
         //if (this.gameObject.tag == SceneManager.)
-       // {
+        // {
 
-            //SceneManager.GetActiveScene().name
-           
-            //cb.pressedColor = Color.blue;
-            //cb.normalColor = Color.blue;
-            //cb.highlightedColor = Color.blue;
-            btn.onClick.AddListener(ClickListener.TaskOnClickDisabled);
-            
-       // }
-        
+        //SceneManager.GetActiveScene().name
+
+        //cb.pressedColor = Color.blue;
+        //cb.normalColor = Color.blue;
+        //cb.highlightedColor = Color.blue;
+
+
+        // }
+
         //else
-        btn.onClick.AddListener(ClickListener.TaskOnClickActive);
+
 
     }
 
