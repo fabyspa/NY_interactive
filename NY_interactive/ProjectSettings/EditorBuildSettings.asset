@@ -9,9 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MASTER.unity
     guid: 96e820f14b8d4ce4ba5cfa05b6a95a83
   - enabled: 1
-    path: Assets/Scenes/PARCHI.unity
-    guid: c8acb7637bbe97645b32bc78a5f1c3be
-  - enabled: 1
     path: Assets/Scenes/RISERVE.unity
     guid: 60bb7cfc06cc0cc49bf0dc65d6de228a
+  - enabled: 1
+    path: Assets/Scenes/PARCHI.unity
+    guid: c8acb7637bbe97645b32bc78a5f1c3be
   m_configObjects: {}

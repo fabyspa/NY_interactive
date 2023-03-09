@@ -7,19 +7,22 @@ public class ClickExample : MonoBehaviour
 {
     public Button yourButton;
     [SerializeField] bool selected;
-    public AddScene scene;
+    public GameObject s;
+
 
     void Start()
     {
         Button btn = yourButton.GetComponent<Button>();
-        ColorBlock cb = btn.colors;
+        SceneControl.ActivateScene(s);
+
+        //ColorBlock cb = btn.colors;
         if (selected)
         {
             
-            cb.pressedColor = Color.blue;
-            cb.normalColor = Color.blue;
-            cb.highlightedColor = Color.blue;
-            //btn.enabled = false;
+            //cb.pressedColor = Color.blue;
+            //cb.normalColor = Color.blue;
+            //cb.highlightedColor = Color.blue;
+           
         }
         
         else
@@ -29,9 +32,8 @@ public class ClickExample : MonoBehaviour
 
     void TaskOnClick()
     {
-      // if(scene.)
-       scene.scene2.allowSceneActivation = false;
-       scene.scene1.allowSceneActivation = true;
+
+        SceneControl.BackgroundScene(s);
 
     }
 }
