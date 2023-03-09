@@ -1034,7 +1034,7 @@ GameObject:
   - component: {fileID: 512323199}
   m_Layer: 5
   m_Name: Button
-  m_TagString: Untagged
+  m_TagString: RISERVE
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1155,8 +1155,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yourButton: {fileID: 512323196}
-  selected: 1
-  s: {fileID: 7801748840615930515}
+  canvas: {fileID: 0}
+  ris: 0
+  par: 0
 --- !u!1 &627957886
 GameObject:
   m_ObjectHideFlags: 0
@@ -3842,7 +3843,7 @@ GameObject:
   - component: {fileID: 1852646932}
   m_Layer: 5
   m_Name: Button
-  m_TagString: Untagged
+  m_TagString: PARCHI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3963,8 +3964,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yourButton: {fileID: 1852646929}
-  selected: 0
-  s: {fileID: 7801748840615930515}
+  canvas: {fileID: 0}
+  ris: 0
+  par: 0
 --- !u!1 &2018903373
 GameObject:
   m_ObjectHideFlags: 0
@@ -5037,7 +5039,7 @@ GameObject:
   - component: {fileID: 7801748840615930514}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: RISERVE
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

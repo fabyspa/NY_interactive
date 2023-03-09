@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class Loader : MonoBehaviour
 {
-    public GameObject c1, c2;
 
     // Start is called before the first frame update
     void Start()
     {
-        SceneControl.addScene();
-        SceneControl.BackgroundScene(c2);
+        SceneControl.addScene();  
     }
 
     // Update is called once per frame

@@ -9,6 +9,8 @@ TagManager:
   - Type
   - ENG
   - ITA
+  - RISERVE
+  - PARCHI
   layers:
   - Default
   - TransparentFX
