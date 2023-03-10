@@ -24,7 +24,7 @@ namespace AirFishLab.ScrollingList
 
         public void Start()
         {
-            //setta il primo come selected
+            if(GetCenterItem()!=null)
             loadexcel.ChangeStateTo(loadexcel.coord2position.FirstOrDefault(x => Enumerable.SequenceEqual(x.Value, Convert_coordinates.remapLatLng(GetCenterItem().coord))).Key, "selected");
         }
 
@@ -41,6 +41,7 @@ namespace AirFishLab.ScrollingList
 
         public void ChangeInfoContents(string type)
         {
+            Debug.Log("CHANGE INFO CONTENTS");
             loadexcel = GameObject.FindObjectOfType<LoadExcel>();
             _contentsList.Clear();
             
@@ -91,17 +92,22 @@ namespace AirFishLab.ScrollingList
             //Debug.Log("size " + size);
             GameObject obj = this.transform.GetChild(size - 1).gameObject;
             //Debug.Log(obj.GetComponentInChildren<Text>().text);
-            foreach (Riserva r in loadexcel.riservaDatabase)
+            if(loadexcel.riservaDatabase.Count!=0) 
             {
-                //Debug.Log("obj " + obj.GetComponentInChildren<Text>().text);
-                if(r.name== obj.GetComponentInChildren<Text>().text)
+                foreach (Riserva r in loadexcel.riservaDatabase)
+
                 {
-                    loadexcel.aItem = r;
-                    //Debug.Log(r.name);
-                    return r;
+                    //Debug.Log("obj " + obj.GetComponentInChildren<Text>().text);
+                    if (r.name == obj.GetComponentInChildren<Text>().text)
+                    {
+                        loadexcel.aItem = r;
+                        //Debug.Log(r.name);
+                        return r;
+                    }
+
                 }
-              
             }
+            
             return null;
         }
         /// <summary>

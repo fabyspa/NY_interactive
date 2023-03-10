@@ -33,19 +33,46 @@ public class Loader
     }
     public static void EnableDisableSceneObjects()
     {
-        if (currentScene == SceneName.PARCHI)
+        if (currentScene == SceneName.PARCHI && SceneManager.GetSceneByName(SceneName.PARCHI.ToString()).isLoaded)
         {
-            // Disabilita gli oggetti della scena Riserva
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName(SceneName.PARCHI.ToString()));
-            if (isRiservaSceneLoaded) SceneManager.UnloadSceneAsync(SceneName.RISERVE.ToString());
+            Debug.Log("ATTIVO PARCHI");
+            GameObject[] objectsInScene = SceneManager.GetSceneByName(SceneName.RISERVE.ToString()).GetRootGameObjects();
+            // Salva lo stato di ogni oggetto
+            Debug.Log(SceneManager.GetActiveScene().name);
+            foreach (GameObject obj in objectsInScene)
+            {
+                obj.SetActive(false);
+            }
+                // Disabilita gli oggetti della scena Riserva
+                SceneManager.SetActiveScene(SceneManager.GetSceneByName(SceneName.PARCHI.ToString()));
+            GameObject[] objectsInSceneActive = SceneManager.GetActiveScene().GetRootGameObjects();
+            // Salva lo stato di ogni oggetto
+            foreach (GameObject obj in objectsInSceneActive)
+            {
+                obj.SetActive(true);
+            }
+            //if (isRiservaSceneLoaded) SceneManager.UnloadSceneAsync(SceneName.RISERVE.ToString());
+
             isParkSceneLoaded = true;
             isRiservaSceneLoaded = false;
         }
-        else
+        else if(currentScene==SceneName.RISERVE && SceneManager.GetSceneByName(SceneName.RISERVE.ToString()).isLoaded)
         {
+            GameObject[] objectsInScene = SceneManager.GetSceneByName(SceneName.PARCHI.ToString()).GetRootGameObjects();
+            // Salva lo stato di ogni oggetto
+            foreach (GameObject obj in objectsInScene)
+            {
+                obj.SetActive(false);
+            }
             // Disabilita gli oggetti della scena Park
             SceneManager.SetActiveScene(SceneManager.GetSceneByName(SceneName.RISERVE.ToString()));
-            if (isParkSceneLoaded) SceneManager.UnloadSceneAsync(SceneName.PARCHI.ToString());
+            GameObject[] objectsInSceneActive = SceneManager.GetActiveScene().GetRootGameObjects();
+            // Salva lo stato di ogni oggetto
+            foreach (GameObject obj in objectsInSceneActive)
+            {
+                obj.SetActive(true);
+            }
+            //if (isParkSceneLoaded) SceneManager.UnloadSceneAsync(SceneName.PARCHI.ToString());
             isRiservaSceneLoaded = true;
             isParkSceneLoaded = false;
         }

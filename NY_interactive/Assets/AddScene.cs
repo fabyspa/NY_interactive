@@ -12,16 +12,28 @@ public class AddScene : MonoBehaviour
 
     private void Awake()
     {
+        StartCoroutine(SceneLoader());
         // Precarica entrambe le scene in background
-        SceneManager.LoadSceneAsync(Loader.SceneName.PARCHI.ToString(), LoadSceneMode.Additive);
-        SceneManager.LoadSceneAsync(Loader.SceneName.RISERVE.ToString(), LoadSceneMode.Additive);
+        
 
     }
     private void Start()
     {
         // Imposta la scena corrente sulla scena iniziale (Park)
-        currentScene = Loader.SceneName.PARCHI;
+       
+    }
+
+    private IEnumerator SceneLoader()
+    {
+        yield return new WaitForSeconds(0.1f);
+        SceneManager.LoadSceneAsync(Loader.SceneName.RISERVE.ToString(), LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync(Loader.SceneName.PARCHI.ToString(), LoadSceneMode.Additive);
+
+        //SceneManager.LoadSceneAsync(Loader.SceneName.RISERVE.ToString(), LoadSceneMode.Additive);
+        currentScene = Loader.SceneName.RISERVE;
         Loader.SetCurrentScene(currentScene);
+        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.1f);
         // Abilita/disabilita i GameObject delle scene in base alla scena corrente
         Loader.EnableDisableSceneObjects();
     }
