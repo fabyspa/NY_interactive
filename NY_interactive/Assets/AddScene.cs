@@ -26,7 +26,7 @@ public class AddScene : MonoBehaviour
     private IEnumerator SceneLoader()
     {
         yield return new WaitForSeconds(0.1f);
-        SceneManager.LoadSceneAsync(Loader.SceneName.RISERVE.ToString(), LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync(Loader.SceneName.RISERVE.ToString(), LoadSceneMode.Single);
         SceneManager.LoadSceneAsync(Loader.SceneName.PARCHI.ToString(), LoadSceneMode.Additive);
 
         //SceneManager.LoadSceneAsync(Loader.SceneName.RISERVE.ToString(), LoadSceneMode.Additive);
