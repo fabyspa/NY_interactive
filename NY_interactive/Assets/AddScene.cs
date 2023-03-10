@@ -7,8 +7,6 @@ using UnityEngine.SceneManagement;
 public class AddScene : MonoBehaviour
 {
     private Loader.SceneName currentScene;
-    private bool isParkSceneLoaded;
-    private bool isRiservaSceneLoaded;
 
     private void Awake()
     {
@@ -25,16 +23,31 @@ public class AddScene : MonoBehaviour
 
     private IEnumerator SceneLoader()
     {
-        yield return new WaitForSeconds(0.1f);
-        SceneManager.LoadSceneAsync(Loader.SceneName.RISERVE.ToString(), LoadSceneMode.Single);
-        SceneManager.LoadSceneAsync(Loader.SceneName.PARCHI.ToString(), LoadSceneMode.Additive);
-
-        //SceneManager.LoadSceneAsync(Loader.SceneName.RISERVE.ToString(), LoadSceneMode.Additive);
+        //yield return new WaitForSeconds(0.1f);
+        var asyncLoadLevel1 =SceneManager.LoadSceneAsync(Loader.SceneName.RISERVE.ToString(), LoadSceneMode.Additive);
+        while (!asyncLoadLevel1.isDone)
+        {
+            Debug.Log("Loading the Scene");
+            yield return null;
+        }
         currentScene = Loader.SceneName.RISERVE;
         Loader.SetCurrentScene(currentScene);
-        yield return new WaitForSeconds(0.1f);
-        yield return new WaitForSeconds(0.1f);
+        
+        var asyncLoadLevel = SceneManager.LoadSceneAsync(Loader.SceneName.PARCHI.ToString(), LoadSceneMode.Additive);
+        while (!asyncLoadLevel.isDone)
+        {
+            Debug.Log("Loading the Scene");
+            yield return null;
+        }
+
+        //GameObject[] objectsInScene = SceneManager.GetSceneByName(Loader.SceneName.PARCHI.ToString()).GetRootGameObjects();
+        //// Salva lo stato di ogni oggetto
+        //foreach (GameObject obj in objectsInScene)
+        //{
+        //    obj.SetActive(false);
+        //}
         // Abilita/disabilita i GameObject delle scene in base alla scena corrente
         Loader.EnableDisableSceneObjects();
+
     }
 }

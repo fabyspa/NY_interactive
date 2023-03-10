@@ -494,12 +494,10 @@ namespace AirFishLab.ScrollingList
 
         void CenteredBoxisChanged()
         {
-            
-            var info= GameObject.FindGameObjectWithTag("Info");
            // var firstFilter = GameObject.FindGameObjectsWithTag("FirstFilter");
 
             #nullable enable
-            VariableGameObjectListBankRiserva? list = (VariableGameObjectListBankRiserva?) info.GetComponent<CircularScrollingListRiserva>().listBank;
+            VariableGameObjectListBankRiserva? list = (VariableGameObjectListBankRiserva?) loadexcel.info.GetComponent<CircularScrollingListRiserva>().listBank;
             if(list!=null)
             {
                 list.ChangeInfoContents(centeredBoxAfterScroll);

@@ -2609,6 +2609,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4333776204369620916, guid: a8eaf8e2c8352da44befdb4403ac224c, type: 3}
+      propertyPath: info
+      value: 
+      objectReference: {fileID: 1371252899}
+    - target: {fileID: 4333776204369620916, guid: a8eaf8e2c8352da44befdb4403ac224c, type: 3}
       propertyPath: point
       value: 
       objectReference: {fileID: 1389103744079038784, guid: 0de64a7c5011c6b41877dab8496f5e0e, type: 3}
@@ -2675,6 +2679,10 @@ PrefabInstance:
     - target: {fileID: 4333776204369620919, guid: a8eaf8e2c8352da44befdb4403ac224c, type: 3}
       propertyPath: m_Name
       value: Databases
+      objectReference: {fileID: 0}
+    - target: {fileID: 4333776204369620919, guid: a8eaf8e2c8352da44befdb4403ac224c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -24,8 +24,11 @@ namespace AirFishLab.ScrollingList
 
         public void Start()
         {
-            if(GetCenterItem()!=null)
-            loadexcel.ChangeStateTo(loadexcel.coord2position.FirstOrDefault(x => Enumerable.SequenceEqual(x.Value, Convert_coordinates.remapLatLng(GetCenterItem().coord))).Key, "selected");
+            Debug.Log("START");
+            if (GetCenterItem() != null)
+                loadexcel.ChangeStateTo(loadexcel.coord2position.FirstOrDefault(x => Enumerable.SequenceEqual(x.Value, Convert_coordinates.remapLatLng(GetCenterItem().coord))).Key, "selected");
+
+            loadexcel = GameObject.FindObjectOfType<LoadExcel>();
         }
 
         public override object GetListContent(int index)
@@ -39,10 +42,11 @@ namespace AirFishLab.ScrollingList
             return _contents.Length;
         }
 
+        //RISERVE
         public void ChangeInfoContents(string type)
         {
             Debug.Log("CHANGE INFO CONTENTS");
-            loadexcel = GameObject.FindObjectOfType<LoadExcel>();
+            
             _contentsList.Clear();
             
             if (type == "Tutte")
@@ -92,8 +96,7 @@ namespace AirFishLab.ScrollingList
             //Debug.Log("size " + size);
             GameObject obj = this.transform.GetChild(size - 1).gameObject;
             //Debug.Log(obj.GetComponentInChildren<Text>().text);
-            if(loadexcel.riservaDatabase.Count!=0) 
-            {
+            
                 foreach (Riserva r in loadexcel.riservaDatabase)
 
                 {
@@ -106,10 +109,11 @@ namespace AirFishLab.ScrollingList
                     }
 
                 }
-            }
+            
             
             return null;
         }
+
         /// <summary>
         /// Used for carry the data of value type to avoid boxing/unboxing
         /// </summary>
@@ -117,7 +121,5 @@ namespace AirFishLab.ScrollingList
         {
             public Riserva data;
         }
-
-        
     }
 }
