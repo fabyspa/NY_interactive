@@ -19,6 +19,7 @@ public class Loader
         if (currentScene == SceneName.PARCHI)
         {
             currentScene = SceneName.RISERVE;
+
             // Abilita/disabilita i GameObject delle scene in base alla scena corrente
             EnableDisableSceneObjects();
         }
@@ -36,15 +37,19 @@ public class Loader
         if (currentScene == SceneName.PARCHI && SceneManager.GetSceneByName(SceneName.PARCHI.ToString()).isLoaded)
         {
             Debug.Log("ATTIVO PARCHI");
-            GameObject[] objectsInScene = SceneManager.GetSceneByName(SceneName.RISERVE.ToString()).GetRootGameObjects();
-            // Salva lo stato di ogni oggetto
-            Debug.Log(SceneManager.GetActiveScene().name);
-            foreach (GameObject obj in objectsInScene)
+            if (SceneManager.GetSceneByName(SceneName.RISERVE.ToString()).isLoaded)
             {
-                obj.SetActive(false);
+                GameObject[] objectsInScene = SceneManager.GetSceneByName(SceneName.RISERVE.ToString()).GetRootGameObjects();
+                foreach (GameObject obj in objectsInScene)
+                {
+                    obj.SetActive(false);
+                }
             }
-                // Disabilita gli oggetti della scena Riserva
-                SceneManager.SetActiveScene(SceneManager.GetSceneByName(SceneName.PARCHI.ToString()));
+           
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName(SceneName.PARCHI.ToString()));
+            // Disabilita gli oggetti della scena Riserva
+           
+
             GameObject[] objectsInSceneActive = SceneManager.GetActiveScene().GetRootGameObjects();
             // Salva lo stato di ogni oggetto
             foreach (GameObject obj in objectsInSceneActive)
@@ -56,8 +61,10 @@ public class Loader
             isParkSceneLoaded = true;
             isRiservaSceneLoaded = false;
         }
-        else if(currentScene==SceneName.RISERVE && SceneManager.GetSceneByName(SceneName.RISERVE.ToString()).isLoaded)
+        else if(currentScene==SceneName.RISERVE)
         {
+            Debug.Log("ATTIVO RISERVE");
+
             GameObject[] objectsInScene = SceneManager.GetSceneByName(SceneName.PARCHI.ToString()).GetRootGameObjects();
             // Salva lo stato di ogni oggetto
             foreach (GameObject obj in objectsInScene)

@@ -231,7 +231,7 @@ public class ButtonPoint : Button
     {
         base.Start();
         loadexcel = FindObjectOfType<LoadExcel>();
-        info = GameObject.FindGameObjectWithTag("Info");
+        info = loadexcel.info;
 
     }
 }

@@ -4,16 +4,20 @@ using UnityEngine;
 using AirFishLab.ScrollingList;
 using System.Linq;
 using UnityEngine.UI;
+ using UnityEngine.SceneManagement;
+
 
 
 public class LoadExcel : MonoBehaviour
 {
     //inizializzo un oggetto Riserva
-    public Riserva blankRiserva;
+    private Riserva blankRiserva;
     public List<Riserva> riservaDatabase = new List<Riserva>();
+    
     public List<Riserva> riservaDatabaseType = new List<Riserva>();
     public List<Riserva> ordenList = new List<Riserva>();
-   // public Image _image;
+    // public Image _image;
+    [SerializeField] public GameObject info;
     public List<string> type = new List<string>();
     [SerializeField] GameObject scrolling;
     [SerializeField] VariableGameObjectListBankRiserva VariableGameObjectListBankRiserva;
@@ -33,17 +37,20 @@ public class LoadExcel : MonoBehaviour
     public void Start()
     {
         LoadItemData();
-        scrolling.GetComponent<VariableStringListBankRiserva>().ChangeContents();
-        SortListByType();
-        GameObject.FindGameObjectWithTag("Info").GetComponent<VariableGameObjectListBankRiserva>().ChangeInfoContents("Tutte");
+        if (this.gameObject.scene.name == Loader.SceneName.RISERVE.ToString())
+        {
+            scrolling.GetComponent<VariableStringListBankRiserva>().ChangeContents();
+            SortListByType();
+            info.GetComponent<VariableGameObjectListBankRiserva>().ChangeInfoContents("Tutte");
+        }
+       
         // Debug.Log("ITEM "+aItem.coord);
     }
 
-    
+
 
     public void LoadItemData()
     {
-
         //clear database
         riservaDatabase.Clear();
         riservaDatabaseType.Clear();
@@ -68,13 +75,14 @@ public class LoadExcel : MonoBehaviour
             string region = data[i]["Regione"].ToString();
             string type_eng = data[i]["Type_ENG"].ToString();
             //Sprite sprite = UpdateImage((data[i]["Name_ITA"]).ToString());
-           //Sprite sprite = null;
-            AddRiserva(type, name, coord, descr,region,sup,anno,luogo,name_eng,descr_eng, type_eng);
-
+            //Sprite sprite = null;
+            AddRiserva(type, name, coord, descr, region, sup, anno, luogo, name_eng, descr_eng, type_eng);
+            
         }
         loadedItems = true;
         GetRiservaTypes();
-       // AddState();
+
+        // AddState();
         /* InstantiatePoints(riservaDatabase,tipo);*/
     }
 
@@ -90,10 +98,24 @@ public class LoadExcel : MonoBehaviour
     //se viene modificato il file excel da esterno facciamo in modo che si aggiorni direttamente la build
     public void ReLoadItemData()
     {
+        //TO DO
         loadedItems = false;
         LoadItemData();
     }
-
+    /// <summary>
+    ///RISERVE
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="name"></param>
+    /// <param name="coord"></param>
+    /// <param name="descr"></param>
+    /// <param name="region"></param>
+    /// <param name="sup"></param>
+    /// <param name="anno"></param>
+    /// <param name="luogo"></param>
+    /// <param name="name_eng"></param>
+    /// <param name="descr_eng"></param>
+    /// <param name="type_eng"></param>
     void AddRiserva(string type, string name, string coord,  string descr, string region, string sup, string anno, string luogo, string name_eng, string descr_eng, string type_eng)
     {
         Riserva tempItem = new Riserva(blankRiserva);
