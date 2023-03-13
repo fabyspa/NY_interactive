@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using AirFishLab.ScrollingList;
+
 public class Loader
 {
     public enum SceneName
@@ -22,6 +24,7 @@ public class Loader
             currentScene = SceneName.RISERVE;
             // Abilita/disabilita i GameObject delle scene in base alla scena corrente
             EnableDisableSceneObjects();
+
         }
         else
         {
@@ -53,6 +56,7 @@ public class Loader
             }
             GameObject.FindGameObjectWithTag("TOGGLE").GetComponent<Toggle>().isOn = toggle;
             //if (isRiservaSceneLoaded) SceneManager.UnloadSceneAsync(SceneName.RISERVE.ToString());
+            ResetScroll(SceneName.PARCHI);
 
             isParkSceneLoaded = true;
             isRiservaSceneLoaded = false;
@@ -74,6 +78,7 @@ public class Loader
                 obj.SetActive(true);
             }
             GameObject.FindGameObjectWithTag("TOGGLE").GetComponent<Toggle>().isOn = toggle;
+            ResetScroll(SceneName.RISERVE);
 
             //if (isParkSceneLoaded) SceneManager.UnloadSceneAsync(SceneName.PARCHI.ToString());
             isRiservaSceneLoaded = true;
@@ -120,5 +125,11 @@ public class Loader
         toggle= GameObject.FindGameObjectWithTag("TOGGLE").GetComponent<Toggle>().isOn;
         Debug.Log("TOGGLE" + toggle);
         return toggle;
+    }
+
+    private static void ResetScroll(SceneName scene)
+    {
+        if (scene == SceneName.RISERVE) GameObject.FindGameObjectWithTag("Info").GetComponent<VariableGameObjectListBankRiserva>().ChangeInfoContents("Tutte");
+        if (scene == SceneName.PARCHI) GameObject.FindGameObjectWithTag("Info").GetComponent<VariableGameObjectListBankParco>().ChangeInfoContents();
     }
 }
