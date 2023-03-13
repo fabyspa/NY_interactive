@@ -1,0 +1,218 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using AirFishLab.ScrollingList;
+using System.Linq;
+using UnityEngine.UI;
+
+
+public class LoadExcelParchi : MonoBehaviour
+{
+    //inizializzo un oggetto Riserva
+    public Parco blankParco;
+    public List<Parco> parchiDatabase = new List<Parco>();
+    [SerializeField] public GameObject info;
+    public bool loadedItems = false;
+    
+    public Dictionary<GameObject, float[]> coord2position = new Dictionary<GameObject, float[]>();
+    public GameObject _oldGameObjecct;
+    public Transform parent;
+    public List<GameObject> pointList = new List<GameObject>();
+    //Ogetto contenente l'item attivo in questo momento
+    public Parco aItem;
+    [SerializeField] GameObject point;
+
+
+
+    public void Start()
+    {
+        LoadItemData();
+        info.GetComponent<VariableGameObjectListBankParco>().ChangeInfoContents();
+        // Debug.Log("ITEM "+aItem.coord);
+    }
+
+    
+
+    public void LoadItemData()
+    {
+
+        //clear database
+        parchiDatabase.Clear();
+        //READ CSV FILE
+        List<Dictionary<string, object>> data = CSVReader.Read("Parchi");
+        for (var i = 0; i < data.Count; i++)
+        {
+            string name = data[i]["Name_ITA"].ToString();
+            string coord = data[i]["Coord"].ToString();
+            string descr = data[i]["Descr_ITA"].ToString();
+            string descr_eng = data[i]["Descr_ENG"].ToString();
+            string name_eng = data[i]["Name_ENG"].ToString();
+            if (name_eng == "")
+            {
+                name_eng = name;
+            }
+            string luogo = data[i]["Luogo"].ToString();
+            string anno = data[i]["Anno"].ToString();
+            string sup = data[i]["Sup"].ToString();
+            string region = data[i]["Regione"].ToString();
+            //Sprite sprite = UpdateImage((data[i]["Name_ITA"]).ToString());
+           //Sprite sprite = null;
+            AddParco(name, coord, descr,region,sup,anno,luogo,name_eng,descr_eng);
+
+        }
+        loadedItems = true;
+       // AddState();
+        /* InstantiatePoints(riservaDatabase,tipo);*/
+    }
+    //se viene modificato il file excel da esterno facciamo in modo che si aggiorni direttamente la build
+    public void ReLoadItemData()
+    {
+        loadedItems = false;
+        LoadItemData();
+    }
+
+    void AddParco(string name, string coord,  string descr, string region, string sup, string anno, string luogo, string name_eng, string descr_eng)
+    {
+        Parco tempItem = new Parco(blankParco);
+
+        tempItem.coord = coord;
+        tempItem.name = name;
+        tempItem.descr = descr;
+        //tempItem.sprite = sprite;
+        tempItem.region = region;
+        tempItem.sup = sup;
+        tempItem.anno = anno;
+        tempItem.luogo = luogo;
+        tempItem.name_eng = name_eng;
+        tempItem.descr_eng = descr_eng;
+        parchiDatabase.Add(tempItem);
+    }
+
+    //Instanzio i punti passandogli la lista 
+    public void InstantiatePoints(List<Parco> r)
+    {
+        ClearPoints();
+        coord2position.Clear();
+        AddState();
+        foreach (Parco c in r) {
+            float[] coord = Convert_coordinates.remapLatLng(c.coord);
+            Vector3 worldSpacePosition = new Vector3(coord[1], coord[0], 0);
+            Vector3 localSpacePosition = transform.InverseTransformPoint(worldSpacePosition);
+            GameObject Tpoint = TransformPoint(c.state);
+
+            var instanciated = Instantiate(Tpoint, localSpacePosition, Quaternion.identity, parent);
+            pointList.Add(instanciated);
+            //Debug.Log(instanciated.transform.localPosition);
+           // Debug.Log(c.coord);
+            if(!coord2position.ContainsKey(instanciated)) coord2position.Add(instanciated,coord);
+
+           // Debug.Log(string.Join(",", coord2position));
+        }
+       
+    }
+
+    public void ClearPoints()
+    {
+        foreach (GameObject c in pointList)
+        {
+            GameObject.Destroy(c);
+        }
+    }
+
+    //aggiunge lo stato alla variabile state
+    public void AddState()
+    {
+        Debug.Log("addstate");
+
+        foreach (Parco r in parchiDatabase)
+        {
+
+            if (r.name == aItem.name)
+            {
+                r.state = "selected";
+            }
+            else r.state = "active";
+        }
+
+
+    }
+
+    public void ChangeStateTo(GameObject g, string newstate)
+    {
+        Vector3 highlights = new Vector3((float)1.5, (float)1.5, 0);
+        Vector3 grande = new Vector3((float)0.8, (float)0.8, 0);
+
+
+        Parco r = GetParcoByCoord(g);
+        if (_oldGameObjecct != null)
+        {
+            Parco oldR = GetParcoByCoord(_oldGameObjecct);
+            oldR.state = "active";
+            _oldGameObjecct.transform.localScale = grande;
+        }
+        r.state = newstate;
+        g.transform.localScale = highlights;
+        _oldGameObjecct = g;
+
+    }
+    //gestisco scala punti
+    public GameObject TransformPoint(string state)
+    {
+        Debug.Log("transform");
+        GameObject t = point;
+        Vector3 piccolo = new Vector3((float)0.4, (float)0.4, 0);
+        Vector3 grande = new Vector3((float)0.8, (float)0.8, 0);
+        Vector3 highlights = new Vector3((float)1.5, (float)1.5, 0);
+        switch (state)
+        {
+            case "active":
+                t.transform.localScale = grande;
+                break;
+            case "selected":
+                t.transform.localScale = highlights;
+                break;
+            default:
+                t.transform.localScale = piccolo;
+                break;
+        }
+         
+            return t;
+    }
+
+    //torna tutti i tipi di riserve diverse
+    
+   
+    public Parco LoadParcoByName(string name)
+    {
+
+        foreach (Parco p in parchiDatabase)
+        {
+            if (p.name == name) return p;
+        }
+
+        return null;
+
+    }
+
+    public Parco GetParcoByCoord(GameObject p)
+    {
+        
+        foreach(Parco r in parchiDatabase)
+        {
+            float[] coord = Convert_coordinates.remapLatLng(r.coord);
+            var value = new float[2];
+            coord2position.TryGetValue(p, out value);
+            //Debug.Log("val "+ string.Join(" ,", value));
+            //Debug.Log("coord " + string.Join(" ,", coord));
+
+            if (Enumerable.SequenceEqual(coord,value))
+            {
+                //Debug.Log("SELEZIONATA "+ r.name);
+                return r;
+            }
+           
+        }
+        return null;
+    }
+
+}

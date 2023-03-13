@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 using AirFishLab.ScrollingList.MovementCtrl;
 using UnityEngine.Events;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 
 namespace AirFishLab.ScrollingList
@@ -19,11 +20,12 @@ namespace AirFishLab.ScrollingList
         public string tagscroll;
         public string centeredBoxAfterScroll;
         LoadExcel loadexcel;
+        LoadExcelParchi loadexcelParco;
         #region Enums
 
-        
+
         //private GameObject info;
-       
+
         /// <summary>
         /// The state of the position of the list
         /// </summary>
@@ -231,6 +233,7 @@ namespace AirFishLab.ScrollingList
             float GetAligningDistance() => _deltaDistanceToCenter;
             PositionState GetPositionState() => _positionState;
             loadexcel = GameObject.FindObjectOfType<LoadExcel>();
+            loadexcelParco = GameObject.FindObjectOfType<LoadExcelParchi>();
             m_MyEvent.AddListener(() => CenteredBoxisChanged());
             //info = GameObject.FindGameObjectWithTag("Info");
             var overGoingThreshold = unitPos * 0.3f;
@@ -473,11 +476,22 @@ namespace AirFishLab.ScrollingList
                 }
                 if (tagscroll == "Info")
                 {
-                    var newInfoCenteredBoxAfterScroll = GetCenteredBox().GetComponentInChildren<Text>().text;
-                    Riserva _centerRiserva = loadexcel.LoadRiservaByName(newInfoCenteredBoxAfterScroll);
-                    loadexcel.aItem = _centerRiserva;
-                    loadexcel.ChangeStateTo(loadexcel.coord2position.FirstOrDefault(x => Enumerable.SequenceEqual(x.Value, Convert_coordinates.remapLatLng(loadexcel.aItem.coord))).Key, "selected");
+                    if(SceneManager.GetActiveScene().name == Loader.SceneName.RISERVE.ToString())
+                    {
+                        var newInfoCenteredBoxAfterScroll = GetCenteredBox().GetComponentInChildren<Text>().text;
+                        Riserva _centerRiserva = loadexcel.LoadRiservaByName(newInfoCenteredBoxAfterScroll);
+                        loadexcel.aItem = _centerRiserva;
+                        loadexcel.ChangeStateTo(loadexcel.coord2position.FirstOrDefault(x => Enumerable.SequenceEqual(x.Value, Convert_coordinates.remapLatLng(loadexcel.aItem.coord))).Key, "selected");
 
+                    }
+                    else
+                    {
+                        var newInfoCenteredBoxAfterScroll = GetCenteredBox().GetComponentInChildren<Text>().text;
+                        Parco _centerRiserva = loadexcelParco.LoadParcoByName(newInfoCenteredBoxAfterScroll);
+                        loadexcelParco.aItem = _centerRiserva;
+                        loadexcelParco.ChangeStateTo(loadexcelParco.coord2position.FirstOrDefault(x => Enumerable.SequenceEqual(x.Value, Convert_coordinates.remapLatLng(loadexcelParco.aItem.coord))).Key, "selected");
+
+                    }
                 }
             }
 

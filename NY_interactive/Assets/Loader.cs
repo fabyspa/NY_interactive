@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class Loader
 {
     public enum SceneName
@@ -10,11 +11,11 @@ public class Loader
     private static SceneName currentScene;
     private static bool isParkSceneLoaded;
     private static bool isRiservaSceneLoaded;
-
+    private static bool toggle;
     public static void SwitchScene()
     {
         // Salva lo stato degli oggetti della scena corrente
-        SaveSceneState();
+        SaveToggleState();
         // Carica la nuova scena
         if (currentScene == SceneName.PARCHI)
         {
@@ -43,14 +44,14 @@ public class Loader
             {
                 obj.SetActive(false);
             }
-                // Disabilita gli oggetti della scena Riserva
-                SceneManager.SetActiveScene(SceneManager.GetSceneByName(SceneName.PARCHI.ToString()));
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName(SceneName.PARCHI.ToString()));
             GameObject[] objectsInSceneActive = SceneManager.GetActiveScene().GetRootGameObjects();
             // Salva lo stato di ogni oggetto
             foreach (GameObject obj in objectsInSceneActive)
             {
                 obj.SetActive(true);
             }
+            GameObject.FindGameObjectWithTag("TOGGLE").GetComponent<Toggle>().isOn = toggle;
             //if (isRiservaSceneLoaded) SceneManager.UnloadSceneAsync(SceneName.RISERVE.ToString());
 
             isParkSceneLoaded = true;
@@ -72,6 +73,8 @@ public class Loader
             {
                 obj.SetActive(true);
             }
+            GameObject.FindGameObjectWithTag("TOGGLE").GetComponent<Toggle>().isOn = toggle;
+
             //if (isParkSceneLoaded) SceneManager.UnloadSceneAsync(SceneName.PARCHI.ToString());
             isRiservaSceneLoaded = true;
             isParkSceneLoaded = false;
@@ -111,5 +114,11 @@ public class Loader
             //    objectState.LoadState();
             //}
         }
+    }
+    private static bool SaveToggleState()
+    {
+        toggle= GameObject.FindGameObjectWithTag("TOGGLE").GetComponent<Toggle>().isOn;
+        Debug.Log("TOGGLE" + toggle);
+        return toggle;
     }
 }

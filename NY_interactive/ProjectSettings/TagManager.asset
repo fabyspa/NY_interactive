@@ -13,6 +13,7 @@ TagManager:
   - PARCHI
   - CANVARISERVE
   - CANVAPARCHI
+  - TOGGLE
   layers:
   - Default
   - TransparentFX

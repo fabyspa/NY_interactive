@@ -4,11 +4,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using AirFishLab.ScrollingList;
+using UnityEngine.SceneManagement;
 
 
 public class ButtonPoint : Button
 {
     LoadExcel loadexcel;
+    LoadExcelParchi loadexcelParchi;
     GameObject info;
     public int val=0;
 
@@ -70,7 +72,7 @@ public class ButtonPoint : Button
 
         base.OnPointerClick(eventData);
 
-        if (loadexcel != null)
+        if (loadexcel != null && SceneManager.GetActiveScene().name==Loader.SceneName.RISERVE.ToString() )
         {
             Vector3 localPosition = this.transform.localPosition;
             Riserva riserva = loadexcel.GetRiservaByCoord(this.gameObject);
@@ -115,7 +117,46 @@ public class ButtonPoint : Button
                 }
                }
             }
-       }
+        if (loadexcelParchi != null && SceneManager.GetActiveScene().name == Loader.SceneName.PARCHI.ToString())
+        {
+            Vector3 localPosition = this.transform.localPosition;
+            Parco parco = loadexcelParchi.GetParcoByCoord(this.gameObject);
+            if (parco.state == "active")
+            {
+                loadexcelParchi.ChangeStateTo(this.gameObject, "selected");
+                for (int i = 0; i < info.GetComponent<VariableGameObjectListBankParco>()._contents.Length; i++)
+                {
+                    if (info.GetComponent<VariableGameObjectListBankParco>()._contents[i].name == info.GetComponent<VariableGameObjectListBankParco>().GetCenterItem().name)
+                    {
+                        indice_i = i;
+                    }
+                    if (info.GetComponent<VariableGameObjectListBankParco>()._contents[i].name == parco.name)
+                    {
+                        indice_j = i;
+                    }
+                }
+
+
+                int diff = indice_i - indice_j;
+                int val = info.GetComponent<VariableGameObjectListBankParco>()._contents.Length;
+                if (Mathf.Abs(diff) > (val - 1) / 2) diff = Mathf.CeilToInt(-1 * Mathf.Sign(diff) * (val - Mathf.Abs(diff)));
+
+                if (diff > 0)
+                {
+                    Debug.Log("NUMERO DI PASSI sinistra" + diff + " per raggiungere" + parco.name + " da " + info.GetComponent<VariableGameObjectListBankParco>().GetCenterItem().name);
+                    info.GetComponent<CircularScrollingListRiserva>()._listPositionCtrl.SetUnitMove(3 * Mathf.Abs(diff));
+                    loadexcelParchi.aItem = parco;
+                }
+                else
+                {
+                    Debug.Log("NUMERO DI PASSI destra" + diff + " per raggiungere" + parco.name + "da " + info.GetComponent<VariableGameObjectListBankParco>().GetCenterItem().name);
+                    info.GetComponent<CircularScrollingListRiserva>()._listPositionCtrl.SetUnitMove(-3 * Mathf.Abs(diff));
+                    loadexcelParchi.aItem = parco;
+
+                }
+            }
+        }
+    }
 
     public override void OnPointerDown(PointerEventData eventData)
     {
@@ -230,8 +271,20 @@ public class ButtonPoint : Button
     protected override void Start()
     {
         base.Start();
-        loadexcel = FindObjectOfType<LoadExcel>();
-        info = loadexcel.info;
+        if (this.gameObject.scene.name == Loader.SceneName.RISERVE.ToString())
+        {
+            Debug.Log("rISERVE");
+
+            loadexcel = FindObjectOfType<LoadExcel>();
+            info = loadexcel.info;
+
+        }
+        if (this.gameObject.scene.name == Loader.SceneName.PARCHI.ToString())
+        {
+            Debug.Log("Parchi");
+            loadexcelParchi = FindObjectOfType<LoadExcelParchi>();
+            info = loadexcelParchi.info;
+        }
 
     }
 }
