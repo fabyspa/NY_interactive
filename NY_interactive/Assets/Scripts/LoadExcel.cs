@@ -20,6 +20,7 @@ public class LoadExcel : MonoBehaviour
     [SerializeField] public GameObject info;
     public List<string> type = new List<string>();
     [SerializeField] GameObject scrolling;
+    [SerializeField] public GameObject info;
     [SerializeField] VariableGameObjectListBankRiserva VariableGameObjectListBankRiserva;
     public bool loadedItems = false;
     public string actualType;
@@ -37,13 +38,9 @@ public class LoadExcel : MonoBehaviour
     public void Start()
     {
         LoadItemData();
-        if (this.gameObject.scene.name == Loader.SceneName.RISERVE.ToString())
-        {
-            scrolling.GetComponent<VariableStringListBankRiserva>().ChangeContents();
-            SortListByType();
-            info.GetComponent<VariableGameObjectListBankRiserva>().ChangeInfoContents("Tutte");
-        }
-       
+        scrolling.GetComponent<VariableStringListBankRiserva>().ChangeContents();
+        SortListByType();
+        info.GetComponent<VariableGameObjectListBankRiserva>().ChangeInfoContents("Tutte");
         // Debug.Log("ITEM "+aItem.coord);
     }
 
