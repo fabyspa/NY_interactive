@@ -495,7 +495,7 @@ namespace AirFishLab.ScrollingList
         void CenteredBoxisChanged()
         {
             
-            var info= GameObject.FindGameObjectWithTag("Info");
+            var info=loadexcel.info;
            // var firstFilter = GameObject.FindGameObjectsWithTag("FirstFilter");
 
             #nullable enable
