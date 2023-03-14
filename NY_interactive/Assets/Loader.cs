@@ -60,7 +60,7 @@ public class Loader
             isParkSceneLoaded = true;
             isRiservaSceneLoaded = false;
         }
-        else if(currentScene==SceneName.RISERVE && SceneManager.GetSceneByName(SceneName.RISERVE.ToString()).isLoaded)
+        else if (currentScene == SceneName.RISERVE && SceneManager.GetSceneByName(SceneName.RISERVE.ToString()).isLoaded)
         {
             GameObject[] objectsInScene = SceneManager.GetSceneByName(SceneName.PARCHI.ToString()).GetRootGameObjects();
             // Salva lo stato di ogni oggetto
@@ -121,13 +121,21 @@ public class Loader
     }
     private static bool SaveToggleState()
     {
-        toggle= GameObject.FindGameObjectWithTag("TOGGLE").GetComponent<Toggle>().isOn;
+        toggle = GameObject.FindGameObjectWithTag("TOGGLE").GetComponent<Toggle>().isOn;
         return toggle;
     }
 
     private static void ResetScroll(SceneName scene)
     {
-        if (scene == SceneName.RISERVE) GameObject.FindGameObjectWithTag("Info").GetComponent<VariableGameObjectListBankRiserva>().ChangeInfoContents("Tutte");
-        if (scene == SceneName.PARCHI) GameObject.FindGameObjectWithTag("Info").GetComponent<VariableGameObjectListBankParco>().ChangeInfoContents();
+        if (scene == SceneName.RISERVE)
+        {
+            LoadExcel loadExcel = GameObject.FindObjectOfType<LoadExcel>();
+            loadExcel.ResetScroll();
+        }
+        if (scene == SceneName.PARCHI)
+        {
+            LoadExcelParchi loadExcel = GameObject.FindObjectOfType<LoadExcelParchi>();
+            loadExcel.ResetScroll();
+        }
     }
 }

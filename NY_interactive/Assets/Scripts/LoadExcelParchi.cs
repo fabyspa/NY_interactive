@@ -31,8 +31,15 @@ public class LoadExcelParchi : MonoBehaviour
         // Debug.Log("ITEM "+aItem.coord);
     }
 
-    
 
+    public void ResetScroll()
+    {
+        var i = FindObjectOfType<CircularScrollingListRiserva>();
+        i._isInitialized = false;
+        i.Initialize();
+        info.GetComponent<VariableGameObjectListBankParco>().ChangeInfoContents();
+
+    }
     public void LoadItemData()
     {
 

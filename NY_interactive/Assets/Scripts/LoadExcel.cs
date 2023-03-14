@@ -40,8 +40,20 @@ public class LoadExcel : MonoBehaviour
         // Debug.Log("ITEM "+aItem.coord);
     }
 
-    
 
+    public void ResetScroll()
+    {
+        foreach (var i in GameObject.FindObjectsOfType<CircularScrollingListRiserva>())
+        {
+           if (i.gameObject.tag== "Type")
+            {
+                i._isInitialized = false;
+                i.Initialize();
+                info.GetComponent<VariableGameObjectListBankRiserva>().ChangeInfoContents("Tutte");
+
+            }
+        }
+    }
     public void LoadItemData()
     {
 

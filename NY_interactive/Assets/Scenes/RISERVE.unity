@@ -1156,8 +1156,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yourButton: {fileID: 512323196}
   canvas: {fileID: 0}
-  ris: 0
-  par: 0
 --- !u!1 &627957886
 GameObject:
   m_ObjectHideFlags: 0
@@ -2962,6 +2960,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 1
+  _isInitialized: 0
 --- !u!114 &1371252905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3969,8 +3968,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yourButton: {fileID: 1852646929}
   canvas: {fileID: 0}
-  ris: 0
-  par: 0
 --- !u!1 &2018903373
 GameObject:
   m_ObjectHideFlags: 0
@@ -6156,6 +6153,7 @@ MonoBehaviour:
     _onMovementEnd:
       m_PersistentCalls:
         m_Calls: []
+  _isInitialized: 0
 --- !u!224 &7801748841792539592
 RectTransform:
   m_ObjectHideFlags: 0
