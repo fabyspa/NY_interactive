@@ -273,7 +273,6 @@ public class ButtonPoint : Button
         base.Start();
         if (this.gameObject.scene.name == Loader.SceneName.RISERVE.ToString())
         {
-            Debug.Log("rISERVE");
 
             loadexcel = FindObjectOfType<LoadExcel>();
             info = loadexcel.info;
@@ -281,7 +280,6 @@ public class ButtonPoint : Button
         }
         if (this.gameObject.scene.name == Loader.SceneName.PARCHI.ToString())
         {
-            Debug.Log("Parchi");
             loadexcelParchi = FindObjectOfType<LoadExcelParchi>();
             info = loadexcelParchi.info;
         }

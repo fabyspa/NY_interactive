@@ -122,7 +122,6 @@ public class LoadExcelParchi : MonoBehaviour
     //aggiunge lo stato alla variabile state
     public void AddState()
     {
-        Debug.Log("addstate");
 
         foreach (Parco r in parchiDatabase)
         {
@@ -158,7 +157,6 @@ public class LoadExcelParchi : MonoBehaviour
     //gestisco scala punti
     public GameObject TransformPoint(string state)
     {
-        Debug.Log("transform");
         GameObject t = point;
         Vector3 piccolo = new Vector3((float)0.4, (float)0.4, 0);
         Vector3 grande = new Vector3((float)0.8, (float)0.8, 0);

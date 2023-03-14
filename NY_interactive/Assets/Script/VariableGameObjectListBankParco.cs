@@ -39,7 +39,6 @@ namespace AirFishLab.ScrollingList
 
         public void ChangeInfoContents()
         {
-            Debug.Log("CHANGE INFO CONTENTS");
             loadexcel = GameObject.FindObjectOfType<LoadExcelParchi>();
             _contentsList.Clear();
            
