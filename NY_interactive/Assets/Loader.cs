@@ -10,7 +10,7 @@ public class Loader
         PARCHI,
         RISERVE
     }
-    private static SceneName currentScene;
+    public static SceneName currentScene;
     private static bool isParkSceneLoaded;
     private static bool isRiservaSceneLoaded;
     private static bool toggle;
@@ -39,7 +39,6 @@ public class Loader
     {
         if (currentScene == SceneName.PARCHI && SceneManager.GetSceneByName(SceneName.PARCHI.ToString()).isLoaded)
         {
-            Debug.Log("ATTIVO PARCHI");
             GameObject[] objectsInScene = SceneManager.GetSceneByName(SceneName.RISERVE.ToString()).GetRootGameObjects();
             // Salva lo stato di ogni oggetto
             Debug.Log(SceneManager.GetActiveScene().name);
@@ -123,7 +122,6 @@ public class Loader
     private static bool SaveToggleState()
     {
         toggle= GameObject.FindGameObjectWithTag("TOGGLE").GetComponent<Toggle>().isOn;
-        Debug.Log("TOGGLE" + toggle);
         return toggle;
     }
 
