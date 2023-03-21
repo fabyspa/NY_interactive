@@ -107,7 +107,7 @@ namespace AirFishLab.ScrollingList
         /// <summary>
         /// The controller for handling the input action and returning the moving distance
         /// </summary>
-        private IMovementCtrl _movementCtrl;
+        public IMovementCtrl _movementCtrl;
         /// <summary>
         /// The local position of the pointer in the last handler call
         /// </summary>
@@ -335,6 +335,8 @@ namespace AirFishLab.ScrollingList
                 + _deltaDistanceToCenter);
             _toRunLateUpdate = true;
             _isEndingMovement = true;
+
+            Debug.Log("unitPos: " + unitPos + "_selectionDistanceFactor: " + _selectionDistanceFactor + "_deltaDistToCent" + _deltaDistanceToCenter);
         }
 
         #endregion

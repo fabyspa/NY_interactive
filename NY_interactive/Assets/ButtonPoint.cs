@@ -89,33 +89,60 @@ public class ButtonPoint : Button
                     {
                         indice_j = i;
                     }
-                  }
+                }
                
 
-                int diff= indice_i - indice_j ;
+               // int diff= indice_j - indice_i ;
                 int val = info.GetComponent<VariableGameObjectListBankRiserva>()._contents.Length;
-                if (Mathf.Abs(diff) > (val -1 ) / 2) diff = Mathf.CeilToInt(-1* Mathf.Sign(diff)*(val - Mathf.Abs(diff)));
-
-                if (diff>0)
-                {
-                    /*PROVVISORIO- per quache strano motivo quando si è su tutte non fsa il numero di salti giusti quando si è a metà*/
-                  // if (loadexcel.riservaDatabase.Count==loadexcel.riservaDatabaseType.Count && diff == (val-1)/2) diff++;
-
+                ListPositionCtrl lpc = info.GetComponent<CircularScrollingListRiserva>()._listPositionCtrl;
+                if (indice_j > indice_i) {
+                    int diff = indice_j - indice_i;
+                    Debug.Log(diff);
+                    lpc.SetSelectionMovement(diff);
                     Debug.Log("NUMERO DI PASSI sinistra" + diff +" per raggiungere" + riserva.name +" da "+ info.GetComponent<VariableGameObjectListBankRiserva>().GetCenterItem().name);
-                    info.GetComponent<CircularScrollingListRiserva>()._listPositionCtrl.SetUnitMove(3 * Mathf.Abs(diff));
-                    loadexcel.aItem = riserva;
+                    //loadexcel.aItem = riserva;
                 }
                 else
                 {
-                    /*PROVVISORIO*/
-                   //if (loadexcel.riservaDatabase.Count == loadexcel.riservaDatabaseType.Count  &&  diff == - (val - 1) / 2) diff--;
+                    int diff = indice_i - indice_j;
+                    Debug.Log(diff);
 
-                    Debug.Log("NUMERO DI PASSI destra" + diff + " per raggiungere" + riserva.name + "da " + info.GetComponent<VariableGameObjectListBankRiserva>().GetCenterItem().name);
-                    info.GetComponent<CircularScrollingListRiserva>()._listPositionCtrl.SetUnitMove(-3 * Mathf.Abs(diff));
-                    loadexcel.aItem = riserva;
+                    lpc.SetSelectionMovement(-diff);
+                    Debug.Log("NUMERO DI PASSI sinistra" + diff + " per raggiungere" + riserva.name + " da " + info.GetComponent<VariableGameObjectListBankRiserva>().GetCenterItem().name);
 
                 }
-               }
+
+                //lpc.SetUnitMove(diff);
+                // if (Mathf.Abs(diff) > (val ) / 2) diff = Mathf.CeilToInt(-1* Mathf.Sign(diff)*(val - Mathf.Abs(diff)));
+
+                // if (diff>0)
+                // {
+                //     //lpc.SetSelectionMovement(diff);
+
+                //     /*PROVVISORIO- per quache strano motivo quando si è su tutte non fsa il numero di salti giusti quando si è a metà*/
+                //     //if( diff == val/2) diff++;
+
+                //     Debug.Log("NUMERO DI PASSI sinistra" + diff +" per raggiungere" + riserva.name +" da "+ info.GetComponent<VariableGameObjectListBankRiserva>().GetCenterItem().name);
+
+                //     //info.GetComponent<CircularScrollingListRiserva>()._listPositionCtrl.SetSelectionMovement(diff);
+                //     loadexcel.aItem = riserva;
+                // }
+                // else
+                // {
+                //     /*PROVVISORIO*/
+                //     //if(  diff == - val / 2) diff--;
+                //     //pc.SetSelectionMovement(3);
+
+                //     Debug.Log("NUMERO DI PASSI destra" + diff + " per raggiungere" + riserva.name + "da " + info.GetComponent<VariableGameObjectListBankRiserva>().GetCenterItem().name);
+                //     //ListPositionCtrl lpc = info.GetComponent<CircularScrollingListRiserva>()._listPositionCtrl;
+                //     //lpc.SetSelectionMovement(indice_j);
+                //     //lpc.SetUnitMove( diff);
+                //     //info.GetComponent<CircularScrollingListRiserva>()._listPositionCtrl.SetSelectionMovement(diff);
+
+                //     loadexcel.aItem = riserva;
+
+                // }
+            }
             }
         if (loadexcelParchi != null && SceneManager.GetActiveScene().name == Loader.SceneName.PARCHI.ToString())
         {
