@@ -46,25 +46,27 @@ public class LoadExcelParchi : MonoBehaviour
         //clear database
         parchiDatabase.Clear();
         //READ CSV FILE
-        List<Dictionary<string, object>> data = CSVReader.Read("Parchi");
+        List<Dictionary<string, object>> data = CSVReader.Read("Parchi_DEF");
         for (var i = 0; i < data.Count; i++)
         {
             string name = data[i]["Name_ITA"].ToString();
             string coord = data[i]["Coord"].ToString();
             string descr = data[i]["Descr_ITA"].ToString();
-            string descr_eng = data[i]["Descr_ENG"].ToString();
+            string anno = data[i]["Anno"].ToString();
+            string sup = data[i]["Sup"].ToString();
+            string region = data[i]["Regione"].ToString();
             string name_eng = data[i]["Name_ENG"].ToString();
+
+            string descr_eng = data[i]["Descr_ENG"].ToString();
             if (name_eng == "")
             {
                 name_eng = name;
             }
-            string luogo = data[i]["Luogo"].ToString();
-            string anno = data[i]["Anno"].ToString();
-            string sup = data[i]["Sup"].ToString();
-            string region = data[i]["Regione"].ToString();
+            //string luogo = data[i]["Luogo"].ToString();
+            
             //Sprite sprite = UpdateImage((data[i]["Name_ITA"]).ToString());
            //Sprite sprite = null;
-            AddParco(name, coord, descr,region,sup,anno,luogo,name_eng,descr_eng);
+            AddParco(name, coord, descr,region,sup,anno,name_eng,descr_eng);
 
         }
         loadedItems = true;
@@ -78,10 +80,10 @@ public class LoadExcelParchi : MonoBehaviour
         LoadItemData();
     }
 
-    void AddParco(string name, string coord,  string descr, string region, string sup, string anno, string luogo, string name_eng, string descr_eng)
+    void AddParco(string name, string coord,  string descr, string region, string sup, string anno, string name_eng, string descr_eng)
     {
         Parco tempItem = new Parco(blankParco);
-
+        Debug.Log("ADDITREM");
         tempItem.coord = coord;
         tempItem.name = name;
         tempItem.descr = descr;
@@ -89,7 +91,6 @@ public class LoadExcelParchi : MonoBehaviour
         tempItem.region = region;
         tempItem.sup = sup;
         tempItem.anno = anno;
-        tempItem.luogo = luogo;
         tempItem.name_eng = name_eng;
         tempItem.descr_eng = descr_eng;
         parchiDatabase.Add(tempItem);

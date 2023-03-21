@@ -1196,8 +1196,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yourButton: {fileID: 512323196}
   canvas: {fileID: 0}
-  ris: 0
-  par: 0
 --- !u!1 &516359037
 GameObject:
   m_ObjectHideFlags: 0
@@ -1531,7 +1529,9 @@ PrefabInstance:
       value: InfoAgg
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5751353493377013838, guid: a768d17576a818343be2bbdf2b90f41b, type: 3}
+    - {fileID: 5751353493075133231, guid: a768d17576a818343be2bbdf2b90f41b, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a768d17576a818343be2bbdf2b90f41b, type: 3}
@@ -1757,7 +1757,6 @@ MonoBehaviour:
     sup: 
     region: 
     anno: 
-    luogo: 
   parchiDatabase: []
   info: {fileID: 1371252899}
   loadedItems: 0
@@ -1774,7 +1773,6 @@ MonoBehaviour:
     sup: 
     region: 
     anno: 
-    luogo: 
   point: {fileID: 1389103744079038784, guid: 0de64a7c5011c6b41877dab8496f5e0e, type: 3}
 --- !u!1 &879902382
 GameObject:
@@ -2906,6 +2904,7 @@ MonoBehaviour:
     _onMovementEnd:
       m_PersistentCalls:
         m_Calls: []
+  _isInitialized: 0
 --- !u!331 &1371252906
 SpriteMask:
   m_ObjectHideFlags: 0
@@ -2979,7 +2978,6 @@ MonoBehaviour:
     sup: 
     region: 
     anno: 
-    luogo: 
   - name: 
     coord: 
     descr: 
@@ -2989,7 +2987,6 @@ MonoBehaviour:
     sup: 
     region: 
     anno: 
-    luogo: 
   - name: 
     coord: 
     descr: 
@@ -2999,7 +2996,6 @@ MonoBehaviour:
     sup: 
     region: 
     anno: 
-    luogo: 
   _circularList: {fileID: 1371252904}
 --- !u!1 &1443876799
 GameObject:
@@ -3134,7 +3130,9 @@ PrefabInstance:
       value: InfoAgg
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5751353493377013838, guid: a768d17576a818343be2bbdf2b90f41b, type: 3}
+    - {fileID: 5751353493075133231, guid: a768d17576a818343be2bbdf2b90f41b, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a768d17576a818343be2bbdf2b90f41b, type: 3}
@@ -3245,7 +3243,9 @@ PrefabInstance:
       value: InfoAgg
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5751353493377013838, guid: a768d17576a818343be2bbdf2b90f41b, type: 3}
+    - {fileID: 5751353493075133231, guid: a768d17576a818343be2bbdf2b90f41b, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a768d17576a818343be2bbdf2b90f41b, type: 3}
@@ -3462,8 +3462,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yourButton: {fileID: 1852646929}
   canvas: {fileID: 0}
-  ris: 0
-  par: 0
 --- !u!1 &2044968079
 GameObject:
   m_ObjectHideFlags: 0
@@ -4670,8 +4668,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67a3e68457993f341afed543da8f1694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tag1: 
-  tag2: 
+  tag1: ITA
+  tag2: ENG
 --- !u!224 &7801748841792539592
 RectTransform:
   m_ObjectHideFlags: 0

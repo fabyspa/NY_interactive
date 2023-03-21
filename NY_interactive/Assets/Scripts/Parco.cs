@@ -16,7 +16,6 @@ public class Parco
     public string sup;
     public string region;
     public string anno;
-    public string luogo;
     // Update is called once per frame
     public Parco( Parco r)
     {
@@ -29,7 +28,6 @@ public class Parco
         descr_eng = r.descr_eng;
         sup = r.sup;
         anno = r.anno;
-        luogo = r.luogo;
         region = r.region;
 
     }

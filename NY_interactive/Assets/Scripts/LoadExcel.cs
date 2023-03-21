@@ -62,7 +62,7 @@ public class LoadExcel : MonoBehaviour
         riservaDatabaseType.Clear();
         type.Clear();
         //READ CSV FILE
-        List<Dictionary<string, object>> data = CSVReader.Read("Riserve_TraduzioneENG");
+        List<Dictionary<string, object>> data = CSVReader.Read("RISERVE01");
         for (var i = 0; i < data.Count; i++)
         {
             string type = data[i]["Type"].ToString();
@@ -80,9 +80,7 @@ public class LoadExcel : MonoBehaviour
             string sup = data[i]["Sup"].ToString();
             string region = data[i]["Regione"].ToString();
             string type_eng = data[i]["Type_ENG"].ToString();
-            //Sprite sprite = UpdateImage((data[i]["Name_ITA"]).ToString());
-           //Sprite sprite = null;
-            AddRiserva(type, name, coord, descr,region,sup,anno,luogo,name_eng,descr_eng, type_eng);
+            AddRiserva(type, name, coord, descr,region,sup,anno,luogo,name_eng,descr_eng,type_eng);
 
         }
         loadedItems = true;
@@ -237,7 +235,7 @@ public class LoadExcel : MonoBehaviour
                 type.Add(r.type);
             }
 
-            if (r.type_eng != "")
+            if (r.type_eng != "" && !ita2engType.ContainsKey(r.type_eng))
             {
                 ita2engType.Add(r.type_eng, r.type);
             }
