@@ -336,7 +336,7 @@ namespace AirFishLab.ScrollingList
             _toRunLateUpdate = true;
             _isEndingMovement = true;
 
-            Debug.Log("unitPos: " + unitPos + "_selectionDistanceFactor: " + _selectionDistanceFactor + "_deltaDistToCent" + _deltaDistanceToCenter);
+            //Debug.Log("unitPos: " + unitPos + "_selectionDistanceFactor: " + _selectionDistanceFactor + "_deltaDistToCent" + _deltaDistanceToCenter);
         }
 
         #endregion

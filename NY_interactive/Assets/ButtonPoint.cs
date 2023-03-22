@@ -78,23 +78,27 @@ public class ButtonPoint : Button
             Riserva riserva = loadexcel.GetRiservaByCoord(this.gameObject);
             if (riserva.state == "active")
             {
-                loadexcel.ChangeStateTo(this.gameObject, "selected");
+                
                 for (int  i = 0; i < info.GetComponent<VariableGameObjectListBankRiserva>()._contents.Length; i++)
                 {
                     if (info.GetComponent<VariableGameObjectListBankRiserva>()._contents[i].name == info.GetComponent<VariableGameObjectListBankRiserva>().GetCenterItem().name)
                     {
+                        //indice dell'oggetto centrale
                         indice_i = i;
                     }
                     if (info.GetComponent<VariableGameObjectListBankRiserva>()._contents[i].name == riserva.name)
                     {
+                        //indice dell'oggetto target
                         indice_j = i;
                     }
                 }
                
 
-               // int diff= indice_j - indice_i ;
+               // int diff= indice_j - indice_i;
                 int val = info.GetComponent<VariableGameObjectListBankRiserva>()._contents.Length;
                 ListPositionCtrl lpc = info.GetComponent<CircularScrollingListRiserva>()._listPositionCtrl;
+
+                //delta indice
                 if (indice_j > indice_i) {
                     int diff = indice_j - indice_i;
                     Debug.Log(diff);
@@ -106,12 +110,11 @@ public class ButtonPoint : Button
                 {
                     int diff = indice_i - indice_j;
                     Debug.Log(diff);
-
                     lpc.SetSelectionMovement(-diff);
                     Debug.Log("NUMERO DI PASSI sinistra" + diff + " per raggiungere" + riserva.name + " da " + info.GetComponent<VariableGameObjectListBankRiserva>().GetCenterItem().name);
 
                 }
-
+                loadexcel.ChangeStateTo(this.gameObject, "selected");
                 //lpc.SetUnitMove(diff);
                 // if (Mathf.Abs(diff) > (val ) / 2) diff = Mathf.CeilToInt(-1* Mathf.Sign(diff)*(val - Mathf.Abs(diff)));
 
