@@ -74,7 +74,7 @@ public class ButtonPoint : Button
 
         if (loadexcel != null && SceneManager.GetActiveScene().name==Loader.SceneName.RISERVE.ToString() )
         {
-            Vector3 localPosition = this.transform.localPosition;
+            //Vector3 localPosition = this.transform.localPosition;
             Riserva riserva = loadexcel.GetRiservaByCoord(this.gameObject);
             if (riserva.state == "active")
             {
@@ -83,38 +83,41 @@ public class ButtonPoint : Button
                 {
                     if (info.GetComponent<VariableGameObjectListBankRiserva>()._contents[i].name == info.GetComponent<VariableGameObjectListBankRiserva>().GetCenterItem().name)
                     {
+                        Debug.Log(info.GetComponent<VariableGameObjectListBankRiserva>().GetCenterItem().name);
                         //indice dell'oggetto centrale
                         indice_i = i;
+                        Debug.Log("center item" + indice_i);
                     }
                     if (info.GetComponent<VariableGameObjectListBankRiserva>()._contents[i].name == riserva.name)
                     {
                         //indice dell'oggetto target
                         indice_j = i;
+                        Debug.Log("target item" + riserva.name+"il cui indice è " + indice_j);
                     }
                 }
-               
+                CircularScrollingListRiserva circular = info.GetComponent<CircularScrollingListRiserva>();
 
-               // int diff= indice_j - indice_i;
-                int val = info.GetComponent<VariableGameObjectListBankRiserva>()._contents.Length;
-                ListPositionCtrl lpc = info.GetComponent<CircularScrollingListRiserva>()._listPositionCtrl;
+                circular.SelectContentID(indice_j);
 
-                //delta indice
-                if (indice_j > indice_i) {
-                    int diff = indice_j - indice_i;
-                    Debug.Log(diff);
-                    lpc.SetSelectionMovement(diff);
-                    Debug.Log("NUMERO DI PASSI sinistra" + diff +" per raggiungere" + riserva.name +" da "+ info.GetComponent<VariableGameObjectListBankRiserva>().GetCenterItem().name);
-                    //loadexcel.aItem = riserva;
-                }
-                else
-                {
-                    int diff = indice_i - indice_j;
-                    Debug.Log(diff);
-                    lpc.SetSelectionMovement(-diff);
-                    Debug.Log("NUMERO DI PASSI sinistra" + diff + " per raggiungere" + riserva.name + " da " + info.GetComponent<VariableGameObjectListBankRiserva>().GetCenterItem().name);
+                // int diff= indice_j - indice_i;
+                //int val = info.GetComponent<VariableGameObjectListBankRiserva>()._contents.Length;
 
-                }
+                ////delta indice
+                //if (indice_j > indice_i) {
+                //    int diff = indice_j - indice_i;
+                //    Debug.Log("differenza verso destra " + diff);
+                //    Debug.Log("NUMERO DI PASSI destra" + diff +" per raggiungere" + riserva.name +" da "+ info.GetComponent<VariableGameObjectListBankRiserva>().GetCenterItem().name);
+                //    //loadexcel.aItem = riserva;
+                //}
+                //else
+                //{
+                //    int diff = indice_i - indice_j;
+                //    lpc.SetSelectionMovement(diff);
+                //    Debug.Log("NUMERO DI PASSI sinistra" + diff + " per raggiungere" + riserva.name + " da " + info.GetComponent<VariableGameObjectListBankRiserva>().GetCenterItem().name);
+
+                //}
                 loadexcel.ChangeStateTo(this.gameObject, "selected");
+                loadexcel.aItem = riserva;
                 //lpc.SetUnitMove(diff);
                 // if (Mathf.Abs(diff) > (val ) / 2) diff = Mathf.CeilToInt(-1* Mathf.Sign(diff)*(val - Mathf.Abs(diff)));
 
@@ -146,7 +149,7 @@ public class ButtonPoint : Button
 
                 // }
             }
-            }
+        }
         if (loadexcelParchi != null && SceneManager.GetActiveScene().name == Loader.SceneName.PARCHI.ToString())
         {
             Vector3 localPosition = this.transform.localPosition;
