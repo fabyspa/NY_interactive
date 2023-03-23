@@ -135,7 +135,7 @@ public class LoadExcel : MonoBehaviour
             Vector3 worldSpacePosition = new Vector3(coord[1], coord[0], 0);
             Vector3 localSpacePosition = transform.InverseTransformPoint(worldSpacePosition);
             GameObject Tpoint = TransformPoint(c.state);
-
+            Tpoint.gameObject.GetComponent<Image>().color = ColorPoint(c.type);
             var instanciated = Instantiate(Tpoint, localSpacePosition, Quaternion.identity, parent);
             pointList.Add(instanciated);
             //Debug.Log(instanciated.transform.localPosition);
@@ -185,8 +185,8 @@ public class LoadExcel : MonoBehaviour
 
     public void ChangeStateTo(GameObject g, string newstate)
     {
-        Vector3 highlights = new Vector3((float)1.5, (float)1.5, 0);
-        Vector3 grande = new Vector3((float)0.8, (float)0.8, 0);
+        Vector3 highlights = new Vector3((float)0.8, (float)0.8, 0);
+        Vector3 grande = new Vector3((float)0.5, (float)0.5, 0);
 
 
         Riserva r = GetRiservaByCoord(g);
@@ -194,10 +194,14 @@ public class LoadExcel : MonoBehaviour
         {
             Riserva oldR = GetRiservaByCoord(_oldGameObjecct);
             oldR.state = "active";
-            _oldGameObjecct.transform.localScale = grande;
+            _oldGameObjecct.transform.localScale = TransformPoint(oldR.state).transform.localScale;
+            _oldGameObjecct.gameObject.GetComponent<Image>().color = ColorPoint(oldR.type);
+            //_oldGameObjecct.transform.localScale = grande;
         }
         r.state = newstate;
-        g.transform.localScale = highlights;
+        g.transform.localScale = TransformPoint(r.state).transform.localScale;
+        g.gameObject.GetComponent<Image>().color = ColorPoint(r.type);
+        //g.transform.localScale = highlights;
         _oldGameObjecct = g;
 
     }
@@ -205,9 +209,9 @@ public class LoadExcel : MonoBehaviour
     public GameObject TransformPoint(string state)
     {
         GameObject t = point;
-        Vector3 piccolo = new Vector3((float)0.4, (float)0.4, 0);
-        Vector3 grande = new Vector3((float)0.8, (float)0.8, 0);
-        Vector3 highlights = new Vector3((float)1.5, (float)1.5, 0);
+        Vector3 piccolo = new Vector3((float)0.15, (float)0.15, 0);
+        Vector3 grande = new Vector3((float)0.5, (float)0.5, 0);
+        Vector3 highlights = new Vector3((float)0.8, (float)0.8, 0);
         switch (state)
         {
             case "active":
@@ -220,9 +224,44 @@ public class LoadExcel : MonoBehaviour
                 t.transform.localScale = piccolo;
                 break;
         }
-         
+
             return t;
     }
+
+    public Color ColorPoint(string type)
+    {
+        Color c = Color.red;
+
+        switch (type)
+        {
+            case "Riserva Naturale Orientata":
+                ColorUtility.TryParseHtmlString("#446658", out c);
+                break;
+            case "Riserva Naturale Statale":
+                ColorUtility.TryParseHtmlString("#78967E", out c);
+                break;
+            case "Riserva Naturale Integrale":
+                ColorUtility.TryParseHtmlString("#486C64", out c);
+                break;
+            case "Riserva Naturale Di Popolamento Animale":
+                ColorUtility.TryParseHtmlString("#5A705F", out c);
+                break;
+            case "Riserva Naturale Biogenetica":
+                ColorUtility.TryParseHtmlString("#325C5A", out c);
+                break;
+            case "Riserva Naturale Statale Orientata":
+                ColorUtility.TryParseHtmlString("#446658", out c);
+                break;
+            case "Foresta Demaniale o altra area gestita":
+                ColorUtility.TryParseHtmlString("#2A4754", out c);
+                break;
+            default:
+                break;
+        }
+        c.a = 0.8f;
+        return c;
+    }
+
 
     //torna tutti i tipi di riserve diverse
     public void GetRiservaTypes()
