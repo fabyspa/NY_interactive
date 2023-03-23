@@ -80,7 +80,8 @@ public class LoadExcel : MonoBehaviour
             string sup = data[i]["Sup"].ToString();
             string region = data[i]["Regione"].ToString();
             string type_eng = data[i]["Type_ENG"].ToString();
-            AddRiserva(type, name, coord, descr,region,sup,anno,luogo,name_eng,descr_eng,type_eng);
+            string repC = data[i]["RepC"].ToString();
+            AddRiserva(type, name, coord, descr,region,sup,anno,luogo,name_eng,descr_eng,type_eng,repC);
 
         }
         loadedItems = true;
@@ -105,7 +106,7 @@ public class LoadExcel : MonoBehaviour
         LoadItemData();
     }
 
-    void AddRiserva(string type, string name, string coord,  string descr, string region, string sup, string anno, string luogo, string name_eng, string descr_eng, string type_eng)
+    void AddRiserva(string type, string name, string coord,  string descr, string region, string sup, string anno, string luogo, string name_eng, string descr_eng, string type_eng,string repC)
     {
         Riserva tempItem = new Riserva(blankRiserva);
 
@@ -121,6 +122,7 @@ public class LoadExcel : MonoBehaviour
         tempItem.name_eng = name_eng;
         tempItem.descr_eng = descr_eng;
         tempItem.type_eng = type_eng;
+        tempItem.repC = repC;
         riservaDatabase.Add(tempItem);
     }
 

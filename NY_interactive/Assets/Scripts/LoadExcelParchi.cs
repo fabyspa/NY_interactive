@@ -56,7 +56,6 @@ public class LoadExcelParchi : MonoBehaviour
             string sup = data[i]["Sup"].ToString();
             string region = data[i]["Regione"].ToString();
             string name_eng = data[i]["Name_ENG"].ToString();
-
             string descr_eng = data[i]["Descr_ENG"].ToString();
             if (name_eng == "")
             {

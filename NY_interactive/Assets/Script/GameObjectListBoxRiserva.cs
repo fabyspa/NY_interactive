@@ -26,7 +26,7 @@ namespace AirFishLab.ScrollingList.Demo
             infos.transform.GetChild(1).GetComponentInChildren<Text>().text = dataWrapper.data.luogo;
             infos.transform.GetChild(2).GetComponentInChildren<Text>().text = dataWrapper.data.anno;
             infos.transform.GetChild(3).GetComponentInChildren<Text>().text = dataWrapper.data.sup;
-            infos.transform.GetChild(4).GetComponentInChildren<Text>().text = "reparto di competena da aggiungere";
+            infos.transform.GetChild(4).GetComponentInChildren<Text>().text = dataWrapper.data.repC;
 
 
 

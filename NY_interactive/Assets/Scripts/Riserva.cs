@@ -19,6 +19,7 @@ public class Riserva
     public string region;
     public string anno;
     public string luogo;
+    public string repC;
     // Update is called once per frame
     public Riserva( Riserva r)
     {
@@ -35,6 +36,6 @@ public class Riserva
         anno = r.anno;
         luogo = r.luogo;
         region = r.region;
-
+        repC = r.repC;
     }
 }
