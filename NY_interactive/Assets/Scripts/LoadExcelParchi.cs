@@ -83,7 +83,6 @@ public class LoadExcelParchi : MonoBehaviour
     void AddParco(string name, string coord,  string descr, string region, string sup, string anno, string name_eng, string descr_eng)
     {
         Parco tempItem = new Parco(blankParco);
-        Debug.Log("ADDITREM");
         tempItem.coord = coord;
         tempItem.name = name;
         tempItem.descr = descr;

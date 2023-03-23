@@ -81,13 +81,13 @@ public class ButtonPoint : Button
                 
                 for (int  i = 0; i < info.GetComponent<VariableGameObjectListBankRiserva>()._contents.Length; i++)
                 {
-                    if (info.GetComponent<VariableGameObjectListBankRiserva>()._contents[i].name == info.GetComponent<VariableGameObjectListBankRiserva>().GetCenterItem().name)
-                    {
-                        Debug.Log(info.GetComponent<VariableGameObjectListBankRiserva>().GetCenterItem().name);
-                        //indice dell'oggetto centrale
-                        indice_i = i;
-                        Debug.Log("center item" + indice_i);
-                    }
+                    //if (info.GetComponent<VariableGameObjectListBankRiserva>()._contents[i].name == info.GetComponent<VariableGameObjectListBankRiserva>().GetCenterItem().name)
+                    //{
+                    //    Debug.Log(info.GetComponent<VariableGameObjectListBankRiserva>().GetCenterItem().name);
+                    //    //indice dell'oggetto centrale
+                    //    indice_i = i;
+                    //    Debug.Log("center item" + indice_i);
+                    //}
                     if (info.GetComponent<VariableGameObjectListBankRiserva>()._contents[i].name == riserva.name)
                     {
                         //indice dell'oggetto target
@@ -98,7 +98,8 @@ public class ButtonPoint : Button
                 CircularScrollingListRiserva circular = info.GetComponent<CircularScrollingListRiserva>();
 
                 circular.SelectContentID(indice_j);
-
+                loadexcel.ChangeStateTo(this.gameObject, "selected");
+                loadexcel.aItem = riserva;
                 // int diff= indice_j - indice_i;
                 //int val = info.GetComponent<VariableGameObjectListBankRiserva>()._contents.Length;
 
@@ -116,8 +117,7 @@ public class ButtonPoint : Button
                 //    Debug.Log("NUMERO DI PASSI sinistra" + diff + " per raggiungere" + riserva.name + " da " + info.GetComponent<VariableGameObjectListBankRiserva>().GetCenterItem().name);
 
                 //}
-                loadexcel.ChangeStateTo(this.gameObject, "selected");
-                loadexcel.aItem = riserva;
+
                 //lpc.SetUnitMove(diff);
                 // if (Mathf.Abs(diff) > (val ) / 2) diff = Mathf.CeilToInt(-1* Mathf.Sign(diff)*(val - Mathf.Abs(diff)));
 
@@ -159,34 +159,40 @@ public class ButtonPoint : Button
                 loadexcelParchi.ChangeStateTo(this.gameObject, "selected");
                 for (int i = 0; i < info.GetComponent<VariableGameObjectListBankParco>()._contents.Length; i++)
                 {
-                    if (info.GetComponent<VariableGameObjectListBankParco>()._contents[i].name == info.GetComponent<VariableGameObjectListBankParco>().GetCenterItem().name)
-                    {
-                        indice_i = i;
-                    }
+                    //if (info.GetComponent<VariableGameObjectListBankParco>()._contents[i].name == info.GetComponent<VariableGameObjectListBankParco>().GetCenterItem().name)
+                    //{
+                    //    indice_i = i;
+                    //}
                     if (info.GetComponent<VariableGameObjectListBankParco>()._contents[i].name == parco.name)
                     {
                         indice_j = i;
                     }
                 }
 
+                CircularScrollingListRiserva circular = info.GetComponent<CircularScrollingListRiserva>();
 
-                int diff = indice_i - indice_j;
-                int val = info.GetComponent<VariableGameObjectListBankParco>()._contents.Length;
-                if (Mathf.Abs(diff) > (val - 1) / 2) diff = Mathf.CeilToInt(-1 * Mathf.Sign(diff) * (val - Mathf.Abs(diff)));
+                circular.SelectContentID(indice_j);
+                loadexcelParchi.ChangeStateTo(this.gameObject, "selected");
+                loadexcelParchi.aItem = parco;
 
-                if (diff > 0)
-                {
-                    Debug.Log("NUMERO DI PASSI sinistra" + diff + " per raggiungere" + parco.name + " da " + info.GetComponent<VariableGameObjectListBankParco>().GetCenterItem().name);
-                    info.GetComponent<CircularScrollingListRiserva>()._listPositionCtrl.SetUnitMove(3 * Mathf.Abs(diff));
-                    loadexcelParchi.aItem = parco;
-                }
-                else
-                {
-                    Debug.Log("NUMERO DI PASSI destra" + diff + " per raggiungere" + parco.name + "da " + info.GetComponent<VariableGameObjectListBankParco>().GetCenterItem().name);
-                    info.GetComponent<CircularScrollingListRiserva>()._listPositionCtrl.SetUnitMove(-3 * Mathf.Abs(diff));
-                    loadexcelParchi.aItem = parco;
+                //VERSIONE SMOOTH
+                //int diff = indice_i - indice_j;
+                //int val = info.GetComponent<VariableGameObjectListBankParco>()._contents.Length;
+                //if (Mathf.Abs(diff) > (val - 1) / 2) diff = Mathf.CeilToInt(-1 * Mathf.Sign(diff) * (val - Mathf.Abs(diff)));
 
-                }
+                //if (diff > 0)
+                //{
+                //    Debug.Log("NUMERO DI PASSI sinistra" + diff + " per raggiungere" + parco.name + " da " + info.GetComponent<VariableGameObjectListBankParco>().GetCenterItem().name);
+                //    info.GetComponent<CircularScrollingListRiserva>()._listPositionCtrl.SetUnitMove(3 * Mathf.Abs(diff));
+                //    loadexcelParchi.aItem = parco;
+                //}
+                //else
+                //{
+                //    Debug.Log("NUMERO DI PASSI destra" + diff + " per raggiungere" + parco.name + "da " + info.GetComponent<VariableGameObjectListBankParco>().GetCenterItem().name);
+                //    info.GetComponent<CircularScrollingListRiserva>()._listPositionCtrl.SetUnitMove(-3 * Mathf.Abs(diff));
+                //    loadexcelParchi.aItem = parco;
+
+                //}
             }
         }
     }
