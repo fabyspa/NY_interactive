@@ -455,7 +455,7 @@ namespace AirFishLab.ScrollingList
                     i.fontSize = 25;
                 }
             }
-            
+           
         }
 
         /// <summary>
@@ -500,7 +500,6 @@ namespace AirFishLab.ScrollingList
                         Riserva _centerRiserva = loadexcel.LoadRiservaByName(newInfoCenteredBoxAfterScroll);
                         loadexcel.aItem = _centerRiserva;
                         loadexcel.ChangeStateTo(loadexcel.coord2position.FirstOrDefault(x => Enumerable.SequenceEqual(x.Value, Convert_coordinates.remapLatLng(loadexcel.aItem.coord))).Key, "selected");
-
                     }
                     else
                     {

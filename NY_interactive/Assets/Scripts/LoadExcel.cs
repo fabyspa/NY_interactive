@@ -267,7 +267,7 @@ public class LoadExcel : MonoBehaviour
         c.a = 0.8f;
         if (state== "selected")
         {
-            c = c * 1.5f;
+            ColorUtility.TryParseHtmlString("#AABBB0", out c);
             c.a = 1f;
         }
        
