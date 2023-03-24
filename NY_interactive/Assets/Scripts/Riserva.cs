@@ -6,7 +6,7 @@ using UnityEngine.UI;
 [System.Serializable]
 public class Riserva
 {
-    public string type;
+    public string[] type;
     public string name;
     public string coord;
     public string descr;
@@ -14,7 +14,7 @@ public class Riserva
     //public Sprite sprite;
     public string name_eng;
     public string descr_eng;
-    public string type_eng;
+    public string[] type_eng;
     public string sup;
     public string region;
     public string anno;

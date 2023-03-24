@@ -36,7 +36,6 @@ namespace AirFishLab.ScrollingList.Demo
             parole = dataWrapper.data.repC.Split(" ");
             int[] indexToRemove = { 0, 1, 2 };
             Array.ForEach(indexToRemove, index => parole= parole.Where(val => Array.IndexOf(parole, val) != index ).ToArray());
-            Debug.Log(string.Join(",", parole));
             infos.transform.GetChild(5).GetComponentInChildren<Text>().text = Stampa() + "Carabinieri biodiversity department";
         }
         public Sprite UpdateImage(string _name)

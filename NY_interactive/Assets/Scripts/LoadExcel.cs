@@ -65,7 +65,7 @@ public class LoadExcel : MonoBehaviour
         List<Dictionary<string, object>> data = CSVReader.Read("RISERVE01");
         for (var i = 0; i < data.Count; i++)
         {
-            string type = data[i]["Type"].ToString();
+            string[] type = data[i]["Type"].ToString().Split(", ");
             string name = data[i]["Name_ITA"].ToString();
             string coord = data[i]["Coord"].ToString();
             string descr = data[i]["Descr_ITA"].ToString();
@@ -79,7 +79,7 @@ public class LoadExcel : MonoBehaviour
             string anno = data[i]["Anno"].ToString();
             string sup = data[i]["Sup"].ToString();
             string region = data[i]["Regione"].ToString();
-            string type_eng = data[i]["Type_ENG"].ToString();
+            string[] type_eng = data[i]["Type_ENG"].ToString().Split(", ");
             string repC = data[i]["RepC"].ToString();
             AddRiserva(type, name, coord, descr,region,sup,anno,luogo,name_eng,descr_eng,type_eng,repC);
 
@@ -106,7 +106,7 @@ public class LoadExcel : MonoBehaviour
         LoadItemData();
     }
 
-    void AddRiserva(string type, string name, string coord,  string descr, string region, string sup, string anno, string luogo, string name_eng, string descr_eng, string type_eng,string repC)
+    void AddRiserva(string[] type, string name, string coord,  string descr, string region, string sup, string anno, string luogo, string name_eng, string descr_eng, string[] type_eng,string repC)
     {
         Riserva tempItem = new Riserva(blankRiserva);
 
@@ -147,11 +147,6 @@ public class LoadExcel : MonoBehaviour
            // Debug.Log(string.Join(",", coord2position));
         }
        
-    }
-
-    public void CoordToPositionMap()
-    {
-
     }
 
     public void ClearPoints()
@@ -233,14 +228,24 @@ public class LoadExcel : MonoBehaviour
         
         foreach (Riserva r in riservaDatabase)
         {
-            if (!type.Contains(r.type)){
-                type.Add(r.type);
-            }
-
-            if (r.type_eng != "" && !ita2engType.ContainsKey(r.type_eng))
+            foreach(string v in r.type)
             {
-                ita2engType.Add(r.type_eng, r.type);
+                if(!type.Contains(v))
+                { 
+                    type.Add(v);
+                    if (r.type_eng.Count() > 1)
+                    {
+                        string trad = (string)r.type_eng.GetValue(type.IndexOf(v));
+                        if (trad != "" && !ita2engType.ContainsKey(trad))
+                        { ita2engType.Add(trad, v); }
+                    }
+                    else
+                    if (r.type_eng[0]!="")
+                        { ita2engType.Add(r.type_eng[0], v); }
+
+                }
             }
+          
         }
 
         //Debug.Log(type);
@@ -254,10 +259,17 @@ public class LoadExcel : MonoBehaviour
             if (loadedItems == false) LoadItemData();
             foreach (Riserva r in riservaDatabase)
             {
-                if (r.type.ToUpper() == type.ToUpper())
+                if (r.type.Contains(type))
                 {
                     //r.sprite = UpdateImage(r.name);
                     riservaDatabaseType.Add(r);
+                    if (r.type.Count() > 1)
+                    {
+                        if (ordenList.Contains(r))
+                        {
+                            ordenList.Remove(r);
+                        }
+                    }
                 }
             }
             actualType = type;
@@ -304,7 +316,9 @@ public class LoadExcel : MonoBehaviour
     {
         foreach (string t in type)
         {
+            
             ordenList.AddRange(LoadRiservaByType(t));
+
         }
         return ordenList;
 
