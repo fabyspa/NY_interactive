@@ -445,6 +445,17 @@ namespace AirFishLab.ScrollingList
                 listBox.UpdatePosition(distance);
 
             //Debug.Log(GetCenteredBox());
+
+            //Aggiorna il box non centrato 
+            if(tagscroll == "Type") 
+            {
+                foreach (Text i in GetCenteredBox().GetComponentsInChildren<Text>())
+                {
+                    i.fontStyle = FontStyle.Normal;
+                    i.fontSize = 25;
+                }
+            }
+           
         }
 
         /// <summary>
@@ -459,7 +470,7 @@ namespace AirFishLab.ScrollingList
             // Update the state of the boxes
             FindDeltaDistanceToCenter();
             if (_listSetting.listType == CircularScrollingList.ListType.Linear)
-                UpdatePositionState();
+                UpdatePositionState();  
 
             if (!_movementCtrl.IsMovementEnded())
                 return;
@@ -474,7 +485,12 @@ namespace AirFishLab.ScrollingList
                         centeredBoxAfterScroll = newCenteredBoxAfterScroll;
                         m_MyEvent.Invoke();
                     }
-
+                    //Cambia il box centrato
+                    foreach (Text i in GetCenteredBox().GetComponentsInChildren<Text>())
+                    {
+                        i.fontStyle = FontStyle.Bold;
+                        i.fontSize = 30;
+                    }
                 }
                 if (tagscroll == "Info")
                 {
@@ -484,7 +500,6 @@ namespace AirFishLab.ScrollingList
                         Riserva _centerRiserva = loadexcel.LoadRiservaByName(newInfoCenteredBoxAfterScroll);
                         loadexcel.aItem = _centerRiserva;
                         loadexcel.ChangeStateTo(loadexcel.coord2position.FirstOrDefault(x => Enumerable.SequenceEqual(x.Value, Convert_coordinates.remapLatLng(loadexcel.aItem.coord))).Key, "selected");
-
                     }
                     else
                     {
@@ -494,6 +509,7 @@ namespace AirFishLab.ScrollingList
                         loadexcelParco.ChangeStateTo(loadexcelParco.coord2position.FirstOrDefault(x => Enumerable.SequenceEqual(x.Value, Convert_coordinates.remapLatLng(loadexcelParco.aItem.coord))).Key, "selected");
 
                     }
+                    
                 }
             }
 
@@ -505,7 +521,6 @@ namespace AirFishLab.ScrollingList
            
             _isEndingMovement = false;
             _listSetting.onMovementEnd?.Invoke();
-            
         }
 
         void CenteredBoxisChanged()

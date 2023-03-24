@@ -10,13 +10,13 @@ public static class Convert_coordinates
 
     public static double xfrom1 = 6.362218;
     public static double xto1 = 18.785160;
-    public static double xfrom2 = -2.37;
-    public static double xto2 = 2.31;
+    public static double xfrom2 = -2.1;
+    public static double xto2 = 2.30;
 
     public static double yfrom1 = 37.027325;
     public static double yto1 = 46.574408;
-    public static double yfrom2 = -0.65;
-    public static double yto2 = 4.46;
+    public static double yfrom2 = -1.55;
+    public static double yto2 = 3.1;
 
     public static int decimalp = 5;
 
