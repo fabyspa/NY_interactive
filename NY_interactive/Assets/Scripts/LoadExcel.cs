@@ -135,7 +135,7 @@ public class LoadExcel : MonoBehaviour
             Vector3 worldSpacePosition = new Vector3(coord[1], coord[0], 0);
             Vector3 localSpacePosition = transform.InverseTransformPoint(worldSpacePosition);
             GameObject Tpoint = TransformPoint(c.state);
-            Tpoint.gameObject.GetComponent<Image>().color = ColorPoint(c.type);
+            Tpoint.gameObject.GetComponent<Image>().color = ColorPoint(c.type, c.state);
             var instanciated = Instantiate(Tpoint, localSpacePosition, Quaternion.identity, parent);
             pointList.Add(instanciated);
             //Debug.Log(instanciated.transform.localPosition);
@@ -185,8 +185,8 @@ public class LoadExcel : MonoBehaviour
 
     public void ChangeStateTo(GameObject g, string newstate)
     {
-        Vector3 highlights = new Vector3((float)0.8, (float)0.8, 0);
-        Vector3 grande = new Vector3((float)0.5, (float)0.5, 0);
+        //Vector3 highlights = new Vector3((float)0.8, (float)0.8, 0);
+        //Vector3 grande = new Vector3((float)0.5, (float)0.5, 0);
 
 
         Riserva r = GetRiservaByCoord(g);
@@ -195,12 +195,18 @@ public class LoadExcel : MonoBehaviour
             Riserva oldR = GetRiservaByCoord(_oldGameObjecct);
             oldR.state = "active";
             _oldGameObjecct.transform.localScale = TransformPoint(oldR.state).transform.localScale;
-            _oldGameObjecct.gameObject.GetComponent<Image>().color = ColorPoint(oldR.type);
+            _oldGameObjecct.gameObject.GetComponent<Image>().color = ColorPoint(oldR.type, oldR.state);
             //_oldGameObjecct.transform.localScale = grande;
         }
         r.state = newstate;
+
+        //mi sposta il punto in alto
+        if (newstate == "selected")
+        {
+            g.transform.SetAsLastSibling();
+        }
         g.transform.localScale = TransformPoint(r.state).transform.localScale;
-        g.gameObject.GetComponent<Image>().color = ColorPoint(r.type);
+        g.gameObject.GetComponent<Image>().color = ColorPoint(r.type, r.state);
         //g.transform.localScale = highlights;
         _oldGameObjecct = g;
 
@@ -228,7 +234,7 @@ public class LoadExcel : MonoBehaviour
             return t;
     }
 
-    public Color ColorPoint(string type)
+    public Color ColorPoint(string type, string state)
     {
         Color c = Color.red;
 
@@ -259,6 +265,12 @@ public class LoadExcel : MonoBehaviour
                 break;
         }
         c.a = 0.8f;
+        if (state== "selected")
+        {
+            c = c * 1.5f;
+            c.a = 1f;
+        }
+       
         return c;
     }
 
