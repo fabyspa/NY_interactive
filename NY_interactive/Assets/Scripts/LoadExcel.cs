@@ -137,7 +137,7 @@ public class LoadExcel : MonoBehaviour
             Vector3 worldSpacePosition = new Vector3(coord[1], coord[0], 0);
             Vector3 localSpacePosition = transform.InverseTransformPoint(worldSpacePosition);
             GameObject Tpoint = TransformPoint(c.state);
-            Tpoint.gameObject.GetComponent<Image>().color = ColorPoint(c.type, c.state);
+            //tofixsamu//Tpoint.gameObject.GetComponent<Image>().color = ColorPoint(c.type, c.state);
             var instanciated = Instantiate(Tpoint, localSpacePosition, Quaternion.identity, parent);
             pointList.Add(instanciated);
             //Debug.Log(instanciated.transform.localPosition);
@@ -192,7 +192,7 @@ public class LoadExcel : MonoBehaviour
             Riserva oldR = GetRiservaByCoord(_oldGameObjecct);
             oldR.state = "active";
             _oldGameObjecct.transform.localScale = TransformPoint(oldR.state).transform.localScale;
-            _oldGameObjecct.gameObject.GetComponent<Image>().color = ColorPoint(oldR.type, oldR.state);
+            //tofixsamu//_oldGameObjecct.gameObject.GetComponent<Image>().color = ColorPoint(oldR.type, oldR.state);
             //_oldGameObjecct.transform.localScale = grande;
         }
         r.state = newstate;
@@ -203,7 +203,7 @@ public class LoadExcel : MonoBehaviour
             g.transform.SetAsLastSibling();
         }
         g.transform.localScale = TransformPoint(r.state).transform.localScale;
-        g.gameObject.GetComponent<Image>().color = ColorPoint(r.type, r.state);
+        //tofixsamu//g.gameObject.GetComponent<Image>().color = ColorPoint(r.type, r.state);
         //g.transform.localScale = highlights;
         _oldGameObjecct = g;
 
