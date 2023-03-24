@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
+using System;
+using System.Runtime.InteropServices;
+
 namespace AirFishLab.ScrollingList.Demo
 {
     public class GameObjectListBoxRiserva : ListBox
@@ -12,6 +16,8 @@ namespace AirFishLab.ScrollingList.Demo
         private Sprite tex;
         [SerializeField]
         private GameObject infos;
+
+        string[] parole;
         
         protected override void UpdateDisplayContent(object content)
         {
@@ -27,10 +33,11 @@ namespace AirFishLab.ScrollingList.Demo
             infos.transform.GetChild(2).GetComponentInChildren<Text>().text = dataWrapper.data.anno;
             infos.transform.GetChild(3).GetComponentInChildren<Text>().text = dataWrapper.data.sup;
             infos.transform.GetChild(4).GetComponentInChildren<Text>().text = dataWrapper.data.repC;
-
-
-
-
+            parole = dataWrapper.data.repC.Split(" ");
+            int[] indexToRemove = { 0, 1, 2 };
+            Array.ForEach(indexToRemove, index => parole= parole.Where(val => Array.IndexOf(parole, val) != index ).ToArray());
+            Debug.Log(string.Join(",", parole));
+            infos.transform.GetChild(5).GetComponentInChildren<Text>().text = Stampa() + "Carabinieri biodiversity department";
         }
         public Sprite UpdateImage(string _name)
         {
@@ -41,7 +48,15 @@ namespace AirFishLab.ScrollingList.Demo
             }
             return null;
         }
-
+        private string Stampa()
+        {
+            String new_string="";
+            foreach (String p in parole)
+            {
+                 new_string = new String(p + " ");
+            }
+            return new_string;
+        }
     }
-    
+       
 }
