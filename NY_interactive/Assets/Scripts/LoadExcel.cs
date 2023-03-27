@@ -137,7 +137,7 @@ public class LoadExcel : MonoBehaviour
             Vector3 worldSpacePosition = new Vector3(coord[1], coord[0], 0);
             Vector3 localSpacePosition = transform.InverseTransformPoint(worldSpacePosition);
             GameObject Tpoint = TransformPoint(c.state);
-            //tofixsamu//Tpoint.gameObject.GetComponent<Image>().color = ColorPoint(c.type, c.state);
+            Tpoint.gameObject.GetComponent<Image>().color = ColorPoint(c.type, c.state, actualType);
             var instanciated = Instantiate(Tpoint, localSpacePosition, Quaternion.identity, parent);
             pointList.Add(instanciated);
             //Debug.Log(instanciated.transform.localPosition);
@@ -192,7 +192,7 @@ public class LoadExcel : MonoBehaviour
             Riserva oldR = GetRiservaByCoord(_oldGameObjecct);
             oldR.state = "active";
             _oldGameObjecct.transform.localScale = TransformPoint(oldR.state).transform.localScale;
-            //tofixsamu//_oldGameObjecct.gameObject.GetComponent<Image>().color = ColorPoint(oldR.type, oldR.state);
+            _oldGameObjecct.gameObject.GetComponent<Image>().color = ColorPoint(oldR.type, oldR.state, actualType);
             //_oldGameObjecct.transform.localScale = grande;
         }
         r.state = newstate;
@@ -203,7 +203,7 @@ public class LoadExcel : MonoBehaviour
             g.transform.SetAsLastSibling();
         }
         g.transform.localScale = TransformPoint(r.state).transform.localScale;
-        //tofixsamu//g.gameObject.GetComponent<Image>().color = ColorPoint(r.type, r.state);
+        g.gameObject.GetComponent<Image>().color = ColorPoint(r.type, r.state, actualType);
         //g.transform.localScale = highlights;
         _oldGameObjecct = g;
 
@@ -231,10 +231,43 @@ public class LoadExcel : MonoBehaviour
             return t;
     }
 
-    public Color ColorPoint(string type, string state)
+    public Color ColorPoint(string[] type, string state, string filter)
     {
         Color c = Color.red;
+        bool checkfilter = true;
+        if (filter == "Tutte")
+        {
+            c = ChangeColor(type[0]);
+        }
+        else
+        {
+            foreach (string s in type)
+            {
+                if( s == filter)
+                {
+                    c=ChangeColor(s);
+                    checkfilter = false;
+                }
+                if (checkfilter)
+                {
+                   c= ChangeColor(s);
+                }
+                
+            }
 
+        }
+        c.a = 0.8f;
+        if (state== "selected")
+        {
+            ColorUtility.TryParseHtmlString("#AABBB0", out c);
+            c.a = 1f;
+        }
+       
+        return c;
+    }
+    public Color ChangeColor(string type)
+    {
+        Color c;
         switch (type)
         {
             case "Riserva Naturale Orientata":
@@ -259,18 +292,11 @@ public class LoadExcel : MonoBehaviour
                 ColorUtility.TryParseHtmlString("#2A4754", out c);
                 break;
             default:
+                c=Color.red;
                 break;
         }
-        c.a = 0.8f;
-        if (state== "selected")
-        {
-            ColorUtility.TryParseHtmlString("#AABBB0", out c);
-            c.a = 1f;
-        }
-       
         return c;
     }
-
 
     //torna tutti i tipi di riserve diverse
     public void GetRiservaTypes()

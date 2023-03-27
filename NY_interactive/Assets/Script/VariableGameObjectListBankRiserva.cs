@@ -26,6 +26,7 @@ namespace AirFishLab.ScrollingList
         {
             if(GetCenterItem()!=null)
             loadexcel.ChangeStateTo(loadexcel.coord2position.FirstOrDefault(x => Enumerable.SequenceEqual(x.Value, Convert_coordinates.remapLatLng(GetCenterItem().coord))).Key, "selected");
+
         }
 
         public override object GetListContent(int index)
