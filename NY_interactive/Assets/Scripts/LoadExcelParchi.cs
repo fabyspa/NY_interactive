@@ -105,14 +105,14 @@ public class LoadExcelParchi : MonoBehaviour
             Vector3 worldSpacePosition = new Vector3(coord[1], coord[0], 0);
             Vector3 localSpacePosition = transform.InverseTransformPoint(worldSpacePosition);
             GameObject Tpoint = TransformPoint(c.state);
-
+            Tpoint.gameObject.GetComponent<Image>().color = ColorPoint(c.state);
+            if (c.state == "selected")
+            {
+                Tpoint.transform.SetAsLastSibling();
+            }
             var instanciated = Instantiate(Tpoint, localSpacePosition, Quaternion.identity, parent);
             pointList.Add(instanciated);
-            //Debug.Log(instanciated.transform.localPosition);
-           // Debug.Log(c.coord);
             if(!coord2position.ContainsKey(instanciated)) coord2position.Add(instanciated,coord);
-
-           // Debug.Log(string.Join(",", coord2position));
         }
        
     }
@@ -144,19 +144,21 @@ public class LoadExcelParchi : MonoBehaviour
 
     public void ChangeStateTo(GameObject g, string newstate)
     {
-        Vector3 highlights = new Vector3((float)1.5, (float)1.5, 0);
-        Vector3 grande = new Vector3((float)0.8, (float)0.8, 0);
-
-
         Parco r = GetParcoByCoord(g);
         if (_oldGameObjecct != null)
         {
             Parco oldR = GetParcoByCoord(_oldGameObjecct);
             oldR.state = "active";
-            _oldGameObjecct.transform.localScale = grande;
+            _oldGameObjecct.transform.localScale = TransformPoint(oldR.state).transform.localScale;
+            _oldGameObjecct.gameObject.GetComponent<Image>().color = ColorPoint(oldR.state);
         }
         r.state = newstate;
-        g.transform.localScale = highlights;
+        if (newstate == "selected")
+        {
+            g.transform.SetAsLastSibling();
+        }
+        g.transform.localScale = TransformPoint(r.state).transform.localScale;
+        g.gameObject.GetComponent<Image>().color = ColorPoint(r.state);
         _oldGameObjecct = g;
 
     }
@@ -164,9 +166,8 @@ public class LoadExcelParchi : MonoBehaviour
     public GameObject TransformPoint(string state)
     {
         GameObject t = point;
-        Vector3 piccolo = new Vector3((float)0.4, (float)0.4, 0);
-        Vector3 grande = new Vector3((float)0.8, (float)0.8, 0);
-        Vector3 highlights = new Vector3((float)1.5, (float)1.5, 0);
+        Vector3 grande = new Vector3((float)0.4, (float)0.4, 0);
+        Vector3 highlights = new Vector3((float)0.7, (float)0.7, 0);
         switch (state)
         {
             case "active":
@@ -176,16 +177,31 @@ public class LoadExcelParchi : MonoBehaviour
                 t.transform.localScale = highlights;
                 break;
             default:
-                t.transform.localScale = piccolo;
                 break;
         }
-         
+           
             return t;
     }
 
+    public Color ColorPoint(string state)
+    {
+        Color c = Color.red;
+        if (state== "active")
+        {
+            ColorUtility.TryParseHtmlString("#A8B1B5", out c);
+            c.a = 0.8f;
+        }
+        else if(state == "selected")
+        {
+            ColorUtility.TryParseHtmlString("#BEC9CC", out c);
+            c.a = 1f;
+        }
+        return c;
+    }
+
+
     //torna tutti i tipi di riserve diverse
-    
-   
+
     public Parco LoadParcoByName(string name)
     {
 

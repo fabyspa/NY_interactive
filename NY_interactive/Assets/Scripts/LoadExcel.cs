@@ -138,13 +138,13 @@ public class LoadExcel : MonoBehaviour
             Vector3 localSpacePosition = transform.InverseTransformPoint(worldSpacePosition);
             GameObject Tpoint = TransformPoint(c.state);
             Tpoint.gameObject.GetComponent<Image>().color = ColorPoint(c.type, c.state, actualType);
+            if (c.state == "selected")
+            {
+                Tpoint.transform.SetAsLastSibling();
+            }
             var instanciated = Instantiate(Tpoint, localSpacePosition, Quaternion.identity, parent);
             pointList.Add(instanciated);
-            //Debug.Log(instanciated.transform.localPosition);
-           // Debug.Log(c.coord);
             if(!coord2position.ContainsKey(instanciated)) coord2position.Add(instanciated,coord);
-
-           // Debug.Log(string.Join(",", coord2position));
         }
        
     }
