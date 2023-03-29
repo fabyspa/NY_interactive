@@ -442,7 +442,9 @@ MonoBehaviour:
   _nameENG: {fileID: 762747884}
   _descrENG: {fileID: 1063018958}
   _image: {fileID: 749491487}
+  background: {fileID: 376624001}
   infos: {fileID: 239347566}
+  listpos: {fileID: 0}
 --- !u!114 &130203476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1465,7 +1467,9 @@ MonoBehaviour:
   _nameENG: {fileID: 2044968081}
   _descrENG: {fileID: 627957888}
   _image: {fileID: 1624490677}
+  background: {fileID: 1251843118}
   infos: {fileID: 3981930}
+  listpos: {fileID: 0}
 --- !u!114 &473017540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4654,7 +4658,9 @@ MonoBehaviour:
   _nameENG: {fileID: 1042248157}
   _descrENG: {fileID: 2018903375}
   _image: {fileID: 1538060161}
+  background: {fileID: 130249177}
   infos: {fileID: 131210973}
+  listpos: {fileID: 0}
 --- !u!114 &1451023626
 MonoBehaviour:
   m_ObjectHideFlags: 0

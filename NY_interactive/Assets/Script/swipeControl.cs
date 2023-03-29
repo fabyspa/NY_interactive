@@ -133,18 +133,13 @@ public class swipeControl : MonoBehaviour
         if (i == 0)
         {
             Debug.Log("TUTTE");
+            
         }
         else
         {
-
-            
             database.LoadRiservaByType(database.type[i - 1]);
             TypesToText(3);
-            //thirdFilter.GetComponent<SwipeControlBase>().reset = true;
             thirdFilter.GetComponent<SwipeControlBase>().ResetScroll();
-            
-            //Debug.Log(this.name);
-            //TypesToText(gameobjectToClone);
 
         }
 

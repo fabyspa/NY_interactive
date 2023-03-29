@@ -20,6 +20,7 @@ public class LoadExcel : MonoBehaviour
     [SerializeField] VariableGameObjectListBankRiserva VariableGameObjectListBankRiserva;
     public bool loadedItems = false;
     public string actualType;
+    public Color actualCol;
     public Dictionary<GameObject, float[]> coord2position = new Dictionary<GameObject, float[]>();
     public GameObject _oldGameObjecct;
     public Transform parent;
@@ -330,6 +331,12 @@ public class LoadExcel : MonoBehaviour
 
     public  List<Riserva> LoadRiservaByType(string type)
     {
+        if(actualType== "Tutte")
+        {
+            Debug.Log("AAAAAA"+type);
+            actualCol= ChangeColor(type);
+
+        }
         if (actualType != type)
         {
             riservaDatabaseType.Clear();
@@ -350,7 +357,7 @@ public class LoadExcel : MonoBehaviour
                 }
             }
             actualType = type;
-
+            actualCol = ChangeColor(type);
         }
 
         return riservaDatabaseType;

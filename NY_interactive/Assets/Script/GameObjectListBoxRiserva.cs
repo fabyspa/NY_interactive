@@ -12,19 +12,23 @@ namespace AirFishLab.ScrollingList.Demo
         [SerializeField]
         private Text _name, _descr,_nameENG, _descrENG;
         [SerializeField]
-        private Image _image;
+        private Image _image, background;
         private Sprite tex;
         [SerializeField]
         private GameObject infos;
+        public LoadExcel listpos;
+
 
         string[] parole;
         
         protected override void UpdateDisplayContent(object content)
         {
             var dataWrapper = (VariableGameObjectListBankRiserva.DataWrapper) content;
+            listpos = GameObject.FindObjectOfType<LoadExcel>();
             _name.text = dataWrapper.data.name;
             _descr.text = dataWrapper.data.descr;
             _image.sprite = UpdateImage(dataWrapper.data.name);
+            background.color = UpdateColor(listpos, dataWrapper.data.name);
             _nameENG.text = dataWrapper.data.name_eng;
             _descrENG.text = dataWrapper.data.descr_eng;
             //regione,luogo,anno istituzione,superficie,reparto di competenza
@@ -47,6 +51,24 @@ namespace AirFishLab.ScrollingList.Demo
             }
             return null;
         }
+
+
+        public Color UpdateColor(LoadExcel lp, string name)
+        {
+            Color c = Color.cyan;
+
+            if(lp.actualType== "Tutte")
+            {
+                Debug.Log(listpos.LoadRiservaByName(name).type[0]);
+                c = listpos.ChangeColor(listpos.LoadRiservaByName(name).type[0]);
+            }
+            else
+            {
+                c =listpos.actualCol;
+            }
+            return c;
+        }
+
         private string Stampa()
         {
             String new_string="";
