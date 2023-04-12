@@ -236,7 +236,7 @@ namespace AirFishLab.ScrollingList
             loadexcelParco = GameObject.FindObjectOfType<LoadExcelParchi>();
             m_MyEvent.AddListener(() => CenteredBoxisChanged());
             //info = GameObject.FindGameObjectWithTag("Info");
-            var overGoingThreshold = unitPos * 0.3f;
+            var overGoingThreshold = unitPos /** 0.3f*/;
 
             switch (_listSetting.controlMode) {
                 case CircularScrollingList.ControlMode.Drag:
@@ -364,8 +364,8 @@ namespace AirFishLab.ScrollingList
 
                 case TouchPhase.Ended:
                     var deltaTime = Time.realtimeSinceStartup - _lastDraggingTime;
-                    Debug.Log("Controllo velocità drag & drop modificando delta time");
-                    _movementCtrl.SetMovement(_deltaInputDistance / deltaTime/**0.5f*/, false);
+                    //velocità drag & drop modificando delta time
+                    _movementCtrl.SetMovement(_deltaInputDistance / deltaTime * 0.5f, false);
                     _isEndingMovement = true;
                     break;
             }
@@ -440,8 +440,9 @@ namespace AirFishLab.ScrollingList
         {
             if (_movementCtrl.IsMovementEnded())
             return;
-            Debug.Log("Velocità movimento da un target ad un altro");
-            var distance = _movementCtrl.GetDistance(Time.deltaTime*0.35f);
+            //Velocità movimento da un target ad un altro
+            var distance = _movementCtrl.GetDistance(Time.deltaTime * 0.5f);
+                
             foreach (var listBox in _listBoxes)
                 listBox.UpdatePosition(distance);
 

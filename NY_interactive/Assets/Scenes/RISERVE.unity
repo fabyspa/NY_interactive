@@ -5884,7 +5884,7 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 2.4
         inSlope: -2.665783
         outSlope: -2.665783
         tangentMode: 0
@@ -10462,7 +10462,7 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 2
         inSlope: 0
         outSlope: 0
         tangentMode: 0
