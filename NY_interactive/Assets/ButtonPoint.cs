@@ -100,6 +100,7 @@ public class ButtonPoint : Button
                 circular.SelectContentID(indice_j);
                 loadexcel.ChangeStateTo(this.gameObject, "selected");
                 loadexcel.aItem = riserva;
+                
                 // int diff= indice_j - indice_i;
                 //int val = info.GetComponent<VariableGameObjectListBankRiserva>()._contents.Length;
 

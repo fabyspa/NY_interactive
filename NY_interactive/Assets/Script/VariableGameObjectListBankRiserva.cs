@@ -24,9 +24,9 @@ namespace AirFishLab.ScrollingList
 
         public void Start()
         {
+            Debug.Log("START");
             if(GetCenterItem()!=null)
             loadexcel.ChangeStateTo(loadexcel.coord2position.FirstOrDefault(x => Enumerable.SequenceEqual(x.Value, Convert_coordinates.remapLatLng(GetCenterItem().coord))).Key, "selected");
-
         }
 
         public override object GetListContent(int index)

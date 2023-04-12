@@ -59,7 +59,6 @@ namespace AirFishLab.ScrollingList.Demo
 
             if(lp.actualType== "Tutte")
             {
-                Debug.Log(listpos.LoadRiservaByName(name).type[0]);
                 c = listpos.ChangeColor(listpos.LoadRiservaByName(name).type[0]);
             }
             else

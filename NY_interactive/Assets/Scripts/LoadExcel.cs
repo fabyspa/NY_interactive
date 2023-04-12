@@ -29,7 +29,7 @@ public class LoadExcel : MonoBehaviour
     //Ogetto contenente l'item attivo in questo momento
     public Riserva aItem;
     [SerializeField] GameObject point;
-
+    public GameObject selectedPoint;
 
 
     public void Start()
@@ -139,15 +139,10 @@ public class LoadExcel : MonoBehaviour
             Vector3 localSpacePosition = transform.InverseTransformPoint(worldSpacePosition);
             GameObject Tpoint = TransformPoint(c.state);
             Tpoint.gameObject.GetComponent<Image>().color = ColorPoint(c.type, c.state, actualType);
-            if (c.state == "selected")
-            {
-                Tpoint.transform.SetAsLastSibling();
-            }
             var instanciated = Instantiate(Tpoint, localSpacePosition, Quaternion.identity, parent);
             pointList.Add(instanciated);
             if(!coord2position.ContainsKey(instanciated)) coord2position.Add(instanciated,coord);
         }
-       
     }
 
     public void ClearPoints()
@@ -201,13 +196,13 @@ public class LoadExcel : MonoBehaviour
         //mi sposta il punto in alto
         if (newstate == "selected")
         {
-            g.transform.SetAsLastSibling();
+            Debug.Log("SETASLASTSIBLING");
+            selectedPoint = g;
         }
         g.transform.localScale = TransformPoint(r.state).transform.localScale;
         g.gameObject.GetComponent<Image>().color = ColorPoint(r.type, r.state, actualType);
-        //g.transform.localScale = highlights;
         _oldGameObjecct = g;
-
+        selectedPoint.transform.SetAsLastSibling();
     }
     //gestisco scala punti
     public GameObject TransformPoint(string state)
@@ -220,12 +215,15 @@ public class LoadExcel : MonoBehaviour
         {
             case "active":
                 t.transform.localScale = grande;
+                t.gameObject.transform.GetChild(0).gameObject.active = true;
                 break;
             case "selected":
                 t.transform.localScale = highlights;
+                t.gameObject.transform.GetChild(0).gameObject.active = true;
                 break;
             default:
                 t.transform.localScale = piccolo;
+                t.gameObject.transform.GetChild(0).gameObject.active = false;
                 break;
         }
 

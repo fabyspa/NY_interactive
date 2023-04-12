@@ -21,6 +21,7 @@ public class LoadExcelParchi : MonoBehaviour
     //Ogetto contenente l'item attivo in questo momento
     public Parco aItem;
     [SerializeField] GameObject point;
+    public GameObject selectedPoint;
 
 
 
@@ -106,15 +107,10 @@ public class LoadExcelParchi : MonoBehaviour
             Vector3 localSpacePosition = transform.InverseTransformPoint(worldSpacePosition);
             GameObject Tpoint = TransformPoint(c.state);
             Tpoint.gameObject.GetComponent<Image>().color = ColorPoint(c.state);
-            if (c.state == "selected")
-            {
-                Tpoint.transform.SetAsLastSibling();
-            }
             var instanciated = Instantiate(Tpoint, localSpacePosition, Quaternion.identity, parent);
             pointList.Add(instanciated);
             if(!coord2position.ContainsKey(instanciated)) coord2position.Add(instanciated,coord);
         }
-       
     }
 
     public void ClearPoints()
@@ -155,12 +151,13 @@ public class LoadExcelParchi : MonoBehaviour
         r.state = newstate;
         if (newstate == "selected")
         {
-            g.transform.SetAsLastSibling();
+            Debug.Log("SETASLASTSIBLING");
+            selectedPoint = g;
         }
         g.transform.localScale = TransformPoint(r.state).transform.localScale;
         g.gameObject.GetComponent<Image>().color = ColorPoint(r.state);
         _oldGameObjecct = g;
-
+        selectedPoint.transform.SetAsLastSibling();
     }
     //gestisco scala punti
     public GameObject TransformPoint(string state)
@@ -172,11 +169,14 @@ public class LoadExcelParchi : MonoBehaviour
         {
             case "active":
                 t.transform.localScale = grande;
+                t.gameObject.transform.GetChild(0).gameObject.active = true;
                 break;
             case "selected":
                 t.transform.localScale = highlights;
+                t.gameObject.transform.GetChild(0).gameObject.active = true;
                 break;
             default:
+                t.gameObject.transform.GetChild(0).gameObject.active = false;
                 break;
         }
            

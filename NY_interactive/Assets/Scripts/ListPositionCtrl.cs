@@ -507,7 +507,6 @@ namespace AirFishLab.ScrollingList
                         Parco _centerRiserva = loadexcelParco.LoadParcoByName(newInfoCenteredBoxAfterScroll);
                         loadexcelParco.aItem = _centerRiserva;
                         loadexcelParco.ChangeStateTo(loadexcelParco.coord2position.FirstOrDefault(x => Enumerable.SequenceEqual(x.Value, Convert_coordinates.remapLatLng(loadexcelParco.aItem.coord))).Key, "selected");
-
                     }
                     
                 }
