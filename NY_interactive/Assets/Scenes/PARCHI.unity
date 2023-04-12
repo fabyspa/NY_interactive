@@ -3385,6 +3385,7 @@ MonoBehaviour:
     region: 
     anno: 
   point: {fileID: 1389103744079038784, guid: 0de64a7c5011c6b41877dab8496f5e0e, type: 3}
+  selectedPoint: {fileID: 0}
 --- !u!224 &868456410 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5751353492927724499, guid: a768d17576a818343be2bbdf2b90f41b, type: 3}
@@ -4762,6 +4763,10 @@ PrefabInstance:
     - target: {fileID: 5871631200982249940, guid: 0de64a7c5011c6b41877dab8496f5e0e, type: 3}
       propertyPath: m_Colors.m_PressedColor.r
       value: 0.3773585
+      objectReference: {fileID: 0}
+    - target: {fileID: 7703121878477223333, guid: 0de64a7c5011c6b41877dab8496f5e0e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

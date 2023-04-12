@@ -51,9 +51,9 @@ public class LoadExcel : MonoBehaviour
                 i._isInitialized = false;
                 i.Initialize();
                 info.GetComponent<VariableGameObjectListBankRiserva>().ChangeInfoContents("Tutte");
-
             }
         }
+        
     }
     public void LoadItemData()
     {
@@ -176,6 +176,18 @@ public class LoadExcel : MonoBehaviour
         
     }
 
+    //public void BringUp()
+    //{
+    //    for(int i=0;i<parent.childCount; i++)
+    //    {
+    //        if(parent.GetChild(i)== selectedPoint)
+    //        {
+    //            parent.GetChild(i).transform.SetAsLastSibling();
+    //            return;
+    //        }
+    //    }
+        
+    //}
     public void ChangeStateTo(GameObject g, string newstate)
     {
         //Vector3 highlights = new Vector3((float)0.8, (float)0.8, 0);

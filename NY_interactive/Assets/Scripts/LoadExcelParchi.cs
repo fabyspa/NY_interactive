@@ -124,7 +124,6 @@ public class LoadExcelParchi : MonoBehaviour
     //aggiunge lo stato alla variabile state
     public void AddState()
     {
-
         foreach (Parco r in parchiDatabase)
         {
 
@@ -134,8 +133,6 @@ public class LoadExcelParchi : MonoBehaviour
             }
             else r.state = "active";
         }
-
-
     }
 
     public void ChangeStateTo(GameObject g, string newstate)

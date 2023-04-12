@@ -14,13 +14,11 @@ public class AddScene : MonoBehaviour
     {
         StartCoroutine(SceneLoader());
         // Precarica entrambe le scene in background
-        
 
     }
     private void Start()
     {
         // Imposta la scena corrente sulla scena iniziale (Park)
-       
     }
 
     private IEnumerator SceneLoader()
@@ -32,6 +30,7 @@ public class AddScene : MonoBehaviour
             Debug.Log("Loading the Scene");
             yield return null;
         }
+
         currentScene = Loader.SceneName.RISERVE;
         Loader.SetCurrentScene(currentScene);
 
@@ -42,6 +41,7 @@ public class AddScene : MonoBehaviour
             yield return null;
         }
 
+
         //GameObject[] objectsInScene = SceneManager.GetSceneByName(Loader.SceneName.PARCHI.ToString()).GetRootGameObjects();
         //// Salva lo stato di ogni oggetto
         //foreach (GameObject obj in objectsInScene)
@@ -50,5 +50,6 @@ public class AddScene : MonoBehaviour
         //}
         // Abilita/disabilita i GameObject delle scene in base alla scena corrente
         Loader.EnableDisableSceneObjects();
+    
     }
 }

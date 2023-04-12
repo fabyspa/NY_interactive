@@ -97,6 +97,7 @@ public class Loader
             //    objectState.SaveState();
             //}
         }
+        Debug.Log("LoaderScene6");
     }
 
 
@@ -130,7 +131,7 @@ public class Loader
         if (scene == SceneName.RISERVE)
         {
             LoadExcel loadExcel = GameObject.FindObjectOfType<LoadExcel>();
-            loadExcel.ResetScroll();
+            loadExcel.ResetScroll(); 
         }
         if (scene == SceneName.PARCHI)
         {
