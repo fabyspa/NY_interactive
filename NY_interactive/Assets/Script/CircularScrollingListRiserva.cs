@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace AirFishLab.ScrollingList
@@ -135,6 +136,7 @@ namespace AirFishLab.ScrollingList
             InitializeListComponents();
             // Make the list position ctrl initialize its position state
             _listPositionCtrl.LateUpdate();
+            if(SceneManager.GetActiveScene().name==Loader.SceneName.RISERVE.ToString())_listPositionCtrl.CenteredBoxisChanged();
             _listPositionCtrl.InitialImageSorting();
             _isInitialized = true;
         }
@@ -201,7 +203,7 @@ namespace AirFishLab.ScrollingList
             if (_hasNoContent)
                 return;
 
-            _listPositionCtrl.SetUnitMove(1);
+            _listPositionCtrl.SetUnitMove(20);
         }
 
         /// <summary>
@@ -212,7 +214,7 @@ namespace AirFishLab.ScrollingList
             if (_hasNoContent)
                 return;
 
-            _listPositionCtrl.SetUnitMove(-1);
+            _listPositionCtrl.SetUnitMove(-20);
         }
 
         /// <summary>

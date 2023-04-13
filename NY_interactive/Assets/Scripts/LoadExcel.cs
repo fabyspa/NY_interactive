@@ -15,7 +15,7 @@ public class LoadExcel : MonoBehaviour
     public List<Riserva> ordenList = new List<Riserva>();
    // public Image _image;
     public List<string> type = new List<string>();
-    [SerializeField] GameObject scrolling;
+    [SerializeField] public GameObject scrolling;
     [SerializeField] public GameObject info;
     [SerializeField] VariableGameObjectListBankRiserva VariableGameObjectListBankRiserva;
     public bool loadedItems = false;
@@ -54,6 +54,14 @@ public class LoadExcel : MonoBehaviour
             }
         }
         
+    }
+
+    public void SetFocusOnTheTop()
+    {
+        Debug.Log("AIITEM" + aItem.name);
+        var myKey = coord2position.FirstOrDefault(x => Enumerable.SequenceEqual(x.Value, Convert_coordinates.remapLatLng(aItem.coord))).Key;
+        
+        myKey.transform.SetAsLastSibling();
     }
     public void LoadItemData()
     {

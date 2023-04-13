@@ -236,7 +236,7 @@ namespace AirFishLab.ScrollingList
             loadexcelParco = GameObject.FindObjectOfType<LoadExcelParchi>();
             m_MyEvent.AddListener(() => CenteredBoxisChanged());
             //info = GameObject.FindGameObjectWithTag("Info");
-            var overGoingThreshold = unitPos /** 0.3f*/;
+            var overGoingThreshold = unitPos;
 
             switch (_listSetting.controlMode) {
                 case CircularScrollingList.ControlMode.Drag:
@@ -365,7 +365,7 @@ namespace AirFishLab.ScrollingList
                 case TouchPhase.Ended:
                     var deltaTime = Time.realtimeSinceStartup - _lastDraggingTime;
                     //velocità drag & drop modificando delta time
-                    _movementCtrl.SetMovement(_deltaInputDistance / deltaTime * 0.5f, false);
+                    _movementCtrl.SetMovement(_deltaInputDistance / deltaTime, false);
                     _isEndingMovement = true;
                     break;
             }
@@ -441,7 +441,7 @@ namespace AirFishLab.ScrollingList
             if (_movementCtrl.IsMovementEnded())
             return;
             //Velocità movimento da un target ad un altro
-            var distance = _movementCtrl.GetDistance(Time.deltaTime * 0.5f);
+            var distance = _movementCtrl.GetDistance(Time.deltaTime*0.8f);
                 
             foreach (var listBox in _listBoxes)
                 listBox.UpdatePosition(distance);
@@ -449,15 +449,8 @@ namespace AirFishLab.ScrollingList
             //Debug.Log(GetCenteredBox());
 
             //Aggiorna il box non centrato 
-            if(tagscroll == "Type") 
-            {
-                foreach (Text i in GetCenteredBox().GetComponentsInChildren<Text>())
-                {
-                    i.fontStyle = FontStyle.Normal;
-                    i.fontSize = 25;
-                }
-            }
            
+
         }
 
         /// <summary>
@@ -488,11 +481,7 @@ namespace AirFishLab.ScrollingList
                         m_MyEvent.Invoke();
                     }
                     //Cambia il box centrato
-                    foreach (Text i in GetCenteredBox().GetComponentsInChildren<Text>())
-                    {
-                        i.fontStyle = FontStyle.Bold;
-                        i.fontSize = 30;
-                    }
+                    
                 }
                 if (tagscroll == "Info")
                 {
@@ -524,13 +513,28 @@ namespace AirFishLab.ScrollingList
             _listSetting.onMovementEnd?.Invoke();
         }
 
-        void CenteredBoxisChanged()
+        public void CenteredBoxisChanged()
         {
             
             var info=loadexcel.info;
-           // var firstFilter = GameObject.FindGameObjectsWithTag("FirstFilter");
 
-            #nullable enable
+            foreach(ListBox i in _listBoxes)
+            {
+                Text t = i.GetComponentInChildren<Text>();
+                if (i != GetCenteredBox())
+                {
+                    t.fontStyle = FontStyle.Normal;
+                    t.fontSize = 25;
+                }
+                else
+                {
+                    t.fontSize = 30;
+                    t.fontStyle = FontStyle.Bold;
+                }
+            }
+                       
+
+#nullable enable
             VariableGameObjectListBankRiserva? list = (VariableGameObjectListBankRiserva?) info.GetComponent<CircularScrollingListRiserva>().listBank;
             if(list!=null)
             {

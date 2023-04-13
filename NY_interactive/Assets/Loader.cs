@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using AirFishLab.ScrollingList;
+using System.Linq;
 
 public class Loader
 {
@@ -76,9 +77,10 @@ public class Loader
             {
                 obj.SetActive(true);
             }
+            var loadexcel = GameObject.FindObjectOfType<LoadExcel>();
             GameObject.FindGameObjectWithTag("TOGGLE").GetComponent<Toggle>().isOn = toggle;
             ResetScroll(SceneName.RISERVE);
-
+            loadexcel.SetFocusOnTheTop();
             //if (isParkSceneLoaded) SceneManager.UnloadSceneAsync(SceneName.PARCHI.ToString());
             isRiservaSceneLoaded = true;
             isParkSceneLoaded = false;
