@@ -365,7 +365,7 @@ namespace AirFishLab.ScrollingList
                 case TouchPhase.Ended:
                     var deltaTime = Time.realtimeSinceStartup - _lastDraggingTime;
                     //velocità drag & drop modificando delta time
-                    _movementCtrl.SetMovement(_deltaInputDistance / deltaTime, false);
+                    _movementCtrl.SetMovement(_deltaInputDistance / deltaTime * 0.5f, false);
                     _isEndingMovement = true;
                     break;
             }
@@ -441,7 +441,7 @@ namespace AirFishLab.ScrollingList
             if (_movementCtrl.IsMovementEnded())
             return;
             //Velocità movimento da un target ad un altro
-            var distance = _movementCtrl.GetDistance(Time.deltaTime*0.8f);
+            var distance = _movementCtrl.GetDistance(Time.deltaTime*0.5f);
                 
             foreach (var listBox in _listBoxes)
                 listBox.UpdatePosition(distance);
