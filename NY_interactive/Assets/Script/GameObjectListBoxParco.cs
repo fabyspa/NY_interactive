@@ -24,7 +24,6 @@ namespace AirFishLab.ScrollingList.Demo
             infos.transform.GetChild(0).GetComponentInChildren<Text>().text = dataWrapper.data.region;
             infos.transform.GetChild(1).GetComponentInChildren<Text>().text = dataWrapper.data.anno;
             infos.transform.GetChild(2).GetComponentInChildren<Text>().text = dataWrapper.data.sup;
-            //infos.transform.GetChild(4).GetComponentInChildren<Text>().text = "reparto di competena da aggiungere";
 
         }
         public Sprite UpdateImage(string _name)
