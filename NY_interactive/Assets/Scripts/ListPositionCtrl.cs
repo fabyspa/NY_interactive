@@ -517,7 +517,7 @@ namespace AirFishLab.ScrollingList
         {
             
             var info=loadexcel.info;
-
+           
             foreach(ListBox i in _listBoxes)
             {
                 Text t = i.GetComponentInChildren<Text>();

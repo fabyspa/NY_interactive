@@ -10,7 +10,7 @@ namespace AirFishLab.ScrollingList.Demo
     public class GameObjectListBoxRiserva : ListBox
     {
         [SerializeField]
-        private Text _name, _descr,_nameENG, _descrENG;
+        private Text _name, _descr, _descrENG;
         [SerializeField]
         private Image _image, background;
         private Sprite tex;
@@ -29,7 +29,6 @@ namespace AirFishLab.ScrollingList.Demo
             _descr.text = dataWrapper.data.descr;
             _image.sprite = UpdateImage(dataWrapper.data.name);
             background.color = UpdateColor(listpos, dataWrapper.data.name);
-            _nameENG.text = dataWrapper.data.name_eng;
             _descrENG.text = dataWrapper.data.descr_eng;
             //regione,luogo,anno istituzione,superficie,reparto di competenza
             infos.transform.GetChild(0).GetComponentInChildren<Text>().text = dataWrapper.data.region;

@@ -10,8 +10,6 @@ public class Parco
     public string coord;
     public string descr;
     public string state;
-    //public Sprite sprite;
-    public string name_eng;
     public string descr_eng;
     public string sup;
     public string region;
@@ -22,9 +20,7 @@ public class Parco
         name = r.name;
         coord = r.coord;
         descr = r.descr;
-        //sprite= r.sprite;
         state = r.state;
-        name_eng = r.name_eng;
         descr_eng = r.descr_eng;
         sup = r.sup;
         anno = r.anno;

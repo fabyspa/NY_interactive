@@ -74,23 +74,18 @@ public class LoadExcel : MonoBehaviour
         List<Dictionary<string, object>> data = CSVReader.Read("RISERVE01");
         for (var i = 0; i < data.Count; i++)
         {
-            string[] type = data[i]["Type"].ToString().Split(", ");
+            string[] type = data[i]["Type"].ToString().Split(",");
             string name = data[i]["Name_ITA"].ToString();
             string coord = data[i]["Coord"].ToString();
             string descr = data[i]["Descr_ITA"].ToString();
             string descr_eng = data[i]["Descr_ENG"].ToString();
-            string name_eng = data[i]["Name_ENG"].ToString();
-            if (name_eng == "")
-            {
-                name_eng = name;
-            }
             string luogo = data[i]["Luogo"].ToString();
             string anno = data[i]["Anno"].ToString();
             string sup = data[i]["Sup"].ToString();
             string region = data[i]["Regione"].ToString();
-            string[] type_eng = data[i]["Type_ENG"].ToString().Split(", ");
+            string[] type_eng = data[i]["Type_ENG"].ToString().Split(",");
             string repC = data[i]["RepC"].ToString();
-            AddRiserva(type, name, coord, descr,region,sup,anno,luogo,name_eng,descr_eng,type_eng,repC);
+            AddRiserva(type, name, coord, descr,region,sup,anno,luogo,descr_eng,type_eng,repC);
 
         }
         loadedItems = true;
@@ -115,7 +110,7 @@ public class LoadExcel : MonoBehaviour
         LoadItemData();
     }
 
-    void AddRiserva(string[] type, string name, string coord,  string descr, string region, string sup, string anno, string luogo, string name_eng, string descr_eng, string[] type_eng,string repC)
+    void AddRiserva(string[] type, string name, string coord,  string descr, string region, string sup, string anno, string luogo, string descr_eng, string[] type_eng,string repC)
     {
         Riserva tempItem = new Riserva(blankRiserva);
 
@@ -123,12 +118,10 @@ public class LoadExcel : MonoBehaviour
         tempItem.coord = coord;
         tempItem.name = name;
         tempItem.descr = descr;
-        //tempItem.sprite = sprite;
         tempItem.region = region;
         tempItem.sup = sup;
         tempItem.anno = anno;
         tempItem.luogo = luogo;
-        tempItem.name_eng = name_eng;
         tempItem.descr_eng = descr_eng;
         tempItem.type_eng = type_eng;
         tempItem.repC = repC;
@@ -289,23 +282,17 @@ public class LoadExcel : MonoBehaviour
         Color c;
         switch (type)
         {
-            case "Riserva Naturale Orientata":
+            case "Orientata":
                 ColorUtility.TryParseHtmlString("#446658", out c);
                 break;
-            case "Riserva Naturale Statale":
-                ColorUtility.TryParseHtmlString("#78967E", out c);
-                break;
-            case "Riserva Naturale Integrale":
+            case "Integrale":
                 ColorUtility.TryParseHtmlString("#486C64", out c);
                 break;
-            case "Riserva Naturale Di Popolamento Animale":
+            case "Popolamento Animale":
                 ColorUtility.TryParseHtmlString("#5A705F", out c);
                 break;
-            case "Riserva Naturale Biogenetica":
+            case "Biogenetica":
                 ColorUtility.TryParseHtmlString("#325C5A", out c);
-                break;
-            case "Riserva Naturale Statale Orientata":
-                ColorUtility.TryParseHtmlString("#446658", out c);
                 break;
             case "Foresta Demaniale o altra area gestita":
                 ColorUtility.TryParseHtmlString("#2A4754", out c);
