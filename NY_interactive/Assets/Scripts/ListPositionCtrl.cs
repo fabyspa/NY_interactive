@@ -515,23 +515,32 @@ namespace AirFishLab.ScrollingList
 
         public void CenteredBoxisChanged()
         {
-            
             var info=loadexcel.info;
-           
-            foreach(ListBox i in _listBoxes)
+
+            if (tagscroll == "Type")
             {
-                Text t = i.GetComponentInChildren<Text>();
-                if (i != GetCenteredBox())
+                foreach (ListBox i in _listBoxes)
                 {
-                    t.fontStyle = FontStyle.Normal;
-                    t.fontSize = 25;
-                }
-                else
-                {
-                    t.fontSize = 30;
-                    t.fontStyle = FontStyle.Bold;
+                    Text ita = i.gameObject.transform.GetChild(0).GetComponentInChildren<Text>();
+                    Text eng = i.gameObject.transform.GetChild(1).GetComponentInChildren<Text>();
+                    //Text t = i.GetComponentInChildren<Text>();
+                    if (i != GetCenteredBox())
+                    {
+                        ita.fontStyle = FontStyle.Normal;
+                        ita.fontSize = 25;
+                        eng.fontStyle = FontStyle.Normal;
+                        eng.fontSize = 25;
+                    }
+                    else
+                    {
+                        ita.fontSize = 30;
+                        ita.fontStyle = FontStyle.Bold;
+                        eng.fontSize = 30;
+                        eng.fontStyle = FontStyle.Bold;
+                    }
                 }
             }
+            
                        
 
 #nullable enable
