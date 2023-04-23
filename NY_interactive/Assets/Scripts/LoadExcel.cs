@@ -191,10 +191,6 @@ public class LoadExcel : MonoBehaviour
     //}
     public void ChangeStateTo(GameObject g, string newstate)
     {
-        //Vector3 highlights = new Vector3((float)0.8, (float)0.8, 0);
-        //Vector3 grande = new Vector3((float)0.5, (float)0.5, 0);
-
-
         Riserva r = GetRiservaByCoord(g);
         if (_oldGameObjecct != null)
         {
@@ -202,14 +198,12 @@ public class LoadExcel : MonoBehaviour
             oldR.state = "active";
             _oldGameObjecct.transform.localScale = TransformPoint(oldR.state).transform.localScale;
             _oldGameObjecct.gameObject.GetComponent<Image>().color = ColorPoint(oldR.type, oldR.state, actualType);
-            //_oldGameObjecct.transform.localScale = grande;
         }
         r.state = newstate;
 
         //mi sposta il punto in alto
         if (newstate == "selected")
         {
-            Debug.Log("SETASLASTSIBLING");
             selectedPoint = g;
         }
         g.transform.localScale = TransformPoint(r.state).transform.localScale;
@@ -331,16 +325,13 @@ public class LoadExcel : MonoBehaviour
           
         }
 
-        //Debug.Log(type);
     }
 
     public  List<Riserva> LoadRiservaByType(string type)
     {
         if(actualType== "Tutte")
         {
-            Debug.Log("AAAAAA"+type);
             actualCol= ChangeColor(type);
-
         }
         if (actualType != type)
         {
@@ -350,7 +341,6 @@ public class LoadExcel : MonoBehaviour
             {
                 if (r.type.Contains(type))
                 {
-                    //r.sprite = UpdateImage(r.name);
                     riservaDatabaseType.Add(r);
                     if (r.type.Count() > 1)
                     {
@@ -388,12 +378,9 @@ public class LoadExcel : MonoBehaviour
             float[] coord = Convert_coordinates.remapLatLng(r.coord);
             var value = new float[2];
             coord2position.TryGetValue(p, out value);
-            //Debug.Log("val "+ string.Join(" ,", value));
-            //Debug.Log("coord " + string.Join(" ,", coord));
-
+            
             if (Enumerable.SequenceEqual(coord,value))
             {
-                //Debug.Log("SELEZIONATA "+ r.name);
                 return r;
             }
            

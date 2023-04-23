@@ -299,7 +299,6 @@ namespace AirFishLab.ScrollingList
         public void UpdateTagScroll()
         {
             tagScroll = this.gameObject.tag.ToString();
-            Debug.Log("TAGSCROLL " + tagScroll);
             _listPositionCtrl.tagscroll = tagScroll;
         }
 

@@ -92,7 +92,6 @@ public class ButtonPoint : Button
                     {
                         //indice dell'oggetto target
                         indice_j = i;
-                        Debug.Log("target item" + riserva.name+"il cui indice è " + indice_j);
                     }
                 }
                 CircularScrollingListRiserva circular = info.GetComponent<CircularScrollingListRiserva>();
