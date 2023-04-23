@@ -341,7 +341,6 @@ public class LoadExcel : MonoBehaviour
             {
                 if (r.type.Contains(type))
                 {
-                    riservaDatabaseType.Add(r);
                     if (r.type.Count() > 1)
                     {
                         Debug.Log(r.name);
