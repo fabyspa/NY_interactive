@@ -351,14 +351,16 @@ public class LoadExcel : MonoBehaviour
                 if (r.type.Contains(type))
                 {
                     //r.sprite = UpdateImage(r.name);
-                    riservaDatabaseType.Add(r);
                     if (r.type.Count() > 1)
                     {
+                        Debug.Log(r.name);
                         if (ordenList.Contains(r))
                         {
                             ordenList.Remove(r);
                         }
                     }
+                    riservaDatabaseType.Add(r);
+
                 }
             }
             actualType = type;
