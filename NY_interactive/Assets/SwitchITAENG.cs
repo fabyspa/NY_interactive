@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class SwitchITAENG : MonoBehaviour
 {
     Toggle m_Toggle;
-    //public Text m_Text;
     public string tag1, tag2;
     void Start()
     {
@@ -28,11 +27,9 @@ public class SwitchITAENG : MonoBehaviour
     //Output the new state of the Toggle into Text when the user uses the Toggle
     void ToggleValueChanged(Toggle change)
     {
-       // m_Text.text = "Toggle is : " + m_Toggle.isOn;
-       Debug.Log(m_Toggle.isOn);
        
-            //traduci in inglese
-            SwitchActiveTag();
+        //traduci in inglese
+        SwitchActiveTag();
         
     }
 

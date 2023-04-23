@@ -136,7 +136,8 @@ namespace AirFishLab.ScrollingList
             InitializeListComponents();
             // Make the list position ctrl initialize its position state
             _listPositionCtrl.LateUpdate();
-            if(SceneManager.GetActiveScene().name==Loader.SceneName.RISERVE.ToString())_listPositionCtrl.CenteredBoxisChanged();
+            UpdateTagScroll();
+            if (SceneManager.GetActiveScene().name==Loader.SceneName.RISERVE.ToString())_listPositionCtrl.CenteredBoxisChanged();
             _listPositionCtrl.InitialImageSorting();
             _isInitialized = true;
         }
@@ -298,7 +299,6 @@ namespace AirFishLab.ScrollingList
         public void UpdateTagScroll()
         {
             tagScroll = this.gameObject.tag.ToString();
-            Debug.Log("TAGSCROLL " + tagScroll);
             _listPositionCtrl.tagscroll = tagScroll;
         }
 
