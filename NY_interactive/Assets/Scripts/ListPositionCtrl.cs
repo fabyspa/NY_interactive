@@ -477,23 +477,44 @@ namespace AirFishLab.ScrollingList
 
             if (!_isEndingMovement)
                 return;
-            else
+             else
             {
                 if (tagscroll == "Type")
                 {
                     //Debug.Log("type: " + GetCenteredBox().GetComponentInChildren<Text>().text);
                     var newCenteredBoxAfterScroll = GetCenteredBox().GetComponentInChildren<Text>().text;
+                    foreach (ListBox i in _listBoxes)
+                    {
+                        Text ita = i.gameObject.transform.GetChild(0).GetComponentInChildren<Text>();
+                        Text eng = i.gameObject.transform.GetChild(1).GetComponentInChildren<Text>();
+                        //Text t = i.GetComponentInChildren<Text>();
+                        if (i != GetCenteredBox())
+                        {
+                            ita.fontStyle = FontStyle.Normal;
+                            ita.fontSize = 25;
+                            eng.fontStyle = FontStyle.Normal;
+                            eng.fontSize = 25;
+                        }
+                        else
+                        {
+                            Debug.Log(GetCenteredBox().name);
+                            ita.fontSize = 30;
+                            ita.fontStyle = FontStyle.Bold;
+                            eng.fontSize = 30;
+                            eng.fontStyle = FontStyle.Bold;
+                        }
+                    }
                     if (m_MyEvent != null && centeredBoxAfterScroll != newCenteredBoxAfterScroll)
                     {
                         centeredBoxAfterScroll = newCenteredBoxAfterScroll;
                         m_MyEvent.Invoke();
                     }
                     //Cambia il box centrato.
-
+                    
                 }
                 if (tagscroll == "Info")
                 {
-                    if (SceneManager.GetActiveScene().name == Loader.SceneName.RISERVE.ToString())
+                    if(SceneManager.GetActiveScene().name == Loader.SceneName.RISERVE.ToString())
                     {
                         var newInfoCenteredBoxAfterScroll = GetCenteredBox().GetComponentInChildren<Text>().text;
                         Riserva _centerRiserva = loadexcel.LoadRiservaByName(newInfoCenteredBoxAfterScroll);
@@ -507,11 +528,11 @@ namespace AirFishLab.ScrollingList
                         loadexcelParco.aItem = _centerRiserva;
                         loadexcelParco.ChangeStateTo(loadexcelParco.coord2position.FirstOrDefault(x => Enumerable.SequenceEqual(x.Value, Convert_coordinates.remapLatLng(loadexcelParco.aItem.coord))).Key, "selected");
                     }
-
+                    
                 }
             }
 
-
+           
             _isEndingMovement = false;
             _listSetting.onMovementEnd?.Invoke();
         }
@@ -519,33 +540,6 @@ namespace AirFishLab.ScrollingList
         public void CenteredBoxisChanged()
         {
             var info=loadexcel.info;
-
-            if (tagscroll == "Type")
-            {
-                foreach (ListBox i in _listBoxes)
-                {
-                    Text ita = i.gameObject.transform.GetChild(0).GetComponentInChildren<Text>();
-                    Text eng = i.gameObject.transform.GetChild(1).GetComponentInChildren<Text>();
-                    //Text t = i.GetComponentInChildren<Text>();
-                    if (i != GetCenteredBox())
-                    {
-                        ita.fontStyle = FontStyle.Normal;
-                        ita.fontSize = 25;
-                        eng.fontStyle = FontStyle.Normal;
-                        eng.fontSize = 25;
-                    }
-                    else
-                    {
-                        ita.fontSize = 30;
-                        ita.fontStyle = FontStyle.Bold;
-                        eng.fontSize = 30;
-                        eng.fontStyle = FontStyle.Bold;
-                    }
-                }
-            }
-            
-                       
-
 #nullable enable
             VariableGameObjectListBankRiserva? list = (VariableGameObjectListBankRiserva?) info.GetComponent<CircularScrollingListRiserva>().listBank;
             if(list!=null)
@@ -554,16 +548,6 @@ namespace AirFishLab.ScrollingList
             }
 
             #nullable disable
-            // list.ChangeInfoContents(centeredBoxAfterScroll);
-            //foreach (VariableStringListBankRiserva v in _variable)
-            //{
-            //    Debug.Log(v.gameObject.name);
-            //    if (v.gameObject.transform.parent.name == "Info")
-            //    {
-            //        v.ChangeInfoContents(centeredBoxAfterScroll);
-
-            //    }
-            //}
 
         }
         #endregion
