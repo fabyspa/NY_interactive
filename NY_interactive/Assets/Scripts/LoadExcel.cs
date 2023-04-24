@@ -341,14 +341,7 @@ public class LoadExcel : MonoBehaviour
             {
                 if (r.type.Contains(type))
                 {
-                    if (r.type.Count() > 1)
-                    {
-                        Debug.Log(r.name);
-                        if (ordenList.Contains(r))
-                        {
-                            ordenList.Remove(r);
-                        }
-                    }
+                   
                     riservaDatabaseType.Add(r);
 
                 }
@@ -398,7 +391,8 @@ public class LoadExcel : MonoBehaviour
             ordenList.AddRange(LoadRiservaByType(t));
 
         }
-        return ordenList;
+       
+        return ordenList.GroupBy(r=>r.name).Select(g=>g.First()).ToList();
 
     }
 

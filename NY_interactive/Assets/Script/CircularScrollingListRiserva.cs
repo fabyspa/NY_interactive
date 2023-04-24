@@ -300,6 +300,7 @@ namespace AirFishLab.ScrollingList
         {
             tagScroll = this.gameObject.tag.ToString();
             _listPositionCtrl.tagscroll = tagScroll;
+          
         }
 
         public void OnEndDrag(PointerEventData eventData)

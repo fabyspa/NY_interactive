@@ -442,9 +442,11 @@ namespace AirFishLab.ScrollingList
             return;
             //Velocità movimento da un target ad un altro
             var distance = _movementCtrl.GetDistance(Time.deltaTime*0.5f);
-                
+
             foreach (var listBox in _listBoxes)
+            {
                 listBox.UpdatePosition(distance);
+            }
 
             //Debug.Log(GetCenteredBox());
 
@@ -465,9 +467,15 @@ namespace AirFishLab.ScrollingList
             // Update the state of the boxes
             FindDeltaDistanceToCenter();
             if (_listSetting.listType == CircularScrollingList.ListType.Linear)
-                UpdatePositionState();  
+                UpdatePositionState();
 
             if (!_movementCtrl.IsMovementEnded())
+             return;
+           
+            // Not to update the state of box after the last frame of movement
+            _toRunLateUpdate = false;
+
+            if (!_isEndingMovement)
                 return;
             else
             {
@@ -480,12 +488,12 @@ namespace AirFishLab.ScrollingList
                         centeredBoxAfterScroll = newCenteredBoxAfterScroll;
                         m_MyEvent.Invoke();
                     }
-                    //Cambia il box centrato
-                    
+                    //Cambia il box centrato.
+
                 }
                 if (tagscroll == "Info")
                 {
-                    if(SceneManager.GetActiveScene().name == Loader.SceneName.RISERVE.ToString())
+                    if (SceneManager.GetActiveScene().name == Loader.SceneName.RISERVE.ToString())
                     {
                         var newInfoCenteredBoxAfterScroll = GetCenteredBox().GetComponentInChildren<Text>().text;
                         Riserva _centerRiserva = loadexcel.LoadRiservaByName(newInfoCenteredBoxAfterScroll);
@@ -499,16 +507,11 @@ namespace AirFishLab.ScrollingList
                         loadexcelParco.aItem = _centerRiserva;
                         loadexcelParco.ChangeStateTo(loadexcelParco.coord2position.FirstOrDefault(x => Enumerable.SequenceEqual(x.Value, Convert_coordinates.remapLatLng(loadexcelParco.aItem.coord))).Key, "selected");
                     }
-                    
+
                 }
             }
 
-            // Not to update the state of box after the last frame of movement
-            _toRunLateUpdate = false;
 
-            if (!_isEndingMovement)
-                return;
-           
             _isEndingMovement = false;
             _listSetting.onMovementEnd?.Invoke();
         }
