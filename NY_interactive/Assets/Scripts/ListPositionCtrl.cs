@@ -547,7 +547,7 @@ namespace AirFishLab.ScrollingList
                 list.ChangeInfoContents(centeredBoxAfterScroll);
             }
 
-            #nullable disable
+#nullable disable
 
         }
         #endregion

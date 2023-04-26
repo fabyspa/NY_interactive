@@ -58,7 +58,6 @@ public class LoadExcel : MonoBehaviour
 
     public void SetFocusOnTheTop()
     {
-        Debug.Log("AIITEM" + aItem.name);
         var myKey = coord2position.FirstOrDefault(x => Enumerable.SequenceEqual(x.Value, Convert_coordinates.remapLatLng(aItem.coord))).Key;
         
         myKey.transform.SetAsLastSibling();
