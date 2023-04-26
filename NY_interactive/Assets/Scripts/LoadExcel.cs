@@ -277,19 +277,19 @@ public class LoadExcel : MonoBehaviour
         switch (type)
         {
             case "Orientata":
-                ColorUtility.TryParseHtmlString("#446658", out c);
+                ColorUtility.TryParseHtmlString("#5D8562", out c);
                 break;
             case "Integrale":
-                ColorUtility.TryParseHtmlString("#486C64", out c);
+                ColorUtility.TryParseHtmlString("#648F76", out c);
                 break;
             case "Popolamento Animale":
-                ColorUtility.TryParseHtmlString("#5A705F", out c);
+                ColorUtility.TryParseHtmlString("#7D946F", out c);
                 break;
             case "Biogenetica":
-                ColorUtility.TryParseHtmlString("#325C5A", out c);
+                ColorUtility.TryParseHtmlString("#457969", out c);
                 break;
             case "Foresta Demaniale o altra area gestita":
-                ColorUtility.TryParseHtmlString("#2A4754", out c);
+                ColorUtility.TryParseHtmlString("#39585C", out c);
                 break;
             default:
                 c=Color.red;
