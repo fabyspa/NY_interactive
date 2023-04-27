@@ -483,7 +483,7 @@ namespace AirFishLab.ScrollingList
                 {
                     //Debug.Log("type: " + GetCenteredBox().GetComponentInChildren<Text>().text);
                     var newCenteredBoxAfterScroll = GetCenteredBox().GetComponentInChildren<Text>().text;
-                    BoldTheCenterItem();
+                    //BoldTheCenterItem();
                     if (m_MyEvent != null && centeredBoxAfterScroll != newCenteredBoxAfterScroll)
                     {
                         centeredBoxAfterScroll = newCenteredBoxAfterScroll;
