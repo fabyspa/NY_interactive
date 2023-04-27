@@ -73,7 +73,6 @@ namespace AirFishLab.ScrollingList
                  GetCenterItem();
 
                 loadexcel.InstantiatePoints(loadexcel.riservaDatabase);
-
                 //Debug.Log(loadexcel.pointList.Count);
             }
 

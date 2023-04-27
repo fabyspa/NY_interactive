@@ -449,9 +449,9 @@ namespace AirFishLab.ScrollingList
             }
 
             //Debug.Log(GetCenteredBox());
-
+            BoldTheCenterItem();
             //Aggiorna il box non centrato 
-           
+
 
         }
 
@@ -483,27 +483,7 @@ namespace AirFishLab.ScrollingList
                 {
                     //Debug.Log("type: " + GetCenteredBox().GetComponentInChildren<Text>().text);
                     var newCenteredBoxAfterScroll = GetCenteredBox().GetComponentInChildren<Text>().text;
-                    foreach (ListBox i in _listBoxes)
-                    {
-                        Text ita = i.gameObject.transform.GetChild(0).GetComponentInChildren<Text>();
-                        Text eng = i.gameObject.transform.GetChild(1).GetComponentInChildren<Text>();
-                        //Text t = i.GetComponentInChildren<Text>();
-                        if (i != GetCenteredBox())
-                        {
-                            ita.fontStyle = FontStyle.Normal;
-                            ita.fontSize = 25;
-                            eng.fontStyle = FontStyle.Normal;
-                            eng.fontSize = 25;
-                        }
-                        else
-                        {
-                            Debug.Log(GetCenteredBox().name);
-                            ita.fontSize = 30;
-                            ita.fontStyle = FontStyle.Bold;
-                            eng.fontSize = 30;
-                            eng.fontStyle = FontStyle.Bold;
-                        }
-                    }
+                    BoldTheCenterItem();
                     if (m_MyEvent != null && centeredBoxAfterScroll != newCenteredBoxAfterScroll)
                     {
                         centeredBoxAfterScroll = newCenteredBoxAfterScroll;
@@ -537,6 +517,33 @@ namespace AirFishLab.ScrollingList
             _listSetting.onMovementEnd?.Invoke();
         }
 
+
+        public void BoldTheCenterItem()
+        {
+            foreach (ListBox i in _listBoxes)
+            {
+                Text ita = i.gameObject.transform.GetChild(0).GetComponentInChildren<Text>();
+                Text eng = i.gameObject.transform.GetChild(1).GetComponentInChildren<Text>();
+                //Text t = i.GetComponentInChildren<Text>();
+                //if (GetCenteredBox() == null) Debug.Log("NULL");
+                if (i != GetCenteredBox())
+                {
+                    ita.fontStyle = FontStyle.Normal;
+                    ita.fontSize = 25;
+                    eng.fontStyle = FontStyle.Normal;
+                    eng.fontSize = 25;
+                }
+                else
+                {
+                    ita.fontSize = 30;
+                    ita.fontStyle = FontStyle.Bold;
+                    eng.fontSize = 30;
+                    eng.fontStyle = FontStyle.Bold;
+                }
+            }
+
+        }
+
         public void CenteredBoxisChanged()
         {
             var info=loadexcel.info;
@@ -546,7 +553,7 @@ namespace AirFishLab.ScrollingList
             {
                 list.ChangeInfoContents(centeredBoxAfterScroll);
             }
-
+            
 #nullable disable
 
         }
