@@ -78,8 +78,14 @@ namespace AirFishLab.ScrollingList
             }
 
             //loadexcel.AddState();
-            var myKey = loadexcel.coord2position.FirstOrDefault(x => Enumerable.SequenceEqual(x.Value, Convert_coordinates.remapLatLng(loadexcel.aItem.coord))).Key;
+            GameObject myKey = loadexcel.coord2position.FirstOrDefault(x => Enumerable.SequenceEqual(x.Value, Convert_coordinates.remapLatLng(loadexcel.aItem.coord))).Key;
+            //myKey.transform.SetAsLastSibling();
+            if(myKey != null)
+            {
+                myKey.transform.SetAsLastSibling();
+            }
             loadexcel._oldGameObjecct = myKey;
+
         }
 
         
