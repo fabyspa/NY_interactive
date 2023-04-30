@@ -448,8 +448,8 @@ namespace AirFishLab.ScrollingList
                 listBox.UpdatePosition(distance);
             }
 
-            //Debug.Log(GetCenteredBox());
-            BoldTheCenterItem();
+            
+                //BoldTheCenterItem();
             //Aggiorna il box non centrato 
 
 
