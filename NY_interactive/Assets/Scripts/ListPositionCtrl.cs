@@ -471,13 +471,7 @@ namespace AirFishLab.ScrollingList
 
             if (!_movementCtrl.IsMovementEnded())
              return;
-           
-            // Not to update the state of box after the last frame of movement
-            _toRunLateUpdate = false;
-
-            if (!_isEndingMovement)
-                return;
-             else
+            else
             {
                 if (tagscroll == "Type")
                 {
@@ -492,12 +486,14 @@ namespace AirFishLab.ScrollingList
                     //Cambia il box centrato.
                     
                 }
+
                 if (tagscroll == "Info")
                 {
-                    if(SceneManager.GetActiveScene().name == Loader.SceneName.RISERVE.ToString())
+                    if (SceneManager.GetActiveScene().name == Loader.SceneName.RISERVE.ToString())
                     {
                         var newInfoCenteredBoxAfterScroll = GetCenteredBox().GetComponentInChildren<Text>().text;
                         Riserva _centerRiserva = loadexcel.LoadRiservaByName(newInfoCenteredBoxAfterScroll);
+                        Debug.Log("INFO4444");
                         loadexcel.aItem = _centerRiserva;
                         loadexcel.ChangeStateTo(loadexcel.coord2position.FirstOrDefault(x => Enumerable.SequenceEqual(x.Value, Convert_coordinates.remapLatLng(loadexcel.aItem.coord))).Key, "selected");
                     }
@@ -505,12 +501,19 @@ namespace AirFishLab.ScrollingList
                     {
                         var newInfoCenteredBoxAfterScroll = GetCenteredBox().GetComponentInChildren<Text>().text;
                         Parco _centerRiserva = loadexcelParco.LoadParcoByName(newInfoCenteredBoxAfterScroll);
+                        Debug.Log("INFO44444");
                         loadexcelParco.aItem = _centerRiserva;
                         loadexcelParco.ChangeStateTo(loadexcelParco.coord2position.FirstOrDefault(x => Enumerable.SequenceEqual(x.Value, Convert_coordinates.remapLatLng(loadexcelParco.aItem.coord))).Key, "selected");
                     }
-                    
+
                 }
             }
+            // Not to update the state of box after the last frame of movement
+            _toRunLateUpdate = false;
+
+            if (!_isEndingMovement)
+                return;
+            
 
            
             _isEndingMovement = false;
