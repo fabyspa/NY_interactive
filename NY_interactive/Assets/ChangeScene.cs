@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEditor.Experimental.Rendering;
 
 public class ChangeScene : MonoBehaviour
 {
@@ -13,9 +14,7 @@ public class ChangeScene : MonoBehaviour
     {
         Button btn = yourButton.GetComponent<Button>();
         canvas = transform.root.gameObject;
-
-
-
+        
         if (this.gameObject.tag == Loader.currentScene.ToString())
         {
             btn.onClick.AddListener(Loader.SwitchScene);

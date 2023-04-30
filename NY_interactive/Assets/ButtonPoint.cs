@@ -71,7 +71,10 @@ public class ButtonPoint : Button
         int indice_j=0;
 
         base.OnPointerClick(eventData);
-
+        foreach(CircularScrollingListRiserva cslr in GameObject.FindObjectsOfType<CircularScrollingListRiserva>())
+        {
+            cslr._listPositionCtrl.tagscroll = "Click";
+        }
         if (loadexcel != null && SceneManager.GetActiveScene().name==Loader.SceneName.RISERVE.ToString() )
         {
             //Vector3 localPosition = this.transform.localPosition;

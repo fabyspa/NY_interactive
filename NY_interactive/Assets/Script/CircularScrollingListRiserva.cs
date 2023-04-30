@@ -199,23 +199,31 @@ namespace AirFishLab.ScrollingList
         /// <summary>
         /// Move the list one unit up or right
         /// </summary>
-        public void MoveOneUnitUp()
+        public void MoveOneUnitUp(string tagscroll)
         {
             if (_hasNoContent)
                 return;
+            if(tagscroll== "Type")
+                _listPositionCtrl.SetUnitMove(3);
 
-            _listPositionCtrl.SetUnitMove(4);
+            else
+                _listPositionCtrl.SetUnitMove(4);
+
         }
 
         /// <summary>
         /// Move the list one unit down or left
         /// </summary>
-        public void MoveOneUnitDown()
+        public void MoveOneUnitDown(string tagscroll)
         {
             if (_hasNoContent)
                 return;
 
-            _listPositionCtrl.SetUnitMove(-4);
+            if (tagscroll == "Type")
+                _listPositionCtrl.SetUnitMove(-3);
+
+            else
+                _listPositionCtrl.SetUnitMove(-4);
         }
 
         /// <summary>
@@ -284,7 +292,8 @@ namespace AirFishLab.ScrollingList
         {
             if (_hasNoContent)
                 return;
-
+            _listPositionCtrl.first = false;
+            _listPositionCtrl.tagscroll = this.gameObject.tag;
             _listPositionCtrl.InputPositionHandler(eventData, TouchPhase.Began);
         }
 

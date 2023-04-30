@@ -30,11 +30,15 @@ public class Loader
         else
         {
             currentScene = SceneName.PARCHI;
+
             // Abilita/disabilita i GameObject delle scene in base alla scena corrente
             EnableDisableSceneObjects();
         }
         // Carica lo stato degli oggetti della nuova scena
+        GameObject.FindGameObjectWithTag("AUDIO").GetComponent<AudioSource>().Play();
+
         LoadSceneState();
+
     }
     public static void EnableDisableSceneObjects()
     {
@@ -55,6 +59,9 @@ public class Loader
                 obj.SetActive(true);
             }
             GameObject.FindGameObjectWithTag("TOGGLE").GetComponent<Toggle>().isOn = toggle;
+            var loadexcel = GameObject.FindObjectOfType<LoadExcelParchi>();
+            loadexcel.info.GetComponent<CircularScrollingListRiserva>()._listPositionCtrl.first = true;
+
             //if (isRiservaSceneLoaded) SceneManager.UnloadSceneAsync(SceneName.RISERVE.ToString());
             ResetScroll(SceneName.PARCHI);
 
@@ -79,6 +86,7 @@ public class Loader
             }
             var loadexcel = GameObject.FindObjectOfType<LoadExcel>();
             GameObject.FindGameObjectWithTag("TOGGLE").GetComponent<Toggle>().isOn = toggle;
+            loadexcel.info.GetComponent<CircularScrollingListRiserva>()._listPositionCtrl.first = true;
             ResetScroll(SceneName.RISERVE);
             loadexcel.SetFocusOnTheTop();
             //if (isParkSceneLoaded) SceneManager.UnloadSceneAsync(SceneName.PARCHI.ToString());
