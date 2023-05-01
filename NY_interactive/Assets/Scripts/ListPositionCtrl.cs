@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -8,8 +7,9 @@ using AirFishLab.ScrollingList.MovementCtrl;
 using UnityEngine.Events;
 using System.Linq;
 using UnityEngine.SceneManagement;
-using static UnityEngine.ParticleSystem;
-
+using System.Collections;
+using System.Runtime.CompilerServices;
+using UnityEngine.UIElements;
 
 namespace AirFishLab.ScrollingList
 {
@@ -23,6 +23,9 @@ namespace AirFishLab.ScrollingList
         LoadExcel loadexcel;
         LoadExcelParchi loadexcelParco;
         public bool first;
+        private bool _scrolling;
+        public bool isRunning = false;
+
         #region Enums
 
 
@@ -369,6 +372,7 @@ namespace AirFishLab.ScrollingList
                     //velocit� drag & drop modificando delta time
                     _movementCtrl.SetMovement(_deltaInputDistance / deltaTime * 0.5f, false);
                     _isEndingMovement = true;
+
                     break;
             }
 
@@ -441,7 +445,9 @@ namespace AirFishLab.ScrollingList
         public void Update()
         {
             if (_movementCtrl.IsMovementEnded())
-            return;
+            {
+                return;
+            }
             //Velocit� movimento da un target ad un altro
             var distance = _movementCtrl.GetDistance(Time.deltaTime*0.5f);
 
@@ -475,14 +481,15 @@ namespace AirFishLab.ScrollingList
              return;
             else
             {
+
                 if (tagscroll == "Type")
                 {
                     //Debug.Log("type: " + GetCenteredBox().GetComponentInChildren<Text>().text);
                     var newCenteredBoxAfterScroll = GetCenteredBox().GetComponentInChildren<Text>().text;
                     //BoldTheCenterItem();
-                    if(SceneManager.GetActiveScene().name==Loader.SceneName.RISERVE.ToString())
-                        DeleteAudioSource(loadexcel.scrolling);
-                 
+                    if (SceneManager.GetActiveScene().name == Loader.SceneName.RISERVE.ToString())
+                        //DeleteAudioSource(loadexcel.scrolling);
+
 
                     if (m_MyEvent != null && centeredBoxAfterScroll != newCenteredBoxAfterScroll)
                     {
@@ -490,16 +497,16 @@ namespace AirFishLab.ScrollingList
                         m_MyEvent.Invoke();
                     }
                     //Cambia il box centrato.
-                    
+
                 }
 
                 if (tagscroll == "Info")
                 {
-                    if (SceneManager.GetActiveScene().name == Loader.SceneName.RISERVE.ToString())
-                        DeleteAudioSource(loadexcel.info);
+                    if (SceneManager.GetActiveScene().name == Loader.SceneName.RISERVE.ToString()) ;
+                    // DeleteAudioSource(loadexcel.info);
                     else
                     {
-                        DeleteAudioSource(loadexcelParco.info);
+                        // DeleteAudioSource(loadexcelParco.info);
 
                     }
 
@@ -507,7 +514,6 @@ namespace AirFishLab.ScrollingList
                     {
                         var newInfoCenteredBoxAfterScroll = GetCenteredBox().GetComponentInChildren<Text>().text;
                         Riserva _centerRiserva = loadexcel.LoadRiservaByName(newInfoCenteredBoxAfterScroll);
-                        Debug.Log("INFO4444");
                         loadexcel.aItem = _centerRiserva;
                         loadexcel.ChangeStateTo(loadexcel.coord2position.FirstOrDefault(x => Enumerable.SequenceEqual(x.Value, Convert_coordinates.remapLatLng(loadexcel.aItem.coord))).Key, "selected");
                     }
@@ -515,18 +521,24 @@ namespace AirFishLab.ScrollingList
                     {
                         var newInfoCenteredBoxAfterScroll = GetCenteredBox().GetComponentInChildren<Text>().text;
                         Parco _centerRiserva = loadexcelParco.LoadParcoByName(newInfoCenteredBoxAfterScroll);
-                        Debug.Log("INFO44444");
                         loadexcelParco.aItem = _centerRiserva;
                         loadexcelParco.ChangeStateTo(loadexcelParco.coord2position.FirstOrDefault(x => Enumerable.SequenceEqual(x.Value, Convert_coordinates.remapLatLng(loadexcelParco.aItem.coord))).Key, "selected");
                     }
 
                 }
+
+
+
+
             }
             // Not to update the state of box after the last frame of movement
             _toRunLateUpdate = false;
 
             if (!_isEndingMovement)
+            {
                 return;
+            }
+                
             
 
            
@@ -537,6 +549,9 @@ namespace AirFishLab.ScrollingList
 
         public void BoldTheCenterItem()
         {
+            if (_movementCtrl.IsMovementEnded())
+                return;
+
             foreach (ListBox i in _listBoxes)
             {
                 Text ita = i.gameObject.transform.GetChild(0).GetComponentInChildren<Text>();
@@ -556,6 +571,7 @@ namespace AirFishLab.ScrollingList
                     ita.fontStyle = FontStyle.Bold;
                     eng.fontSize = 30;
                     eng.fontStyle = FontStyle.Bold;
+                   
                 }
             }
 
@@ -587,7 +603,6 @@ namespace AirFishLab.ScrollingList
         {
             var minDeltaDistance = Mathf.Infinity;
             ListBox candidateBox = null;
-
             foreach (var listBox in _listBoxes) {
                 // Skip the disabled box in linear mode
                 if (!listBox.isActiveAndEnabled)
@@ -608,39 +623,52 @@ namespace AirFishLab.ScrollingList
             if (_centeredBox != candidateBox) {
                 _listSetting.onCenteredContentChanged?.Invoke(candidateBox.contentID);
                 candidateBox.PopToFront();
+                Debug.Log("SCROLLING");
                 if (!first)
                 {
-                    if(tagscroll=="Info")
+                    _scrolling = true;
+
+                    if (tagscroll=="Info")
                     {
+                        Debug.Log("SCROLLING INFO");
                         if (SceneManager.GetActiveScene().name == Loader.SceneName.RISERVE.ToString())
                         {
-                            AudioClip clip = loadexcel.info.GetComponent<AudioSource>().clip;
-                            AudioSource audioSource = loadexcel.info.AddComponent<AudioSource>();
+                            var scroll = loadexcel.info;
+                            AudioClip clip = scroll.GetComponents<AudioSource>()[0].clip;
+                            AudioSource audioSource = scroll.AddComponent<AudioSource>();
                             audioSource.clip = clip;
                             audioSource.playOnAwake = false;
                             audioSource.Play();
+                            GameObject.FindFirstObjectByType<AudioManager>().PlayAndDelete(loadexcel.info);
                         }
                         else
                         {
-                            AudioClip clip = loadexcelParco.info.GetComponent<AudioSource>().clip;
-                            AudioSource audioSource = loadexcelParco.info.AddComponent<AudioSource>();
+                            var scroll = loadexcelParco.info;
+                            AudioClip clip = scroll.GetComponents<AudioSource>()[0].clip;
+                            AudioSource audioSource = scroll.AddComponent<AudioSource>();
                             audioSource.clip = clip;
                             audioSource.playOnAwake = false;
                             audioSource.Play();
+                            GameObject.FindFirstObjectByType<AudioManager>().PlayAndDelete(loadexcelParco.info);
+
                         }
                     }
                     else if(tagscroll=="Type")
                     {
                         if (SceneManager.GetActiveScene().name == Loader.SceneName.RISERVE.ToString())
                         {
-                            AudioClip clip = loadexcel.scrolling.GetComponent<AudioSource>().clip;
-                            AudioSource audioSource = loadexcel.scrolling.AddComponent<AudioSource>();
+                            var scroll = loadexcel.scrolling;
+                            AudioClip clip = scroll.GetComponents<AudioSource>()[0].clip;
+                            AudioSource audioSource = scroll.AddComponent<AudioSource>();
                             audioSource.clip = clip;
                             audioSource.playOnAwake = false;
                             audioSource.Play();
+                            GameObject.FindFirstObjectByType<AudioManager>().PlayAndDelete(loadexcel.scrolling);
+
                         }
 
                     }
+
                    
                 }
             }
@@ -677,10 +705,10 @@ namespace AirFishLab.ScrollingList
         public void DeleteAudioSource(GameObject circular)
         {
             var counter = 0;
-           
-            foreach (AudioSource a in circular.GetComponent<CircularScrollingListRiserva>().gameObject.GetComponents<AudioSource>())
+            AudioSource[] audiosources = circular.GetComponent<CircularScrollingListRiserva>().gameObject.GetComponents<AudioSource>();
+            foreach (AudioSource a in audiosources)
             {
-                if (counter != 0)
+                if (counter!=0 && counter!=audiosources.Length-1)
                     GameObject.Destroy(a);
                 counter++;
             }
@@ -711,5 +739,13 @@ namespace AirFishLab.ScrollingList
         }
 
         #endregion
+        public IEnumerator PlayAndDelete(GameObject scroll)
+        {
+            isRunning = true;
+            var clip = scroll.GetComponents<AudioSource>()[0].clip;
+            yield return new WaitForSeconds(clip.length);
+            DeleteAudioSource(scroll);
+            isRunning = false;
+        }
     }
 }

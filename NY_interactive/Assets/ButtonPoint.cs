@@ -81,7 +81,7 @@ public class ButtonPoint : Button
             Riserva riserva = loadexcel.GetRiservaByCoord(this.gameObject);
             if (riserva.state == "active")
             {
-                
+                this.GetComponent<AudioSource>().Play();
                 for (int  i = 0; i < info.GetComponent<VariableGameObjectListBankRiserva>()._contents.Length; i++)
                 {
                     //if (info.GetComponent<VariableGameObjectListBankRiserva>()._contents[i].name == info.GetComponent<VariableGameObjectListBankRiserva>().GetCenterItem().name)
@@ -159,6 +159,8 @@ public class ButtonPoint : Button
             Parco parco = loadexcelParchi.GetParcoByCoord(this.gameObject);
             if (parco.state == "active")
             {
+                this.GetComponent<AudioSource>().Play();
+
                 loadexcelParchi.ChangeStateTo(this.gameObject, "selected");
                 for (int i = 0; i < info.GetComponent<VariableGameObjectListBankParco>()._contents.Length; i++)
                 {

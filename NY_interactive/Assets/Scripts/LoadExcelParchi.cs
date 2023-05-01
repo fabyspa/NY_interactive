@@ -141,7 +141,6 @@ public class LoadExcelParchi : MonoBehaviour
         r.state = newstate;
         if (newstate == "selected")
         {
-            Debug.Log("SETASLASTSIBLING");
             selectedPoint = g;
         }
         g.transform.localScale = TransformPoint(r.state).transform.localScale;
