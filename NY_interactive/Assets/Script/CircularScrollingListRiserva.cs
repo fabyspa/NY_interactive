@@ -220,10 +220,18 @@ namespace AirFishLab.ScrollingList
                 return;
 
             if (tagscroll == "Type")
+            {
                 _listPositionCtrl.SetUnitMove(-3);
+                _listPositionCtrl.first = false;
+            }
 
             else
+            {
                 _listPositionCtrl.SetUnitMove(-4);
+                _listPositionCtrl.first = false;
+
+            }
+
         }
 
         /// <summary>

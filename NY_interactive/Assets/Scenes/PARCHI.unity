@@ -6221,7 +6221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74b28da717247e847909960b478ff563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tagScroll: 
+  tagScroll: Info
   _listBank: {fileID: 1371252907}
   _listBoxes:
   - {fileID: 473017539}
