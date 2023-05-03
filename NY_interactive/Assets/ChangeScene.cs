@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
-using UnityEditor.Experimental.Rendering;
+//using UnityEditor.Experimental.Rendering;
 
 public class ChangeScene : MonoBehaviour
 {
