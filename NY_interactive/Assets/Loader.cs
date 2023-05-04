@@ -46,7 +46,6 @@ public class Loader
         {
             GameObject[] objectsInScene = SceneManager.GetSceneByName(SceneName.RISERVE.ToString()).GetRootGameObjects();
             // Salva lo stato di ogni oggetto
-            Debug.Log(SceneManager.GetActiveScene().name);
             foreach (GameObject obj in objectsInScene)
             {
                 obj.SetActive(false);

@@ -623,14 +623,12 @@ namespace AirFishLab.ScrollingList
             if (_centeredBox != candidateBox) {
                 _listSetting.onCenteredContentChanged?.Invoke(candidateBox.contentID);
                 candidateBox.PopToFront();
-                Debug.Log("SCROLLING");
                 if (!first)
                 {
                     _scrolling = true;
 
                     if (tagscroll=="Info")
                     {
-                        Debug.Log("SCROLLING INFO");
                         if (SceneManager.GetActiveScene().name == Loader.SceneName.RISERVE.ToString())
                         {
                             var scroll = loadexcel.info;

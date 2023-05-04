@@ -27,7 +27,6 @@ public class AddScene : MonoBehaviour
         var asyncLoadLevel1 = SceneManager.LoadSceneAsync(Loader.SceneName.RISERVE.ToString(), LoadSceneMode.Additive);
         while (!asyncLoadLevel1.isDone)
         {
-            Debug.Log("Loading the Scene");
             yield return null;
         }
 
@@ -37,7 +36,6 @@ public class AddScene : MonoBehaviour
         var asyncLoadLevel = SceneManager.LoadSceneAsync(Loader.SceneName.PARCHI.ToString(), LoadSceneMode.Additive);
         while (!asyncLoadLevel.isDone)
         {
-            Debug.Log("Loading the Scene");
             yield return null;
         }
 
