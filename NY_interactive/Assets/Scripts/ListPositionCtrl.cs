@@ -449,7 +449,7 @@ namespace AirFishLab.ScrollingList
                 return;
             }
             //Velocit� movimento da un target ad un altro
-            var distance = _movementCtrl.GetDistance(Time.deltaTime*0.4f);
+            var distance = _movementCtrl.GetDistance(Time.deltaTime*0.3f);  //0.4f
 
             foreach (var listBox in _listBoxes)
             {

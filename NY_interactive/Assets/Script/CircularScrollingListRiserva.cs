@@ -291,11 +291,10 @@ namespace AirFishLab.ScrollingList
             if (!_listContentManager.IsIDValid(contentID))
                 throw new IndexOutOfRangeException(
                     $"{nameof(contentID)} is larger than the number of contents");
-
             var centeredBox = _listPositionCtrl.GetCenteredBox();
             var centeredContentID = centeredBox.contentID;
             _listPositionCtrl.SetSelectionMovement(
-                _listContentManager.GetShortestDiff(centeredContentID, contentID));
+             _listContentManager.GetShortestDiff(centeredContentID, contentID));
         }
 
         #endregion
