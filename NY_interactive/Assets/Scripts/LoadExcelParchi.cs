@@ -137,6 +137,7 @@ public class LoadExcelParchi : MonoBehaviour
             oldR.state = "active";
             _oldGameObjecct.transform.localScale = TransformPoint(oldR.state).transform.localScale;
             _oldGameObjecct.gameObject.GetComponent<Image>().color = ColorPoint(oldR.state);
+            _oldGameObjecct.transform.Find("Blur").GetComponent<Image>().color = new Color(0f, 0f, 0f, 0.3f);
         }
         r.state = newstate;
         if (newstate == "selected")
@@ -147,6 +148,8 @@ public class LoadExcelParchi : MonoBehaviour
         g.gameObject.GetComponent<Image>().color = ColorPoint(r.state);
         _oldGameObjecct = g;
         selectedPoint.transform.SetAsLastSibling();
+        selectedPoint.transform.Find("Blur").GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.3f);
+
     }
     //gestisco scala punti
     public GameObject TransformPoint(string state)
@@ -159,13 +162,17 @@ public class LoadExcelParchi : MonoBehaviour
             case "active":
                 t.transform.localScale = grande;
                 t.gameObject.transform.GetChild(0).gameObject.active = true;
+                t.transform.Find("Blur").GetComponent<Image>().color = new Color(0f, 0f, 0f, 0.3f); 
                 break;
             case "selected":
                 t.transform.localScale = highlights;
                 t.gameObject.transform.GetChild(0).gameObject.active = true;
+                t.transform.Find("Blur").GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.3f);
+
                 break;
             default:
                 t.gameObject.transform.GetChild(0).gameObject.active = false;
+                t.transform.Find("Blur").GetComponent<Image>().color = new Color(0f, 0f, 0f, 0.3f);
                 break;
         }
            

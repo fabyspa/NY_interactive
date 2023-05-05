@@ -197,6 +197,7 @@ public class LoadExcel : MonoBehaviour
             oldR.state = "active";
             _oldGameObjecct.transform.localScale = TransformPoint(oldR.state).transform.localScale;
             _oldGameObjecct.gameObject.GetComponent<Image>().color = ColorPoint(oldR.type, oldR.state, actualType);
+            _oldGameObjecct.transform.Find("Blur").GetComponent<Image>().color = new Color(0f, 0f, 0f, 0.3f);
         }
         r.state = newstate;
 
@@ -207,8 +208,10 @@ public class LoadExcel : MonoBehaviour
         }
         g.transform.localScale = TransformPoint(r.state).transform.localScale;
         g.gameObject.GetComponent<Image>().color = ColorPoint(r.type, r.state, actualType);
+        
         _oldGameObjecct = g;
         selectedPoint.transform.SetAsLastSibling();
+        selectedPoint.transform.Find("Blur").GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.3f);
     }
     //gestisco scala punti
     public GameObject TransformPoint(string state)
@@ -222,14 +225,17 @@ public class LoadExcel : MonoBehaviour
             case "active":
                 t.transform.localScale = grande;
                 t.gameObject.transform.GetChild(0).gameObject.active = true;
+                t.transform.Find("Blur").GetComponent<Image>().color = new Color(0f, 0f, 0f, 0.3f);
                 break;
             case "selected":
                 t.transform.localScale = highlights;
                 t.gameObject.transform.GetChild(0).gameObject.active = true;
+                t.transform.Find("Blur").GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.3f);
                 break;
             default:
                 t.transform.localScale = piccolo;
                 t.gameObject.transform.GetChild(0).gameObject.active = false;
+                t.transform.Find("Blur").GetComponent<Image>().color = new Color(0f, 0f, 0f, 0.3f);
                 break;
         }
 
