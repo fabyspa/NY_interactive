@@ -396,9 +396,9 @@ public class LoadExcel : MonoBehaviour
             ordenList.AddRange(LoadRiservaByType(t));
 
         }
-       
-        return ordenList.GroupBy(r=>r.name).Select(g=>g.First()).ToList();
-
+        ordenList= ordenList.GroupBy(r => r.name).Select(g => g.First()).ToList();
+        return ordenList;
+        
     }
 
 }
